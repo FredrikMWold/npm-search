@@ -1,6 +1,7 @@
 package components
 
 import (
+	"regexp"
 	"strings"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -76,8 +77,10 @@ func (d *DetailsModel) View() string {
 
 	// Build content lines
 	var b strings.Builder
-	titleStyle := lipgloss.NewStyle().Foreground(theme.Mauve).Bold(true)
+	// Make the package name heading the same color as other headings
+	titleStyle := lipgloss.NewStyle().Foreground(theme.Subtext0).Bold(true)
 	labelStyle := lipgloss.NewStyle().Foreground(theme.Subtext0)
+	headingStyle := labelStyle.Copy().Bold(true)
 	linkStyle := lipgloss.NewStyle().Foreground(theme.Blue)
 	mutedStyle := lipgloss.NewStyle().Foreground(theme.Surface2)
 	sep := mutedStyle.Render(strings.Repeat("─", maxInt(0, innerW)))
@@ -95,7 +98,14 @@ func (d *DetailsModel) View() string {
 		b.WriteString("\n")
 	}
 	if d.description != "" {
-		b.WriteString(wrap.Render(d.description))
+		// Section label
+		descLabel := headingStyle.Render("Description")
+		b.WriteString(wrap.Render(descLabel))
+		// add a blank line between the heading and the text
+		b.WriteString("\n\n")
+		// Inline style for code and links, then wrap
+		styledDesc := styleDescription(d.description)
+		b.WriteString(wrap.Render(styledDesc))
 		b.WriteString("\n\n")
 	}
 	// Links section with truncation and aligned labels
@@ -105,13 +115,6 @@ func (d *DetailsModel) View() string {
 	row := func(label, url string) {
 		if url == "" {
 			return
-		}
-		if linkCount == 0 {
-			// first link: add subtle separator if there was preceding text
-			if b.Len() > 0 {
-				b.WriteString(sep)
-				b.WriteString("\n")
-			}
 		}
 		linkCount++
 		lbl := labelStyle.Width(labelW).Render(label)
@@ -125,9 +128,20 @@ func (d *DetailsModel) View() string {
 	repoURL := ensureScheme(normalizeURL(d.repository))
 	homeURL := ensureScheme(d.homepage)
 	npmURL := ensureScheme(d.npmLink)
-	row("repo:", repoURL)
-	row("home:", homeURL)
-	row("npm:", npmURL)
+	hasLinks := repoURL != "" || homeURL != "" || npmURL != ""
+	if hasLinks {
+		if b.Len() > 0 {
+			b.WriteString(sep)
+			b.WriteString("\n")
+		}
+		// Heading for links
+		linksLabel := headingStyle.Render("Links")
+		b.WriteString(wrap.Render(linksLabel))
+		b.WriteString("\n\n")
+		row("repo:", repoURL)
+		row("home:", homeURL)
+		row("npm:", npmURL)
+	}
 
 	// Clamp by lines with ellipsis if overflow (avoid re-wrapping hyperlinks)
 	lines := strings.Split(b.String(), "\n")
@@ -141,6 +155,29 @@ func (d *DetailsModel) View() string {
 	clamped := strings.Join(lines, "\n")
 	content := lipgloss.Place(innerW, innerH, lipgloss.Left, lipgloss.Top, clamped)
 	return d.style.Width(innerW).Height(innerH).Render(content)
+}
+
+// styleDescription applies lightweight inline styling to description text:
+// - `code` spans get a subtle background
+// - http(s) URLs become clickable and blue
+func styleDescription(s string) string {
+	if s == "" {
+		return s
+	}
+	codeStyle := lipgloss.NewStyle().Foreground(theme.Text).Background(theme.Surface1)
+	linkStyle := lipgloss.NewStyle().Foreground(theme.Blue)
+	// Inline code: `code`
+	reCode := regexp.MustCompile("`[^`]+`")
+	s = reCode.ReplaceAllStringFunc(s, func(m string) string {
+		inner := strings.TrimSuffix(strings.TrimPrefix(m, "`"), "`")
+		return codeStyle.Render(inner)
+	})
+	// URLs: http(s)://...
+	reURL := regexp.MustCompile(`https?://[^\s)]+`)
+	s = reURL.ReplaceAllStringFunc(s, func(u string) string {
+		return osc8(u, linkStyle.Render(u))
+	})
+	return s
 }
 
 // local max to avoid importing others
