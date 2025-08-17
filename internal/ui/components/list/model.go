@@ -289,7 +289,7 @@ func (m *Model) SetRowSpinner(frame string) {
 }
 
 // SetInstalled marks which package names were installed successfully to show
-// a green checkmark prefix.
+// a green checkmark suffix.
 func (m *Model) SetInstalled(installed map[string]bool) {
 	if m.del != nil {
 		m.del.installed = installed
@@ -325,24 +325,27 @@ func newDelegate() *delegate {
 func (d *delegate) Render(w io.Writer, m bblist.Model, index int, listItem bblist.Item) {
 	it, _ := listItem.(item)
 	prefix := ""
+	suffix := ""
 	if d.installing != nil && d.installing[it.Name()] {
-		prefix = d.frame + " "
+		// show spinner after the name while installing
+		suffix = " " + d.frame
 	} else if d.installed != nil && d.installed[it.Name()] {
-		// green checkmark for successful install
-		check := lipgloss.NewStyle().Foreground(theme.Green).Render("✔")
-		prefix = check + " "
+		// green checkmark label after the name when installed
+		installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ installed")
+		suffix = " " + installed
 	}
-	// Wrap the item to override Title() with spinner prefix while preserving
+	// Wrap the item to override Title() with spinner prefix/suffix while preserving
 	// default height/formatting.
-	wi := wrappedItem{item: it, pre: prefix}
+	wi := wrappedItem{item: it, pre: prefix, suf: suffix}
 	d.DefaultDelegate.Render(w, m, index, wi)
 }
 
-// wrappedItem decorates an item with a prefix for the Title while delegating
+// wrappedItem decorates an item with a prefix/suffix for the Title while delegating
 // other methods to the embedded item.
 type wrappedItem struct {
 	item
 	pre string
+	suf string
 }
 
-func (w wrappedItem) Title() string { return w.pre + w.item.Title() }
+func (w wrappedItem) Title() string { return w.pre + w.item.Title() + w.suf }

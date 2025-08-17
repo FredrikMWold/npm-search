@@ -148,9 +148,9 @@ func (d *DetailsModel) View() string {
 		linksLabel := headingStyle.Render("Links")
 		b.WriteString(wrap.Render(linksLabel))
 		b.WriteString("\n\n")
-	row(repoIcon, repoURL)
-	row(homeIcon, homeURL)
-	row(npmIcon, npmURL)
+		row(repoIcon, repoURL)
+		row(homeIcon, homeURL)
+		row(npmIcon, npmURL)
 	}
 
 	// Clamp by lines with ellipsis if overflow (avoid re-wrapping hyperlinks)

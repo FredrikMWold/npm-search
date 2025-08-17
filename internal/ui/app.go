@@ -46,6 +46,8 @@ const (
 func New() *Model {
 	// configure spinner
 	sp := spinner.New()
+	// Use a line spinner everywhere
+	sp.Spinner = spinner.Meter
 	sp.Style = lipgloss.NewStyle().Foreground(theme.Mauve)
 
 	return &Model{
@@ -60,8 +62,8 @@ func New() *Model {
 }
 
 func (m *Model) Init() tea.Cmd {
-	// start spinner ticking (we'll render it only when loading)
-	return tea.Batch(m.input.Init(), m.spinner.Tick)
+	// start spinner ticking and scan local deps to pre-mark installed
+	return tea.Batch(m.input.Init(), m.spinner.Tick, commands.ScanInstalledDeps())
 }
 
 func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -223,6 +225,21 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		} else {
 			m.side.SetContent("", "", "", "", "")
 			m.side.SetStats("")
+		}
+		// refresh installed marks against current package.json
+		return m, commands.ScanInstalledDeps()
+	case commands.ScanDepsMsg:
+		if msg.Installed != nil {
+			// merge known installed from scans with runtime installs
+			if m.installed == nil {
+				m.installed = map[string]bool{}
+			}
+			for k, v := range msg.Installed {
+				if v {
+					m.installed[k] = true
+				}
+			}
+			m.list.SetInstalled(m.installed)
 		}
 		return m, nil
 	case commands.NpmInstallMsg:
