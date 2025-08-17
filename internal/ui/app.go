@@ -201,10 +201,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// Map results into list items, include weekly downloads and author
 		items := make([]clist.ItemWithMeta, 0, len(msg.Result.Objects))
 		// Use Blue for Version to avoid clashing with the selected row color
-		verLabel := lipgloss.NewStyle().Foreground(theme.Blue).Bold(true).Render("Version:")
-		dlLabel := lipgloss.NewStyle().Foreground(theme.Green).Bold(true).Render("Download:")
-		licLabel := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render("License:")
-		autLabel := lipgloss.NewStyle().Foreground(theme.Mauve).Bold(true).Render("Author:")
+	verLabel := lipgloss.NewStyle().Foreground(theme.Blue).Bold(true).Render("Version:")
+	dlLabel := lipgloss.NewStyle().Foreground(theme.Sky).Bold(true).Render("Weekly Downloads:")
+	licLabel := lipgloss.NewStyle().Foreground(theme.Yellow).Bold(true).Render("License:")
+	autLabel := lipgloss.NewStyle().Foreground(theme.Mauve).Bold(true).Render("Author:")
 		for _, o := range msg.Result.Objects {
 			title := o.Package.Name
 			line := fmt.Sprintf("%s %s  %s %s  %s %s  %s %s", verLabel, o.Package.Version, dlLabel, fmtInt(o.Package.DownloadsLastWeek), licLabel, nonEmpty(o.Package.License), autLabel, nonEmpty(o.Package.Author))
@@ -353,8 +353,8 @@ func computeSplit(total int, open bool) (listW, sideW int) {
 		// not enough width, hide sidebar
 		return total, 0
 	}
-	// keep at least 22 cols for sidebar
-	side := int(math.Max(22, math.Round(float64(total)*0.32)))
+	// keep at least 22 cols for sidebar, then add 5 extra cols as requested
+	side := int(math.Max(22, math.Round(float64(total)*0.32))) + 12
 	// ensure list has room
 	if side > total-20 {
 		side = total - 20

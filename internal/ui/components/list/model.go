@@ -1,6 +1,7 @@
 package list
 
 import (
+	"fmt"
 	"io"
 	"strings"
 
@@ -88,7 +89,8 @@ func New() *Model {
 				}
 			}
 			if outdated {
-				keys = append(keys, key.NewBinding(key.WithKeys("u"), key.WithHelp("u", "update")))
+				// Show generic Update label in help (no version path)
+				keys = append(keys, key.NewBinding(key.WithKeys("u"), key.WithHelp("u", "Update")))
 			} else {
 				keys = append(keys,
 					key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
@@ -357,14 +359,19 @@ func (d *delegate) Render(w io.Writer, m bblist.Model, index int, listItem bblis
 		// If installed, check if an update is available compared to latest
 		if d.wanted != nil {
 			if want, ok := d.wanted[it.Name()]; ok && updateRecommended(it.latest, want) {
-				warn := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render("⚠ update")
+				// show 'Outdated old -> new'
+				label := "⚠ Outdated"
+				if oldV, newV, okp := updatePath(it.latest, want); okp {
+					label = fmt.Sprintf("⚠ Outdated %s -> %s", oldV, newV)
+				}
+				warn := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render(label)
 				suffix = " " + warn
 			} else {
-				installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ installed")
+				installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ Installed")
 				suffix = " " + installed
 			}
 		} else {
-			installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ installed")
+			installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ Installed")
 			suffix = " " + installed
 		}
 	}
@@ -439,4 +446,18 @@ func numericPrefix(s string) string {
 		i++
 	}
 	return s[:i]
+}
+
+// updatePath returns old and new versions for display (old->new) given latest and wanted specs.
+// It trims ^/~ and leading v, then extracts numeric prefixes.
+func updatePath(latest, wanted string) (string, string, bool) {
+	if latest == "" || wanted == "" {
+		return "", "", false
+	}
+	old := numericPrefix(trimPrefixSet(wanted, "^~vV"))
+	neu := numericPrefix(trimPrefixSet(latest, "vV"))
+	if old == "" || neu == "" || old == neu {
+		return "", "", false
+	}
+	return old, neu, true
 }

@@ -20,6 +20,9 @@ var (
 	Green = lipgloss.Color("#a6e3a1")
 	Peach = lipgloss.Color("#fab387")
 	Red   = lipgloss.Color("#f38ba8")
+	// Additional accents to reduce clashes
+	Sky    = lipgloss.Color("#89dceb")
+	Yellow = lipgloss.Color("#f9e2af")
 )
 
 // Convenience
