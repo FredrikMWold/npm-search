@@ -5,7 +5,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"npm-search/internal/ui/theme"
+	"github.com/fredrikmwold/npm-search/internal/ui/theme"
 )
 
 // Input is a wrapper component around bubbles textinput with rounded border.

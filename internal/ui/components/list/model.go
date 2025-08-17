@@ -9,7 +9,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"npm-search/internal/ui/theme"
+	"github.com/fredrikmwold/npm-search/internal/ui/theme"
 )
 
 // item implements bblist.Item

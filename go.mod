@@ -1,4 +1,4 @@
-module npm-search
+module github.com/fredrikmwold/npm-search
 
 go 1.24.6
 

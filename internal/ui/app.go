@@ -9,10 +9,10 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"npm-search/internal/commands"
-	"npm-search/internal/ui/components"
-	clist "npm-search/internal/ui/components/list"
-	"npm-search/internal/ui/theme"
+	"github.com/fredrikmwold/npm-search/internal/commands"
+	"github.com/fredrikmwold/npm-search/internal/ui/components"
+	clist "github.com/fredrikmwold/npm-search/internal/ui/components/list"
+	"github.com/fredrikmwold/npm-search/internal/ui/theme"
 )
 
 // Model is the root UI model.
@@ -54,8 +54,8 @@ func New() *Model {
 		side:       components.NewDetails(),
 		focus:      focusInput,
 		spinner:    sp,
-	installing: map[string]bool{},
-	installed:  map[string]bool{},
+		installing: map[string]bool{},
+		installed:  map[string]bool{},
 	}
 }
 
