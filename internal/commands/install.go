@@ -80,32 +80,59 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		switch pm {
 		case PMPNPM:
 			cmdName = "pnpm"
-			args = []string{"add"}
-			if dev {
-				args = append(args, "--save-dev")
+			// If package already exists, prefer update; pnpm up <pkg>
+			installed := isPkgInstalled(wd, pkg)
+			if installed {
+				// bump manifest to latest
+				args = []string{"up"}
+			} else {
+				args = []string{"add"}
+				if dev {
+					args = append(args, "--save-dev")
+				}
 			}
 			args = append(args, pkg)
 		case PMYarn:
 			cmdName = "yarn"
-			args = []string{"add"}
-			if dev {
-				args = append(args, "-D")
+			// yarn upgrade <pkg> if installed, else add
+			installed := isPkgInstalled(wd, pkg)
+			if installed {
+				args = []string{"upgrade", "--latest"}
+			} else {
+				args = []string{"add"}
+				if dev {
+					args = append(args, "-D")
+				}
 			}
 			args = append(args, pkg)
 		case PMBun:
 			cmdName = "bun"
-			args = []string{"add"}
-			if dev {
-				args = append(args, "-d")
+			// bun upgrade <pkg> if installed, else add
+			installed := isPkgInstalled(wd, pkg)
+			if installed {
+				args = []string{"upgrade"}
+			} else {
+				args = []string{"add"}
+				if dev {
+					args = append(args, "-d")
+				}
 			}
 			args = append(args, pkg)
 		default: // npm
 			cmdName = "npm"
-			args = []string{"install"}
-			if dev {
-				args = append(args, "--save-dev")
+			// npm update <pkg> if installed, else install
+			installed := isPkgInstalled(wd, pkg)
+			if installed {
+				// npm install <pkg>@latest updates package.json to latest
+				args = []string{"install"}
+			} else {
+				args = []string{"install"}
+				if dev {
+					args = append(args, "--save-dev")
+				}
 			}
-			args = append(args, pkg)
+			// Pin to @latest to ensure manifest bump when updating
+			args = append(args, pkg+"@latest")
 		}
 		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
 		defer cancel()
@@ -126,4 +153,22 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		}
 		return NpmInstallMsg{Package: pkg, Dev: dev, Output: string(out), Err: nil}
 	}
+}
+
+// isPkgInstalled checks if node_modules/<pkg>/package.json exists (supports scopes).
+func isPkgInstalled(cwd, name string) bool {
+	base := cwd
+	if base == "" {
+		if w, err := os.Getwd(); err == nil {
+			base = w
+		}
+	}
+	if base == "" {
+		return false
+	}
+	nm := filepath.Join(base, "node_modules", name, "package.json")
+	if _, err := os.Stat(nm); err == nil {
+		return true
+	}
+	return false
 }

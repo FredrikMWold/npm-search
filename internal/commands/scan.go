@@ -11,6 +11,7 @@ import (
 // ScanDepsMsg is emitted after scanning package.json for installed deps
 type ScanDepsMsg struct {
 	Installed map[string]bool
+	Wanted    map[string]string
 	Path      string
 	Err       error
 }
@@ -22,11 +23,11 @@ func ScanInstalledDeps() tea.Cmd {
 		cwd, _ := os.Getwd()
 		pkgPath := findPackageJSON(cwd)
 		if pkgPath == "" {
-			return ScanDepsMsg{Installed: map[string]bool{}}
+			return ScanDepsMsg{Installed: map[string]bool{}, Wanted: map[string]string{}}
 		}
 		b, err := os.ReadFile(pkgPath)
 		if err != nil {
-			return ScanDepsMsg{Installed: map[string]bool{}, Path: pkgPath, Err: err}
+			return ScanDepsMsg{Installed: map[string]bool{}, Wanted: map[string]string{}, Path: pkgPath, Err: err}
 		}
 		// minimal struct for the sections we care about
 		var data struct {
@@ -35,19 +36,23 @@ func ScanInstalledDeps() tea.Cmd {
 			OptionalDependencies map[string]string `json:"optionalDependencies"`
 		}
 		if err := json.Unmarshal(b, &data); err != nil {
-			return ScanDepsMsg{Installed: map[string]bool{}, Path: pkgPath, Err: err}
+			return ScanDepsMsg{Installed: map[string]bool{}, Wanted: map[string]string{}, Path: pkgPath, Err: err}
 		}
 		set := map[string]bool{}
-		for k := range data.Dependencies {
+		wanted := map[string]string{}
+		for k, v := range data.Dependencies {
 			set[k] = true
+			wanted[k] = v
 		}
-		for k := range data.DevDependencies {
+		for k, v := range data.DevDependencies {
 			set[k] = true
+			wanted[k] = v
 		}
-		for k := range data.OptionalDependencies {
+		for k, v := range data.OptionalDependencies {
 			set[k] = true
+			wanted[k] = v
 		}
-		return ScanDepsMsg{Installed: set, Path: pkgPath}
+		return ScanDepsMsg{Installed: set, Wanted: wanted, Path: pkgPath}
 	}
 }
 

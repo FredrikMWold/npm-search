@@ -175,6 +175,18 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						return m, commands.InstallNPM(name, true)
 					}
 				}
+			case 'u':
+				if m.focus == focusResults {
+					if name, ok := m.list.SelectedName(); ok {
+						if m.installing == nil {
+							m.installing = map[string]bool{}
+						}
+						m.installing[name] = true
+						m.list.SetInstalling(m.installing)
+						// Reuse install command which performs update when already installed
+						return m, commands.InstallNPM(name, false)
+					}
+				}
 			}
 		}
 	case commands.NpmSearchMsg:
@@ -200,7 +212,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			home := o.Package.Links.Homepage
 			repo := o.Package.Links.Repository
 			npm := o.Package.Links.NPM
-			items = append(items, clist.ItemWithMeta{Title: title, LineDesc: line, FullDesc: full, Homepage: home, Repository: repo, NPMLink: npm})
+			items = append(items, clist.ItemWithMeta{Title: title, LineDesc: line, FullDesc: full, Homepage: home, Repository: repo, NPMLink: npm, Latest: o.Package.Version})
 		}
 		m.loading = false
 		// send items with metadata for sidebar
@@ -240,6 +252,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			}
 			m.list.SetInstalled(m.installed)
+			// provide wanted (manifest) versions for update detection
+			m.list.SetWantedVersions(msg.Wanted)
 		}
 		return m, nil
 	case commands.NpmInstallMsg:
@@ -255,6 +269,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 			m.installed[msg.Package] = true
 			m.list.SetInstalled(m.installed)
+			// rescan package.json to refresh installed and wanted versions
+			return m, commands.ScanInstalledDeps()
 		}
 		return m, nil
 	}

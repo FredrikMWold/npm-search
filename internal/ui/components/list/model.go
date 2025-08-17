@@ -21,6 +21,7 @@ type item struct {
 	homepage string
 	repo     string
 	npmLink  string
+	latest   string
 }
 
 func (i item) Title() string       { return i.title }
@@ -43,14 +44,15 @@ type Model struct {
 }
 
 func New() *Model {
+	// Create model first so closures can capture a stable pointer
+	m := &Model{placeholder: "Type and press Enter to search."}
+
 	// Start empty; we'll show a centered placeholder until we have results.
 	var items []bblist.Item
 
 	// Create custom delegate (wrap default styles)
 	d := newDelegate()
 	// Theme normal and selected item styles
-	// SelectedTitle includes a left border which acts as the selection cursor;
-	// color it with our theme accent.
 	d.DefaultDelegate.Styles.SelectedTitle = d.DefaultDelegate.Styles.SelectedTitle.
 		Foreground(theme.Mauve).
 		BorderForeground(theme.Mauve).
@@ -71,28 +73,47 @@ func New() *Model {
 	l.Styles.PaginationStyle = lipgloss.NewStyle().Foreground(theme.Surface2)
 	l.Styles.HelpStyle = lipgloss.NewStyle().Foreground(theme.Surface2)
 
-	// Add custom help keybindings for install actions
+	// Dynamic help: show update when outdated; otherwise show install keys
 	l.AdditionalShortHelpKeys = func() []key.Binding {
-		return []key.Binding{
+		keys := []key.Binding{
 			key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "details")),
-			key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
-			key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
 		}
-	}
-	l.AdditionalFullHelpKeys = func() []key.Binding {
-		return []key.Binding{
-			key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "details")),
-			key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
-			key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
+		if it, ok := m.list.SelectedItem().(item); ok {
+			name := it.Name()
+			installed := m.del != nil && m.del.installed != nil && m.del.installed[name]
+			outdated := false
+			if installed && m.del.wanted != nil {
+				if want, ok2 := m.del.wanted[name]; ok2 {
+					outdated = updateRecommended(it.latest, want)
+				}
+			}
+			if outdated {
+				keys = append(keys, key.NewBinding(key.WithKeys("u"), key.WithHelp("u", "update")))
+			} else {
+				keys = append(keys,
+					key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
+					key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
+				)
+			}
+		} else {
+			keys = append(keys,
+				key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
+				key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
+			)
 		}
+		return keys
 	}
+	l.AdditionalFullHelpKeys = l.AdditionalShortHelpKeys
 
 	style := lipgloss.NewStyle().
 		Border(lipgloss.RoundedBorder()).
 		BorderForeground(theme.BorderUnfocused).
 		Foreground(theme.Text)
 
-	return &Model{style: style, list: l, placeholder: "Type and press Enter to search.", del: d}
+	m.style = style
+	m.list = l
+	m.del = d
+	return m
 }
 
 // SetSize sets the outer container size; the inner list is sized to fill it
@@ -253,6 +274,7 @@ type ItemWithMeta struct {
 	Homepage   string
 	Repository string
 	NPMLink    string
+	Latest     string
 }
 
 // SetItemsWithMeta replaces items and attaches metadata for the sidebar.
@@ -266,6 +288,7 @@ func (m *Model) SetItemsWithMeta(title string, items []ItemWithMeta) {
 			homepage:    it.Homepage,
 			repo:        it.Repository,
 			npmLink:     it.NPMLink,
+			latest:      it.Latest,
 		})
 	}
 	m.list.SetItems(itms)
@@ -309,6 +332,7 @@ type delegate struct {
 	bblist.DefaultDelegate
 	installing map[string]bool
 	installed  map[string]bool
+	wanted     map[string]string // manifest (wanted) versions by name
 	frame      string
 }
 
@@ -330,9 +354,19 @@ func (d *delegate) Render(w io.Writer, m bblist.Model, index int, listItem bblis
 		// show spinner after the name while installing
 		suffix = " " + d.frame
 	} else if d.installed != nil && d.installed[it.Name()] {
-		// green checkmark label after the name when installed
-		installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ installed")
-		suffix = " " + installed
+		// If installed, check if an update is available compared to latest
+		if d.wanted != nil {
+			if want, ok := d.wanted[it.Name()]; ok && updateRecommended(it.latest, want) {
+				warn := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render("⚠ update")
+				suffix = " " + warn
+			} else {
+				installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ installed")
+				suffix = " " + installed
+			}
+		} else {
+			installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ installed")
+			suffix = " " + installed
+		}
 	}
 	// Wrap the item to override Title() with spinner prefix/suffix while preserving
 	// default height/formatting.
@@ -349,3 +383,60 @@ type wrappedItem struct {
 }
 
 func (w wrappedItem) Title() string { return w.pre + w.item.Title() + w.suf }
+
+// SetWantedVersions updates manifest version specs used to compute updates.
+func (m *Model) SetWantedVersions(wanted map[string]string) {
+	if m.del != nil {
+		m.del.wanted = wanted
+	}
+}
+
+// newerVersion reports whether a > b in a simple semver sense.
+// It compares dot-separated numeric parts and ignores pre-release/build metadata.
+
+// updateRecommended returns true when the manifest's wanted spec does not
+// equal the latest version string (ignoring leading ^/~ and 'v'). This keeps
+// semantics simple: if package.json isn't explicitly at the latest, suggest update.
+func updateRecommended(latest, wanted string) bool {
+	if wanted == "" || latest == "" {
+		return false
+	}
+	w := trimPrefixSet(wanted, "^~vV")
+	l := trimPrefixSet(latest, "vV")
+	// Extract the numeric base (digits and dots) at the start
+	w = numericPrefix(w)
+	l = numericPrefix(l)
+	if w == "" || l == "" {
+		return false
+	}
+	return l != w
+}
+
+func trimPrefixSet(s, set string) string {
+	for len(s) > 0 {
+		matched := false
+		for i := 0; i < len(set); i++ {
+			if s[0] == set[i] {
+				s = s[1:]
+				matched = true
+				break
+			}
+		}
+		if !matched {
+			break
+		}
+	}
+	return s
+}
+
+func numericPrefix(s string) string {
+	i := 0
+	for i < len(s) {
+		c := s[i]
+		if (c < '0' || c > '9') && c != '.' {
+			break
+		}
+		i++
+	}
+	return s[:i]
+}
