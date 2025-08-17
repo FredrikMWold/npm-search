@@ -107,12 +107,18 @@ func (m *Model) SetSize(w, h int) {
 	m.width, m.height = w, h
 	innerW := max(0, w-2)
 	innerH := max(0, h-2)
-	// Dynamically toggle help/pagination based on available height to avoid wrapping
-	showHelp := innerH >= 6
-	showPagination := innerH >= 4
+	// Dynamically toggle help/pagination based on available height AND width to avoid wrapping
+	// Help can get quite long with default + custom keys; hide it on narrow widths
+	const minHelpWidth = 52
+	const minPagWidth = 24
+	showHelp := innerH >= 6 && innerW >= minHelpWidth
+	showPagination := innerH >= 4 && innerW >= minPagWidth
 	m.list.SetShowHelp(showHelp)
 	m.list.SetShowPagination(showPagination)
 	m.list.SetShowStatusBar(false)
+
+	// Constrain help style width to reduce chance of internal wrapping
+	m.list.Styles.HelpStyle = lipgloss.NewStyle().Foreground(theme.Surface2).MaxWidth(innerW)
 
 	// Account for list chrome (title + optional pagination + optional help)
 	chrome := 0
