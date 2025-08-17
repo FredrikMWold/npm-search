@@ -142,15 +142,16 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.list.SetPlaceholder("Type and press Enter to search.")
 			return m, nil
 		}
-		// Map results into list items, include weekly downloads
+		// Map results into list items, include weekly downloads and author
 		items := make([]struct{ Title, Description string }, 0, len(msg.Result.Objects))
 		// Use Blue for Version to avoid clashing with the selected row color
 		verLabel := lipgloss.NewStyle().Foreground(theme.Blue).Bold(true).Render("Version:")
 		dlLabel := lipgloss.NewStyle().Foreground(theme.Green).Bold(true).Render("Download:")
 		licLabel := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render("License:")
+		autLabel := lipgloss.NewStyle().Foreground(theme.Mauve).Bold(true).Render("Author:")
 		for _, o := range msg.Result.Objects {
 			title := o.Package.Name
-			desc := fmt.Sprintf("%s %s  %s %s  %s %s", verLabel, o.Package.Version, dlLabel, fmtInt(o.Package.DownloadsLastWeek), licLabel, nonEmpty(o.Package.License))
+			desc := fmt.Sprintf("%s %s  %s %s  %s %s  %s %s", verLabel, o.Package.Version, dlLabel, fmtInt(o.Package.DownloadsLastWeek), licLabel, nonEmpty(o.Package.License), autLabel, nonEmpty(o.Package.Author))
 			items = append(items, struct{ Title, Description string }{Title: title, Description: desc})
 		}
 		m.loading = false

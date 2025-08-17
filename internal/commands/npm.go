@@ -31,10 +31,16 @@ type NpmSearchResult struct {
 				Repository string `json:"repository"`
 				Bugs       string `json:"bugs"`
 			} `json:"links"`
+			Publisher struct {
+				Username string `json:"username"`
+				Email    string `json:"email"`
+			} `json:"publisher"`
 			// Augmented field: not from the API, we populate it after fetching downloads
 			DownloadsLastWeek int `json:"-"`
 			// Augmented field: latest license string
 			License string `json:"-"`
+			// Augmented field: author (from latest metadata or fallback to publisher username)
+			Author string `json:"-"`
 		} `json:"package"`
 		Score struct {
 			Final  float64 `json:"final"`
@@ -89,6 +95,7 @@ func SearchNPM(query string) tea.Cmd {
 			idx       int
 			downloads int
 			license   string
+			author    string
 		}
 		sem := make(chan struct{}, 5)                  // limit concurrency
 		done := make(chan result, len(parsed.Objects)) // buffer to avoid deadlock before we start reading
@@ -113,6 +120,7 @@ func SearchNPM(query string) tea.Cmd {
 				}
 				// Fetch latest metadata for license
 				lic := ""
+				author := ""
 				latestURL := "https://registry.npmjs.com/" + url.PathEscape(pkg) + "/latest"
 				if r2, e2 := client.Get(latestURL); e2 == nil {
 					defer r2.Body.Close()
@@ -128,9 +136,19 @@ func SearchNPM(query string) tea.Cmd {
 								}
 							}
 						}
+						if av, ok := raw["author"]; ok {
+							switch t := av.(type) {
+							case string:
+								author = t
+							case map[string]any:
+								if nm, ok := t["name"].(string); ok {
+									author = nm
+								}
+							}
+						}
 					}
 				}
-				done <- result{idx: idx, downloads: downloads, license: lic}
+				done <- result{idx: idx, downloads: downloads, license: lic, author: author}
 			}(i, name)
 		}
 		// Collect results
@@ -138,6 +156,14 @@ func SearchNPM(query string) tea.Cmd {
 			res := <-done
 			parsed.Objects[res.idx].Package.DownloadsLastWeek = res.downloads
 			parsed.Objects[res.idx].Package.License = res.license
+			parsed.Objects[res.idx].Package.Author = res.author
+		}
+
+		// Fill author from publisher username if author unavailable
+		for i := range parsed.Objects {
+			if parsed.Objects[i].Package.Author == "" && parsed.Objects[i].Package.Publisher.Username != "" {
+				parsed.Objects[i].Package.Author = parsed.Objects[i].Package.Publisher.Username
+			}
 		}
 
 		return NpmSearchMsg{Query: query, Result: parsed}
