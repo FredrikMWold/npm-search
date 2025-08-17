@@ -9,40 +9,50 @@ type NpmSearchMsg struct {
 
 // NpmSearchResult models the subset of the npm search payload we care about
 type NpmSearchResult struct {
-	Objects []struct {
-		Package struct {
-			Name        string   `json:"name"`
-			Version     string   `json:"version"`
-			Description string   `json:"description"`
-			Keywords    []string `json:"keywords"`
-			Date        string   `json:"date"`
-			Links       struct {
-				NPM        string `json:"npm"`
-				Homepage   string `json:"homepage"`
-				Repository string `json:"repository"`
-				Bugs       string `json:"bugs"`
-			} `json:"links"`
-			Publisher struct {
-				Username string `json:"username"`
-				Email    string `json:"email"`
-			} `json:"publisher"`
-			// Augmented fields (not from the API)
-			DownloadsLastWeek int    `json:"-"`
-			License           string `json:"-"`
-			Author            string `json:"-"`
-		} `json:"package"`
-		Score struct {
-			Final  float64 `json:"final"`
-			Detail struct {
-				Quality     float64 `json:"quality"`
-				Popularity  float64 `json:"popularity"`
-				Maintenance float64 `json:"maintenance"`
-			} `json:"detail"`
-		} `json:"score"`
-		SearchScore float64 `json:"searchScore"`
-	} `json:"objects"`
-	Total int    `json:"total"`
-	Time  string `json:"time"`
+	Objects []NpmSearchObject `json:"objects"`
+	Total   int               `json:"total"`
+	Time    string            `json:"time"`
+}
+
+// NpmSearchObject represents one entry from the search API
+type NpmSearchObject struct {
+	Package NpmPackage `json:"package"`
+	Score   NpmScore   `json:"score"`
+	// SearchScore is present in search API; may be 0 for constructed objects
+	SearchScore float64 `json:"searchScore"`
+}
+
+// NpmPackage is the package metadata subset used by the UI
+type NpmPackage struct {
+	Name        string   `json:"name"`
+	Version     string   `json:"version"`
+	Description string   `json:"description"`
+	Keywords    []string `json:"keywords"`
+	Date        string   `json:"date"`
+	Links       struct {
+		NPM        string `json:"npm"`
+		Homepage   string `json:"homepage"`
+		Repository string `json:"repository"`
+		Bugs       string `json:"bugs"`
+	} `json:"links"`
+	Publisher struct {
+		Username string `json:"username"`
+		Email    string `json:"email"`
+	} `json:"publisher"`
+	// Augmented fields (not from the API)
+	DownloadsLastWeek int    `json:"-"`
+	License           string `json:"-"`
+	Author            string `json:"-"`
+}
+
+// NpmScore mirrors the score field in search API
+type NpmScore struct {
+	Final  float64 `json:"final"`
+	Detail struct {
+		Quality     float64 `json:"quality"`
+		Popularity  float64 `json:"popularity"`
+		Maintenance float64 `json:"maintenance"`
+	} `json:"detail"`
 }
 
 // downloadsPointResponse is the payload from the per-package downloads API

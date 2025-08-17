@@ -61,8 +61,11 @@ func New() *Model {
 }
 
 func (m *Model) Init() tea.Cmd {
-	// start spinner ticking and scan local deps to pre-mark installed
-	return tea.Batch(m.input.Init(), m.spinner.Tick, commands.ScanInstalledDeps())
+	// start spinner ticking, scan local deps, and load project packages initially
+	m.loading = true
+	m.list.SetTitle("Loading project packages…")
+	m.list.SetPlaceholder("Loading project packages…")
+	return tea.Batch(m.input.Init(), m.spinner.Tick, commands.ScanInstalledDeps(), commands.LoadProjectPackages())
 }
 
 func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -90,12 +93,26 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyCtrlC:
 			return m, tea.Quit
 		case tea.KeyEsc:
-			// Always bring focus back to input on Escape and close sidebar
+			// Clear the input, return focus to it, close sidebar, and reload local packages
+			m.input.Clear()
 			m.focus = focusInput
 			m.sideOpen = false
 			m.applyFocus()
+			// Trigger reload of project packages
+			m.loading = true
+			m.list.SetTitle("Loading project packages…")
+			m.list.SetPlaceholder("Loading project packages…")
 			// Recompute sizes after closing sidebar
 			m.recomputeLayout()
+			return m, commands.LoadProjectPackages()
+		case tea.KeyTab:
+			// toggle focus between input and results
+			if m.focus == focusInput {
+				m.focus = focusResults
+			} else {
+				m.focus = focusInput
+			}
+			m.applyFocus()
 			return m, nil
 		case tea.KeyRunes:
 			// handled below
@@ -196,9 +213,20 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.loading = false
 		// send items with metadata for sidebar
 		// convert to the specialized setter to preserve extra fields
-		m.list.SetItemsWithMeta("Results", items)
-		m.list.SetTitle("Results")
-		m.list.SetPlaceholder("Type and press Enter to search.")
+		if msg.Query == "" {
+			m.list.SetItemsWithMeta("Project packages", items)
+			if len(items) == 0 {
+				m.list.SetTitle("Project packages")
+				m.list.SetPlaceholder("No packages found in package.json. Type and press Enter to search.")
+			} else {
+				m.list.SetTitle("Project packages")
+				m.list.SetPlaceholder("Press Enter for details, Tab to toggle focus. Type and Enter to search.")
+			}
+		} else {
+			m.list.SetItemsWithMeta("Results", items)
+			m.list.SetTitle("Results")
+			m.list.SetPlaceholder("Type and press Enter to search.")
+		}
 		// close sidebar by default after a new search
 		m.sideOpen = false
 		m.side.SetContent("", "", "", "", "")

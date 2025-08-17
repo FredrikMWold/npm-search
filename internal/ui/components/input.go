@@ -102,4 +102,11 @@ func (i *Input) SetFocused(f bool) {
 	}
 }
 
+// Clear resets the input value and cursor position.
+func (i *Input) Clear() {
+	i.ti.SetValue("")
+	// Move cursor to start to avoid any residual position
+	i.ti.SetCursor(0)
+}
+
 //
