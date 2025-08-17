@@ -5,9 +5,9 @@ import (
 	"log"
 	"math"
 
+	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/charmbracelet/bubbles/spinner"
 
 	"npm-search/internal/commands"
 	"npm-search/internal/ui/components"
@@ -27,6 +27,8 @@ type Model struct {
 	// loading spinner for async searches
 	spinner spinner.Model
 	loading bool
+	// per-row install spinner state
+	installing map[string]bool
 }
 
 type focusTarget int
@@ -42,10 +44,11 @@ func New() *Model {
 	sp.Style = lipgloss.NewStyle().Foreground(theme.Mauve)
 
 	return &Model{
-		input:   components.NewInput(),
-		list:    clist.New(),
-		focus:   focusInput,
-		spinner: sp,
+		input:      components.NewInput(),
+		list:       clist.New(),
+		focus:      focusInput,
+		spinner:    sp,
+		installing: map[string]bool{},
 	}
 }
 
@@ -64,6 +67,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.list.SetTitle(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 			m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 		}
+		// Also update row spinner frame for installing packages
+		m.list.SetRowSpinner(m.spinner.View())
 		return m, cmd
 	case tea.WindowSizeMsg:
 		m.width, m.height = msg.Width, msg.Height
@@ -106,12 +111,23 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			case 'i':
 				if m.focus == focusResults {
 					if name, ok := m.list.SelectedName(); ok {
+						// mark installing and kick off command
+						if m.installing == nil {
+							m.installing = map[string]bool{}
+						}
+						m.installing[name] = true
+						m.list.SetInstalling(m.installing)
 						return m, commands.InstallNPM(name, false)
 					}
 				}
 			case 'I':
 				if m.focus == focusResults {
 					if name, ok := m.list.SelectedName(); ok {
+						if m.installing == nil {
+							m.installing = map[string]bool{}
+						}
+						m.installing[name] = true
+						m.list.SetInstalling(m.installing)
 						return m, commands.InstallNPM(name, true)
 					}
 				}
@@ -137,10 +153,17 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			desc := fmt.Sprintf("%s %s  %s %s  %s %s", verLabel, o.Package.Version, dlLabel, fmtInt(o.Package.DownloadsLastWeek), licLabel, nonEmpty(o.Package.License))
 			items = append(items, struct{ Title, Description string }{Title: title, Description: desc})
 		}
-	m.loading = false
-	m.list.SetItems("Results", items)
-	m.list.SetTitle("Results")
-	m.list.SetPlaceholder("Type and press Enter to search.")
+		m.loading = false
+		m.list.SetItems("Results", items)
+		m.list.SetTitle("Results")
+		m.list.SetPlaceholder("Type and press Enter to search.")
+		return m, nil
+	case commands.NpmInstallMsg:
+		// clear installing flag for the package
+		if msg.Package != "" && m.installing != nil {
+			delete(m.installing, msg.Package)
+			m.list.SetInstalling(m.installing)
+		}
 		return m, nil
 	}
 

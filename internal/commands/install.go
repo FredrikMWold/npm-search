@@ -34,7 +34,6 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 			log.Printf("npm install failed for %s (dev=%v): %v\n%s", pkg, dev, err, string(out))
 			return NpmInstallMsg{Package: pkg, Dev: dev, Output: string(out), Err: err}
 		}
-		log.Printf("npm install succeeded for %s (dev=%v)\n%s", pkg, dev, string(out))
 		return NpmInstallMsg{Package: pkg, Dev: dev, Output: string(out), Err: nil}
 	}
 }
