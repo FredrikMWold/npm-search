@@ -16,12 +16,21 @@ before:
     - go generate ./...
 
 builds:
-  - env:
+  - id: npm-search
+    main: ./cmd/npm-search
+    ldflags:
+      - -X github.com/fredrikmwold/npm-search/internal/version.Version={{.Version}}
+      - -X github.com/fredrikmwold/npm-search/internal/version.Commit={{.Commit}}
+      - -X github.com/fredrikmwold/npm-search/internal/version.Date={{.Date}}
+    env:
       - CGO_ENABLED=0
     goos:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - arm64
 
 archives:
   - formats: [tar.gz]
