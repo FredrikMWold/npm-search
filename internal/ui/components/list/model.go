@@ -359,10 +359,10 @@ func (d *delegate) Render(w io.Writer, m bblist.Model, index int, listItem bblis
 		// If installed, check if an update is available compared to latest
 		if d.wanted != nil {
 			if want, ok := d.wanted[it.Name()]; ok && updateRecommended(it.latest, want) {
-				// show 'Outdated old -> new'
-				label := "⚠ Outdated"
+				// show 'Outdated old -> new' with Meslo Nerd Font warning triangle
+				label := " Outdated"
 				if oldV, newV, okp := updatePath(it.latest, want); okp {
-					label = fmt.Sprintf("⚠ Outdated %s -> %s", oldV, newV)
+					label = fmt.Sprintf(" Outdated %s -> %s", oldV, newV)
 				}
 				warn := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render(label)
 				suffix = " " + warn
