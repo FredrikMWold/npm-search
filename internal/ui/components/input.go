@@ -86,7 +86,7 @@ func (i *Input) View() string {
 	// Render text input within the styled box ensuring total width (including
 	// border and padding) equals i.width. Rounded border adds 1 col per side
 	// and we configured horizontal padding of 1 per side => subtract 2.
-	innerWidth := max(0, i.width-2)
+	innerWidth := intMax(0, i.width-2)
 	box := i.style.Width(innerWidth).Render(i.ti.View())
 	return box
 }
@@ -102,12 +102,4 @@ func (i *Input) SetFocused(f bool) {
 	}
 }
 
-// (Results removed; replaced by list component in a separate package.)
-
-// max helper
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
+//

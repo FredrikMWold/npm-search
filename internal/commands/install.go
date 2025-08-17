@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -29,42 +28,7 @@ const (
 	PMBun  PackageManager = "bun"
 )
 
-// detectPackageManager inspects lockfiles to decide which package manager to use.
-// Defaults to npm if none detected.
-func detectPackageManager(cwd string) PackageManager {
-	if cwd == "" {
-		if w, err := os.Getwd(); err == nil {
-			cwd = w
-		}
-	}
-	if cwd != "" {
-		tryFiles := []struct {
-			file string
-			pm   PackageManager
-		}{
-			{"pnpm-lock.yaml", PMPNPM},
-			{"bun.lockb", PMBun},
-			{"yarn.lock", PMYarn},
-			{"package-lock.json", PMNPM},
-		}
-		dir := cwd
-		for {
-			for _, t := range tryFiles {
-				if _, err := os.Stat(filepath.Join(dir, t.file)); err == nil {
-					return t.pm
-				}
-			}
-			parent := filepath.Dir(dir)
-			if parent == dir { // reached filesystem root
-				break
-			}
-			dir = parent
-		}
-	}
-
-	// Fallback
-	return PMNPM
-}
+//
 
 func InstallNPM(pkg string, dev bool) tea.Cmd {
 	return func() tea.Msg {
@@ -77,11 +41,12 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 
 		var cmdName string
 		var args []string
+		// Determine if already installed once per exec
+		installed := isPkgInstalled(wd, pkg)
 		switch pm {
 		case PMPNPM:
 			cmdName = "pnpm"
 			// If package already exists, prefer update; pnpm up <pkg>
-			installed := isPkgInstalled(wd, pkg)
 			if installed {
 				// bump manifest to latest
 				args = []string{"up"}
@@ -95,7 +60,6 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		case PMYarn:
 			cmdName = "yarn"
 			// yarn upgrade <pkg> if installed, else add
-			installed := isPkgInstalled(wd, pkg)
 			if installed {
 				args = []string{"upgrade", "--latest"}
 			} else {
@@ -108,7 +72,6 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		case PMBun:
 			cmdName = "bun"
 			// bun upgrade <pkg> if installed, else add
-			installed := isPkgInstalled(wd, pkg)
 			if installed {
 				args = []string{"upgrade"}
 			} else {
@@ -121,7 +84,6 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		default: // npm
 			cmdName = "npm"
 			// npm update <pkg> if installed, else install
-			installed := isPkgInstalled(wd, pkg)
 			if installed {
 				// npm install <pkg>@latest updates package.json to latest
 				args = []string{"install"}
@@ -155,20 +117,4 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 	}
 }
 
-// isPkgInstalled checks if node_modules/<pkg>/package.json exists (supports scopes).
-func isPkgInstalled(cwd, name string) bool {
-	base := cwd
-	if base == "" {
-		if w, err := os.Getwd(); err == nil {
-			base = w
-		}
-	}
-	if base == "" {
-		return false
-	}
-	nm := filepath.Join(base, "node_modules", name, "package.json")
-	if _, err := os.Stat(nm); err == nil {
-		return true
-	}
-	return false
-}
+//

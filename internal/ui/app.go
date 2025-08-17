@@ -3,7 +3,6 @@ package ui
 import (
 	"fmt"
 	"log"
-	"math"
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
@@ -81,15 +80,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, cmd
 	case tea.WindowSizeMsg:
 		m.width, m.height = msg.Width, msg.Height
-		// Update component sizes.
-		m.input.SetWidth(m.width)
-		// Reserve space for the results box below.
-		inputHeight := m.input.Height()
-		remaining := int(math.Max(0, float64(m.height-inputHeight)))
-		// Split remaining into list and sidebar (70/30 when open and wide enough)
-		listW, sideW := computeSplit(m.width, m.sideOpen)
-		m.list.SetSize(listW, remaining)
-		m.side.SetSize(sideW, remaining)
+		m.recomputeLayout()
 		// Update focus styles on resize as well.
 		m.applyFocus()
 		return m, nil
@@ -104,14 +95,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.sideOpen = false
 			m.applyFocus()
 			// Recompute sizes after closing sidebar
-			inputHeight := m.input.Height()
-			remaining := int(math.Max(0, float64(m.height-inputHeight)))
-			listW, sideW := computeSplit(m.width, m.sideOpen)
-			m.list.SetSize(listW, remaining)
-			m.side.SetSize(sideW, remaining)
+			m.recomputeLayout()
 			return m, nil
 		case tea.KeyRunes:
-			// noop, handled below
+			// handled below
 		case tea.KeyEnter:
 			if m.focus == focusInput {
 				// Trigger search and move focus to results
@@ -127,11 +114,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				if m.sideOpen {
 					m.sideOpen = false
 					// Recompute sizes for closed state
-					inputHeight := m.input.Height()
-					remaining := int(math.Max(0, float64(m.height-inputHeight)))
-					listW, sideW := computeSplit(m.width, m.sideOpen)
-					m.list.SetSize(listW, remaining)
-					m.side.SetSize(sideW, remaining)
+					m.recomputeLayout()
 					return m, nil
 				}
 				// Open the sidebar with details for the selected item
@@ -141,11 +124,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.side.SetStats(det.StatsLine)
 				}
 				// Recompute sizes for open state
-				inputHeight := m.input.Height()
-				remaining := int(math.Max(0, float64(m.height-inputHeight)))
-				listW, sideW := computeSplit(m.width, m.sideOpen)
-				m.list.SetSize(listW, remaining)
-				m.side.SetSize(sideW, remaining)
+				m.recomputeLayout()
 				return m, nil
 			}
 		}
@@ -225,11 +204,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.side.SetContent("", "", "", "", "")
 		m.side.SetStats("")
 		// ensure sizing is recomputed on new data
-		inputHeight := m.input.Height()
-		remaining := int(math.Max(0, float64(m.height-inputHeight)))
-		listW, sideW := computeSplit(m.width, m.sideOpen)
-		m.list.SetSize(listW, remaining)
-		m.side.SetSize(sideW, remaining)
+		m.recomputeLayout()
 		// initialize sidebar with first selection, if any
 		if det, ok := m.list.SelectedDetails(); ok {
 			m.side.SetContent(det.Name, det.Description, det.Homepage, det.Repository, det.NPMLink)
@@ -315,52 +290,19 @@ func (m *Model) applyFocus() {
 	m.side.SetFocused(m.focus == focusResults)
 }
 
-// (search command/types moved to internal/commands)
+//
 
-// fmtInt formats an int with thin thousand separators for readability.
-func fmtInt(n int) string {
-	s := fmt.Sprintf("%d", n)
-	// insert separators from the right
-	out := make([]byte, 0, len(s)+len(s)/3)
-	cnt := 0
-	for i := len(s) - 1; i >= 0; i-- {
-		out = append(out, s[i])
-		cnt++
-		if cnt%3 == 0 && i != 0 {
-			out = append(out, ',')
-		}
+// recomputeLayout updates child sizes based on current width/height/sidebar state.
+func (m *Model) recomputeLayout() {
+	m.input.SetWidth(m.width)
+	// Height remaining for list/sidebar
+	remaining := m.height - m.input.Height()
+	if remaining < 0 {
+		remaining = 0
 	}
-	// reverse
-	for i, j := 0, len(out)-1; i < j; i, j = i+1, j-1 {
-		out[i], out[j] = out[j], out[i]
-	}
-	return string(out)
+	listW, sideW := computeSplit(m.width, m.sideOpen)
+	m.list.SetSize(listW, remaining)
+	m.side.SetSize(sideW, remaining)
 }
 
-func nonEmpty(s string) string {
-	if s == "" {
-		return "n/a"
-	}
-	return s
-}
-
-// computeSplit returns widths for list and sidebar based on total width.
-func computeSplit(total int, open bool) (listW, sideW int) {
-	if !open {
-		return total, 0
-	}
-	if total <= 48 {
-		// not enough width, hide sidebar
-		return total, 0
-	}
-	// keep at least 22 cols for sidebar, then add 5 extra cols as requested
-	side := int(math.Max(22, math.Round(float64(total)*0.32))) + 12
-	// ensure list has room
-	if side > total-20 {
-		side = total - 20
-	}
-	if side < 0 {
-		side = 0
-	}
-	return total - side, side
-}
+// fmtInt formats an int with thousand separators; moved to helpers.go

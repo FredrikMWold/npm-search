@@ -68,11 +68,11 @@ func (d *DetailsModel) SetStats(s string) { d.stats = s }
 func (d *DetailsModel) Update(msg tea.Msg) tea.Cmd { return nil }
 
 func (d *DetailsModel) View() string {
-	innerW := maxInt(0, d.width-2)
-	innerH := maxInt(0, d.height-2)
+	innerW := intMax(0, d.width-2)
+	innerH := intMax(0, d.height-2)
 
 	if innerW == 0 || innerH == 0 {
-		return d.style.Width(maxInt(0, d.width-2)).Height(maxInt(0, d.height-2)).Render("")
+		return d.style.Width(intMax(0, d.width-2)).Height(intMax(0, d.height-2)).Render("")
 	}
 
 	// Build content lines
@@ -83,7 +83,7 @@ func (d *DetailsModel) View() string {
 	headingStyle := labelStyle.Bold(true)
 	linkStyle := lipgloss.NewStyle().Foreground(theme.Blue)
 	mutedStyle := lipgloss.NewStyle().Foreground(theme.Surface2)
-	sep := mutedStyle.Render(strings.Repeat("─", maxInt(0, innerW)))
+	sep := mutedStyle.Render(strings.Repeat("─", intMax(0, innerW)))
 
 	wrap := lipgloss.NewStyle().Width(innerW).MaxWidth(innerW)
 
@@ -109,14 +109,12 @@ func (d *DetailsModel) View() string {
 		b.WriteString("\n\n")
 	}
 	// Links section with truncation and aligned icons only (no text labels)
-	linkCount := 0
 	labelW := 8 // space for [home] + space
-	linkW := maxInt(8, innerW-labelW)
+	linkW := intMax(8, innerW-labelW)
 	row := func(icon, url string) {
 		if url == "" {
 			return
 		}
-		linkCount++
 		// icon + single trailing space (no left/half padding), clickable
 		widthStyle := lipgloss.NewStyle().Width(labelW)
 		cell := widthStyle.Render(icon + " ")
@@ -226,16 +224,10 @@ func shortenLinkDisplay(url string, maxW int) string {
 	return disp[:left] + "…" + disp[len(disp)-right:]
 }
 
-// local max to avoid importing others
-func maxInt(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
+//
 
 // shortenLink normalizes and middle-truncates a link to fit maxW cells.
-// (shortenLink removed in favor of shortenLinkDisplay)
+//
 
 // ensureScheme adds https:// to URLs that lack http(s) scheme
 func ensureScheme(s string) string {

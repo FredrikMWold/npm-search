@@ -1,8 +1,6 @@
 package list
 
 import (
-	"fmt"
-	"io"
 	"strings"
 
 	"github.com/charmbracelet/bubbles/key"
@@ -321,76 +319,6 @@ func (m *Model) SetInstalled(installed map[string]bool) {
 	}
 }
 
-// max helper (local copy)
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-// delegate customizes row rendering to show a spinner for installing items.
-type delegate struct {
-	bblist.DefaultDelegate
-	installing map[string]bool
-	installed  map[string]bool
-	wanted     map[string]string // manifest (wanted) versions by name
-	frame      string
-}
-
-func newDelegate() *delegate {
-	d := &delegate{
-		DefaultDelegate: bblist.NewDefaultDelegate(),
-		installing:      map[string]bool{},
-	}
-	return d
-}
-
-// Render prints each list item with optional spinner when installing using the
-// DefaultDelegate to preserve correct height/spacing.
-func (d *delegate) Render(w io.Writer, m bblist.Model, index int, listItem bblist.Item) {
-	it, _ := listItem.(item)
-	prefix := ""
-	suffix := ""
-	if d.installing != nil && d.installing[it.Name()] {
-		// show spinner after the name while installing
-		suffix = " " + d.frame
-	} else if d.installed != nil && d.installed[it.Name()] {
-		// If installed, check if an update is available compared to latest
-		if d.wanted != nil {
-			if want, ok := d.wanted[it.Name()]; ok && updateRecommended(it.latest, want) {
-				// show 'Outdated old -> new' with Meslo Nerd Font warning triangle
-				label := " Outdated"
-				if oldV, newV, okp := updatePath(it.latest, want); okp {
-					label = fmt.Sprintf(" Outdated %s -> %s", oldV, newV)
-				}
-				warn := lipgloss.NewStyle().Foreground(theme.Peach).Bold(true).Render(label)
-				suffix = " " + warn
-			} else {
-				installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ Installed")
-				suffix = " " + installed
-			}
-		} else {
-			installed := lipgloss.NewStyle().Foreground(theme.Green).Render("✔ Installed")
-			suffix = " " + installed
-		}
-	}
-	// Wrap the item to override Title() with spinner prefix/suffix while preserving
-	// default height/formatting.
-	wi := wrappedItem{item: it, pre: prefix, suf: suffix}
-	d.DefaultDelegate.Render(w, m, index, wi)
-}
-
-// wrappedItem decorates an item with a prefix/suffix for the Title while delegating
-// other methods to the embedded item.
-type wrappedItem struct {
-	item
-	pre string
-	suf string
-}
-
-func (w wrappedItem) Title() string { return w.pre + w.item.Title() + w.suf }
-
 // SetWantedVersions updates manifest version specs used to compute updates.
 func (m *Model) SetWantedVersions(wanted map[string]string) {
 	if m.del != nil {
@@ -398,66 +326,10 @@ func (m *Model) SetWantedVersions(wanted map[string]string) {
 	}
 }
 
-// newerVersion reports whether a > b in a simple semver sense.
-// It compares dot-separated numeric parts and ignores pre-release/build metadata.
-
-// updateRecommended returns true when the manifest's wanted spec does not
-// equal the latest version string (ignoring leading ^/~ and 'v'). This keeps
-// semantics simple: if package.json isn't explicitly at the latest, suggest update.
-func updateRecommended(latest, wanted string) bool {
-	if wanted == "" || latest == "" {
-		return false
+// max helper (local copy)
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
-	w := trimPrefixSet(wanted, "^~vV")
-	l := trimPrefixSet(latest, "vV")
-	// Extract the numeric base (digits and dots) at the start
-	w = numericPrefix(w)
-	l = numericPrefix(l)
-	if w == "" || l == "" {
-		return false
-	}
-	return l != w
-}
-
-func trimPrefixSet(s, set string) string {
-	for len(s) > 0 {
-		matched := false
-		for i := 0; i < len(set); i++ {
-			if s[0] == set[i] {
-				s = s[1:]
-				matched = true
-				break
-			}
-		}
-		if !matched {
-			break
-		}
-	}
-	return s
-}
-
-func numericPrefix(s string) string {
-	i := 0
-	for i < len(s) {
-		c := s[i]
-		if (c < '0' || c > '9') && c != '.' {
-			break
-		}
-		i++
-	}
-	return s[:i]
-}
-
-// updatePath returns old and new versions for display (old->new) given latest and wanted specs.
-// It trims ^/~ and leading v, then extracts numeric prefixes.
-func updatePath(latest, wanted string) (string, string, bool) {
-	if latest == "" || wanted == "" {
-		return "", "", false
-	}
-	old := numericPrefix(trimPrefixSet(wanted, "^~vV"))
-	neu := numericPrefix(trimPrefixSet(latest, "vV"))
-	if old == "" || neu == "" || old == neu {
-		return "", "", false
-	}
-	return old, neu, true
+	return b
 }
