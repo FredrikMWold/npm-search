@@ -23,6 +23,7 @@ profile.cov
 # Go workspace file
 go.work
 go.work.sum
+npm-search
 
 # env file
 .env

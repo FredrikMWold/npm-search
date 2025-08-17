@@ -3,9 +3,10 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/fredrikmwold/npm-search.svg)](https://pkg.go.dev/github.com/fredrikmwold/npm-search)
 [![Release](https://img.shields.io/github/v/release/FredrikMWold/npm-search?sort=semver)](https://github.com/FredrikMWold/npm-search/releases)
 
-**A minimal, keyboard-first TUI for npm** built with [Bubble Tea](https://github.com/charmbracelet/bubbletea). Search, inspect, and install packages without leaving your terminal.
+**A minimal, keyboard-first TUI for npm** built with [Bubble Tea](https://github.com/charmbracelet/bubbletea). Search, inspect, install, and manage/update your project's npm packages without leaving your terminal.
 
 ![Demo](./demo.gif)
+
 
 <details>
 	<summary><strong>Quick keys</strong></summary>
@@ -18,7 +19,9 @@
 | Results | `i` | Install selected package |
 | Results | `I` | Install as dev dependency |
 | Results | `u` | Update selected package to latest (if installed) |
-| Anywhere | `Esc` or `Ctrl+C` | Quit |
+| Anywhere | `Tab` | Toggle focus between input and results |
+| Anywhere | `Esc` | Clear input and show your project packages |
+| Anywhere | `Ctrl+C` | Quit |
 
 > Tip: The help footer updates based on what you can do at the moment.
 
@@ -27,6 +30,7 @@
 ## Features
 
 - 🔎 Fast npm search from the terminal
+- 🧰 Manage and update your project's npm packages
 - 📊 Results show version, weekly downloads, license, and author
 - 📚 Details sidebar with description and quick links (homepage, repo, npm)
 - ⌨️ One-key install (i), dev install (I), and update (u) when installed

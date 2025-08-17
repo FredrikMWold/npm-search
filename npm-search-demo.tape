@@ -24,6 +24,19 @@ Sleep 1200ms
 Enter
 Sleep 2500ms
 
+# On launch, the app lists your project packages
+# Toggle focus to the list with Tab and move around
+Tab
+Sleep 700ms
+Down
+Sleep 700ms
+Down
+Sleep 700ms
+Up
+Sleep 700ms
+Tab
+Sleep 700ms
+
 # Search for a small package
 Type "left-pad"
 Sleep 1s
@@ -50,25 +63,16 @@ Sleep 1500ms
 Type "i"
 Sleep 5s
 
-# After install completes, the row shows "✔ Installed"
-Sleep 2s
-
-# Toggle help to showcase keybindings
-Type "?"
-Sleep 1500ms
-Type "?"
-Sleep 1200ms
-
 # Also install the 3rd item using capital I (dev install)
 # Move to the top to normalize position
 Up
-Sleep 250ms
+Sleep 500ms
 Up
-Sleep 250ms
+Sleep 500ms
 Up
-Sleep 250ms
+Sleep 500ms
 Up
-Sleep 250ms
+Sleep 500ms
 Up
 Sleep 400ms
 
@@ -80,13 +84,7 @@ Sleep 600ms
 
 # Install as dev
 Type "I"
-Sleep 7s
-
-# Wait for the Installed badge
-Sleep 1500ms
-
-# Linger on the UI for a moment
-Sleep 4s
+Sleep 5s
 
 # Exit the app
 Ctrl+c

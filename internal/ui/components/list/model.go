@@ -101,6 +101,11 @@ func New() *Model {
 				key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
 			)
 		}
+		// Global keys
+		keys = append(keys,
+			key.NewBinding(key.WithKeys("tab"), key.WithHelp("tab", "switch focus")),
+			key.NewBinding(key.WithKeys("esc"), key.WithHelp("esc", "clear search")),
+		)
 		return keys
 	}
 	l.AdditionalFullHelpKeys = l.AdditionalShortHelpKeys
