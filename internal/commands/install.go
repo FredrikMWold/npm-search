@@ -3,7 +3,6 @@ package commands
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"time"
@@ -102,7 +101,6 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		if _, err := exec.LookPath(cmdName); err != nil {
 			if pm != PMNPM { // only auto-use npm when npm was selected by detection
 				e := fmt.Errorf("%s not found on PATH", cmdName)
-				log.Printf("%v", e)
 				return NpmInstallMsg{Package: pkg, Dev: dev, Output: "", Err: e}
 			}
 			// pm is npm; proceed
@@ -110,7 +108,6 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 		cmd := exec.CommandContext(ctx, cmdName, args...)
 		out, err := cmd.CombinedOutput()
 		if err != nil {
-			log.Printf("%s install failed for %s (dev=%v): %v\n%s", cmdName, pkg, dev, err, string(out))
 			return NpmInstallMsg{Package: pkg, Dev: dev, Output: string(out), Err: err}
 		}
 		return NpmInstallMsg{Package: pkg, Dev: dev, Output: string(out), Err: nil}

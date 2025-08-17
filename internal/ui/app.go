@@ -2,7 +2,6 @@ package ui
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
@@ -19,12 +18,17 @@ type Model struct {
 	width  int
 	height int
 
-	input *components.Input
-	list  *clist.Model
-	side  *components.DetailsModel
+	input  *components.Input
+	list   *clist.Model
+	side   *components.DetailsModel
+	readme *components.MarkdownViewer
+	// sequence for README requests to ignore stale responses
+	readmeReq int
 	// whether the sidebar is currently open
 	sideOpen bool
-	focus    focusTarget
+	// whether the fullscreen README viewer is open
+	readmeOpen bool
+	focus      focusTarget
 
 	// loading spinner for async searches
 	spinner spinner.Model
@@ -53,6 +57,7 @@ func New() *Model {
 		input:      components.NewInput(),
 		list:       clist.New(),
 		side:       components.NewDetails(),
+		readme:     components.NewMarkdownViewer(),
 		focus:      focusInput,
 		spinner:    sp,
 		installing: map[string]bool{},
@@ -93,10 +98,17 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyCtrlC:
 			return m, tea.Quit
 		case tea.KeyEsc:
-			// Clear the input, return focus to it, close sidebar, and reload local packages
+			// If README is open, close it quickly without resetting state
+			if m.readmeOpen {
+				m.readmeOpen = false
+				m.recomputeLayout()
+				return m, nil
+			}
+			// Otherwise: Clear the input, return focus to it, close sidebar, and reload local packages
 			m.input.Clear()
 			m.focus = focusInput
 			m.sideOpen = false
+			m.readmeOpen = false
 			m.applyFocus()
 			// Trigger reload of project packages
 			m.loading = true
@@ -130,12 +142,15 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				// Toggle the sidebar when pressing Enter on results
 				if m.sideOpen {
 					m.sideOpen = false
+					m.readmeOpen = false
+					m.list.SetShowReadmeHotkey(false)
 					// Recompute sizes for closed state
 					m.recomputeLayout()
 					return m, nil
 				}
 				// Open the sidebar with details for the selected item
 				m.sideOpen = true
+				m.list.SetShowReadmeHotkey(true)
 				if det, ok := m.list.SelectedDetails(); ok {
 					m.side.SetContent(det.Name, det.Description, det.Homepage, det.Repository, det.NPMLink)
 					m.side.SetStats(det.StatsLine)
@@ -145,7 +160,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				return m, nil
 			}
 		}
-		// Rune key handling (lowercase/uppercase i)
+		// Rune key handling
 		if r := msg.Runes; len(r) == 1 {
 			switch r[0] {
 			case 'i':
@@ -183,11 +198,33 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						return m, commands.InstallNPM(name, false)
 					}
 				}
+			case 'r', 'R':
+				// Only handle README toggle when results are focused and sidebar is open
+				if m.focus != focusResults || !m.sideOpen {
+					break
+				}
+				if m.readmeOpen {
+					m.readmeOpen = false
+					m.recomputeLayout()
+					return m, nil
+				}
+				if det, ok := m.list.SelectedDetails(); ok {
+					m.readmeOpen = true
+					m.recomputeLayout()
+					if det.Repository == "" {
+						m.readme.SetPlain("No GitHub repository URL found for this package.")
+						return m, nil
+					}
+					// Avoid placeholder text sticking; start with an empty view
+					m.readme.SetPlain("")
+					m.readmeReq++
+					return m, commands.FetchGitHubReadmeWithReq(det.Repository, m.readmeReq)
+				}
+				return m, nil
 			}
 		}
 	case commands.NpmSearchMsg:
 		if msg.Err != nil {
-			log.Printf("npm search error for %q: %v", msg.Query, msg.Err)
 			// stop loading state on error as well
 			m.loading = false
 			m.list.SetTitle("Results")
@@ -227,8 +264,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.list.SetTitle("Results")
 			m.list.SetPlaceholder("Type and press Enter to search.")
 		}
-		// close sidebar by default after a new search
+		// close sidebar and README by default after a new search
 		m.sideOpen = false
+		m.readmeOpen = false
+		m.list.SetShowReadmeHotkey(false)
 		m.side.SetContent("", "", "", "", "")
 		m.side.SetStats("")
 		// ensure sizing is recomputed on new data
@@ -276,11 +315,40 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, commands.ScanInstalledDeps()
 		}
 		return m, nil
+	case commands.GitHubReadmeMsg:
+		// Render markdown asynchronously for responsiveness
+		if msg.Err != nil {
+			m.readme.SetPlain("Could not load README:\n\n" + msg.Err.Error())
+			return m, nil
+		}
+		// Ignore stale responses
+		if msg.Req != m.readmeReq {
+			return m, nil
+		}
+		// Render synchronously so the formatted output shows immediately
+		if m.readmeOpen {
+			m.readme.SetMarkdown(msg.Content)
+		}
+		return m, nil
+	case components.MarkdownRenderedMsg:
+		// Ignore stale renders not matching the current request
+		if msg.Seq != m.readmeReq {
+			return m, nil
+		}
+		// Ensure we handle the async rendered content promptly
+		if cmd := m.readme.Update(msg); cmd != nil {
+			return m, cmd
+		}
+		return m, nil
 	}
 
 	// Let the focused component handle the message.
 	var cmds []tea.Cmd
-	if m.focus == focusInput {
+	if m.readmeOpen {
+		if cmd := m.readme.Update(msg); cmd != nil {
+			cmds = append(cmds, cmd)
+		}
+	} else if m.focus == focusInput {
 		if cmd := m.input.Update(msg); cmd != nil {
 			cmds = append(cmds, cmd)
 		}
@@ -304,8 +372,14 @@ func (m *Model) View() string {
 	// Render input and results. The input renders its own inline label.
 	m.input.SetLabel("npm search:", lipgloss.NewStyle().Foreground(theme.Subtext0))
 	inputView := m.input.View()
-	// Two-column layout: list + sidebar
-	body := lipgloss.JoinHorizontal(lipgloss.Top, m.list.View(), m.side.View())
+	// When README is open, use the full area below the input
+	var body string
+	if m.readmeOpen {
+		body = m.readme.View()
+	} else {
+		// Two-column layout: list + sidebar
+		body = lipgloss.JoinHorizontal(lipgloss.Top, m.list.View(), m.side.View())
+	}
 	return lipgloss.JoinVertical(lipgloss.Left, inputView, body)
 }
 
@@ -327,6 +401,15 @@ func (m *Model) recomputeLayout() {
 	remaining := m.height - m.input.Height()
 	if remaining < 0 {
 		remaining = 0
+	}
+	if m.readmeOpen {
+		// Full width for README viewer
+		m.readme.SetSize(m.width, remaining)
+		// Still keep list/side sizes updated (hidden) to avoid surprises on return
+		listW, sideW := computeSplit(m.width, m.sideOpen)
+		m.list.SetSize(listW, remaining)
+		m.side.SetSize(sideW, remaining)
+		return
 	}
 	listW, sideW := computeSplit(m.width, m.sideOpen)
 	m.list.SetSize(listW, remaining)

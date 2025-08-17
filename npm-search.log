@@ -1,0 +1,1018 @@
+readme 2025/08/17 23:05:27 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:05:27 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:05:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:05:27 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:05:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:05:27 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:05:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:05:27 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:05:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:05:28 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:05:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:05:28 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:05:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:05:28 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:05:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:05:28 non-200 404 for https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:05:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:06:12 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:06:18 fetching README for facebook/react
+readme 2025/08/17 23:06:18 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:06:40 fetching README for remix-run/react-router
+readme 2025/08/17 23:06:40 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:07:55 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:08:00 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:08:00 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:08:00 RESP 404 text/plain; charset=utf-8 dur=207.974445ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:08:00 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:08:00 RESP 404 text/plain; charset=utf-8 dur=174.589578ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:08:00 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:08:00 RESP 404 text/plain; charset=utf-8 dur=230.235894ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:08:00 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:08:01 RESP 404 text/plain; charset=utf-8 dur=204.10197ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:08:01 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:08:01 RESP 404 text/plain; charset=utf-8 dur=148.06625ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:08:01 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:08:01 RESP 404 text/plain; charset=utf-8 dur=172.177047ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:08:01 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:08:01 RESP 404 text/plain; charset=utf-8 dur=192.304683ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:08:01 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:08:01 RESP 404 text/plain; charset=utf-8 dur=203.881625ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:08:01 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:08:01 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=14.566414ms
+readme 2025/08/17 23:08:01 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:08:31 fetching README for facebook/react
+readme 2025/08/17 23:08:31 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:08:31 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=16.317919ms
+readme 2025/08/17 23:08:31 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:08:53 fetching README for facebook/react
+readme 2025/08/17 23:08:53 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:08:53 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=14.185383ms
+readme 2025/08/17 23:08:53 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:09:03 fetching README for jsx-eslint/eslint-plugin-react
+readme 2025/08/17 23:09:03 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md
+readme 2025/08/17 23:09:03 RESP 404 text/plain; charset=utf-8 dur=199.182937ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md body="404: Not Found"
+readme 2025/08/17 23:09:03 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md
+readme 2025/08/17 23:09:03 RESP 404 text/plain; charset=utf-8 dur=181.036112ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:09:03 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md
+readme 2025/08/17 23:09:03 RESP 404 text/plain; charset=utf-8 dur=227.777599ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:09:03 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD
+readme 2025/08/17 23:09:04 RESP 404 text/plain; charset=utf-8 dur=204.326532ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:09:04 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown
+readme 2025/08/17 23:09:04 RESP 404 text/plain; charset=utf-8 dur=166.723203ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:09:04 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst
+readme 2025/08/17 23:09:04 RESP 404 text/plain; charset=utf-8 dur=243.220923ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:09:04 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt
+readme 2025/08/17 23:09:04 RESP 404 text/plain; charset=utf-8 dur=204.220805ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:09:04 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README
+readme 2025/08/17 23:09:04 RESP 404 text/plain; charset=utf-8 dur=158.987348ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README body="404: Not Found"
+readme 2025/08/17 23:09:04 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/17 23:09:05 RESP 200 text/plain; charset=utf-8 bytes=39448 dur=253.166918ms
+readme 2025/08/17 23:09:05 using README from https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/17 23:10:37 fetching README for facebook/react
+readme 2025/08/17 23:10:37 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:10:37 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=293.598866ms
+readme 2025/08/17 23:10:37 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:11:15 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:11:21 fetching README for facebook/react
+readme 2025/08/17 23:11:21 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:11:21 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=52.713304ms
+readme 2025/08/17 23:11:21 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:11:37 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:11:48 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:11:48 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:11:48 RESP 404 text/plain; charset=utf-8 dur=210.094552ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:11:48 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:11:48 RESP 404 text/plain; charset=utf-8 dur=204.229994ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:11:48 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:11:48 RESP 404 text/plain; charset=utf-8 dur=204.617795ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:11:48 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:11:49 RESP 404 text/plain; charset=utf-8 dur=154.582886ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:11:49 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:11:49 RESP 404 text/plain; charset=utf-8 dur=171.956476ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:11:49 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:11:49 RESP 404 text/plain; charset=utf-8 dur=186.735769ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:11:49 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:11:49 RESP 404 text/plain; charset=utf-8 dur=203.69043ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:11:49 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:11:49 RESP 404 text/plain; charset=utf-8 dur=204.561314ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:11:49 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:11:50 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=204.734249ms
+readme 2025/08/17 23:11:50 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:12:01 fetching README for DefinitelyTyped/DefinitelyTyped
+readme 2025/08/17 23:12:01 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md
+readme 2025/08/17 23:12:01 RESP 404 text/plain; charset=utf-8 dur=257.034207ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md body="404: Not Found"
+readme 2025/08/17 23:12:01 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md
+readme 2025/08/17 23:12:01 RESP 404 text/plain; charset=utf-8 dur=152.923111ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:12:01 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md
+readme 2025/08/17 23:12:01 RESP 404 text/plain; charset=utf-8 dur=237.805106ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:12:01 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD
+readme 2025/08/17 23:12:02 RESP 404 text/plain; charset=utf-8 dur=223.222839ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:12:02 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown
+readme 2025/08/17 23:12:02 RESP 404 text/plain; charset=utf-8 dur=204.316649ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:12:02 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst
+readme 2025/08/17 23:12:02 RESP 404 text/plain; charset=utf-8 dur=204.918549ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:12:02 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt
+readme 2025/08/17 23:12:02 RESP 404 text/plain; charset=utf-8 dur=204.307284ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:12:02 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README
+readme 2025/08/17 23:12:03 RESP 404 text/plain; charset=utf-8 dur=197.632174ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README body="404: Not Found"
+readme 2025/08/17 23:12:03 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/17 23:12:03 RESP 200 text/plain; charset=utf-8 bytes=47085 dur=140.656947ms
+readme 2025/08/17 23:12:03 using README from https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/17 23:12:10 fetching README for facebook/react
+readme 2025/08/17 23:12:10 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:12:10 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=17.335941ms
+readme 2025/08/17 23:12:10 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:12:26 fetching README for jsx-eslint/eslint-plugin-react
+readme 2025/08/17 23:12:26 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md
+readme 2025/08/17 23:12:26 RESP 404 text/plain; charset=utf-8 dur=216.643007ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md body="404: Not Found"
+readme 2025/08/17 23:12:26 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md
+readme 2025/08/17 23:12:26 RESP 404 text/plain; charset=utf-8 dur=204.679528ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:12:26 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md
+readme 2025/08/17 23:12:26 RESP 404 text/plain; charset=utf-8 dur=307.275197ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:12:26 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD
+readme 2025/08/17 23:12:27 RESP 404 text/plain; charset=utf-8 dur=154.99726ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:12:27 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown
+readme 2025/08/17 23:12:27 RESP 404 text/plain; charset=utf-8 dur=255.197845ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:12:27 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst
+readme 2025/08/17 23:12:27 RESP 404 text/plain; charset=utf-8 dur=203.885425ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:12:27 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt
+readme 2025/08/17 23:12:27 RESP 404 text/plain; charset=utf-8 dur=204.390691ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:12:27 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README
+readme 2025/08/17 23:12:27 RESP 404 text/plain; charset=utf-8 dur=130.751799ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README body="404: Not Found"
+readme 2025/08/17 23:12:27 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/17 23:12:27 RESP 200 text/plain; charset=utf-8 bytes=39448 dur=16.521704ms
+readme 2025/08/17 23:12:27 using README from https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/17 23:13:58 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:14:03 fetching README for facebook/react
+readme 2025/08/17 23:14:03 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:14:03 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=51.046172ms
+readme 2025/08/17 23:14:03 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:16:47 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:16:53 fetching README for facebook/react
+readme 2025/08/17 23:16:53 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:16:53 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=246.634408ms
+readme 2025/08/17 23:16:53 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:17:05 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:17:05 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:17:05 RESP 404 text/plain; charset=utf-8 dur=215.33252ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:17:05 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:17:05 RESP 404 text/plain; charset=utf-8 dur=165.80907ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:17:05 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:17:05 RESP 404 text/plain; charset=utf-8 dur=188.101672ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:17:05 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:17:06 RESP 404 text/plain; charset=utf-8 dur=171.91239ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:17:06 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:17:06 RESP 404 text/plain; charset=utf-8 dur=172.901357ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:17:06 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:17:06 RESP 404 text/plain; charset=utf-8 dur=289.602662ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:17:06 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:17:06 RESP 404 text/plain; charset=utf-8 dur=205.233898ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:17:06 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:17:06 RESP 404 text/plain; charset=utf-8 dur=203.312942ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:17:06 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:17:07 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=204.884004ms
+readme 2025/08/17 23:17:07 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:17:14 fetching README for react-grid-layout/react-draggable
+readme 2025/08/17 23:17:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/17 23:17:14 RESP 404 text/plain; charset=utf-8 dur=263.877394ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/17 23:17:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/17 23:17:14 RESP 404 text/plain; charset=utf-8 dur=173.159471ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:17:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/17 23:17:14 RESP 404 text/plain; charset=utf-8 dur=192.191669ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:17:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/17 23:17:15 RESP 404 text/plain; charset=utf-8 dur=166.605556ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:17:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/17 23:17:15 RESP 404 text/plain; charset=utf-8 dur=183.798264ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:17:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/17 23:17:15 RESP 404 text/plain; charset=utf-8 dur=205.253577ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:17:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/17 23:17:15 RESP 404 text/plain; charset=utf-8 dur=182.915872ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:17:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/17 23:17:15 RESP 404 text/plain; charset=utf-8 dur=177.657819ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/17 23:17:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/17 23:17:15 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=178.512316ms
+readme 2025/08/17 23:17:15 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/17 23:20:29 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:20:33 fetching README for facebook/react
+readme 2025/08/17 23:20:33 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:20:33 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=46.606734ms
+readme 2025/08/17 23:20:33 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:20:48 fetching README for facebook/react
+readme 2025/08/17 23:20:48 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:20:48 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=13.653214ms
+readme 2025/08/17 23:20:48 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:20:51 fetching README for DefinitelyTyped/DefinitelyTyped
+readme 2025/08/17 23:20:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md
+readme 2025/08/17 23:20:52 RESP 404 text/plain; charset=utf-8 dur=280.817364ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md body="404: Not Found"
+readme 2025/08/17 23:20:52 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md
+readme 2025/08/17 23:20:52 RESP 404 text/plain; charset=utf-8 dur=214.395781ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:20:52 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md
+readme 2025/08/17 23:20:52 RESP 404 text/plain; charset=utf-8 dur=152.267608ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:20:52 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD
+readme 2025/08/17 23:20:52 RESP 404 text/plain; charset=utf-8 dur=249.015139ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:20:52 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown
+readme 2025/08/17 23:20:52 RESP 404 text/plain; charset=utf-8 dur=202.795951ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:20:52 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst
+readme 2025/08/17 23:20:53 RESP 404 text/plain; charset=utf-8 dur=307.343634ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:20:53 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt
+readme 2025/08/17 23:20:53 RESP 404 text/plain; charset=utf-8 dur=307.213666ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:20:53 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README
+readme 2025/08/17 23:20:53 RESP 404 text/plain; charset=utf-8 dur=306.894607ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README body="404: Not Found"
+readme 2025/08/17 23:20:53 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/17 23:20:53 RESP 200 text/plain; charset=utf-8 bytes=47085 dur=206.276812ms
+readme 2025/08/17 23:20:53 using README from https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/17 23:22:02 fetching README for react-grid-layout/react-draggable
+readme 2025/08/17 23:22:02 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/17 23:22:03 RESP 404 text/plain; charset=utf-8 dur=168.913458ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/17 23:22:03 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/17 23:22:03 RESP 404 text/plain; charset=utf-8 dur=204.745361ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:22:03 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/17 23:22:03 RESP 404 text/plain; charset=utf-8 dur=205.905238ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:22:03 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/17 23:22:03 RESP 404 text/plain; charset=utf-8 dur=305.996775ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:22:03 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/17 23:22:04 RESP 404 text/plain; charset=utf-8 dur=204.463039ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:22:04 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/17 23:22:04 RESP 404 text/plain; charset=utf-8 dur=207.093358ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:22:04 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/17 23:22:04 RESP 404 text/plain; charset=utf-8 dur=202.149957ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:22:04 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/17 23:22:04 RESP 404 text/plain; charset=utf-8 dur=205.243315ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/17 23:22:04 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/17 23:22:04 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=22.633407ms
+readme 2025/08/17 23:22:04 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/17 23:23:07 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:23:15 fetching README for facebook/react
+readme 2025/08/17 23:23:15 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:23:15 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=251.200265ms
+readme 2025/08/17 23:23:15 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:23:47 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:23:51 fetching README for recharts/react-smooth
+readme 2025/08/17 23:23:51 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.md
+readme 2025/08/17 23:23:51 RESP 404 text/plain; charset=utf-8 dur=221.134046ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.md body="404: Not Found"
+readme 2025/08/17 23:23:51 GET https://raw.githubusercontent.com/recharts/react-smooth/main/Readme.md
+readme 2025/08/17 23:23:51 RESP 404 text/plain; charset=utf-8 dur=202.932351ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:23:51 GET https://raw.githubusercontent.com/recharts/react-smooth/main/readme.md
+readme 2025/08/17 23:23:51 RESP 404 text/plain; charset=utf-8 dur=160.761231ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:23:51 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.MD
+readme 2025/08/17 23:23:52 RESP 404 text/plain; charset=utf-8 dur=250.978036ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:23:52 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.markdown
+readme 2025/08/17 23:23:52 RESP 404 text/plain; charset=utf-8 dur=203.799833ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:23:52 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.rst
+readme 2025/08/17 23:23:52 RESP 404 text/plain; charset=utf-8 dur=147.804946ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:23:52 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.txt
+readme 2025/08/17 23:23:52 RESP 404 text/plain; charset=utf-8 dur=261.061442ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:23:52 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README
+readme 2025/08/17 23:23:53 RESP 404 text/plain; charset=utf-8 dur=204.175962ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README body="404: Not Found"
+readme 2025/08/17 23:23:53 GET https://raw.githubusercontent.com/recharts/react-smooth/master/README.md
+readme 2025/08/17 23:23:53 RESP 200 text/plain; charset=utf-8 bytes=5088 dur=205.162329ms
+readme 2025/08/17 23:23:53 using README from https://raw.githubusercontent.com/recharts/react-smooth/master/README.md
+readme 2025/08/17 23:24:02 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:24:02 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:24:02 RESP 404 text/plain; charset=utf-8 dur=222.108834ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:24:02 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:24:02 RESP 404 text/plain; charset=utf-8 dur=203.271209ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:24:02 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:24:02 RESP 404 text/plain; charset=utf-8 dur=206.796315ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:24:02 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:24:03 RESP 404 text/plain; charset=utf-8 dur=203.020597ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:24:03 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:24:03 RESP 404 text/plain; charset=utf-8 dur=204.670088ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:24:03 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:24:03 RESP 404 text/plain; charset=utf-8 dur=203.832758ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:24:03 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:24:03 RESP 404 text/plain; charset=utf-8 dur=205.90142ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:24:03 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:24:03 RESP 404 text/plain; charset=utf-8 dur=204.706844ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:24:03 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:24:04 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=203.932905ms
+readme 2025/08/17 23:24:04 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:25:02 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:25:11 fetching README for 47ng/nuqs
+readme 2025/08/17 23:25:11 GET https://raw.githubusercontent.com/47ng/nuqs/main/README.md
+readme 2025/08/17 23:25:12 RESP 404 text/plain; charset=utf-8 dur=184.107767ms url=https://raw.githubusercontent.com/47ng/nuqs/main/README.md body="404: Not Found"
+readme 2025/08/17 23:25:12 GET https://raw.githubusercontent.com/47ng/nuqs/main/Readme.md
+readme 2025/08/17 23:25:12 RESP 404 text/plain; charset=utf-8 dur=176.8947ms url=https://raw.githubusercontent.com/47ng/nuqs/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:25:12 GET https://raw.githubusercontent.com/47ng/nuqs/main/readme.md
+readme 2025/08/17 23:25:12 RESP 404 text/plain; charset=utf-8 dur=194.093144ms url=https://raw.githubusercontent.com/47ng/nuqs/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:25:12 GET https://raw.githubusercontent.com/47ng/nuqs/main/README.MD
+readme 2025/08/17 23:25:12 RESP 404 text/plain; charset=utf-8 dur=157.085028ms url=https://raw.githubusercontent.com/47ng/nuqs/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:25:12 GET https://raw.githubusercontent.com/47ng/nuqs/main/README.markdown
+readme 2025/08/17 23:25:12 RESP 404 text/plain; charset=utf-8 dur=161.766428ms url=https://raw.githubusercontent.com/47ng/nuqs/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:25:12 GET https://raw.githubusercontent.com/47ng/nuqs/main/README.rst
+readme 2025/08/17 23:25:13 RESP 404 text/plain; charset=utf-8 dur=201.574583ms url=https://raw.githubusercontent.com/47ng/nuqs/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:25:13 GET https://raw.githubusercontent.com/47ng/nuqs/main/README.txt
+readme 2025/08/17 23:25:13 RESP 404 text/plain; charset=utf-8 dur=204.588496ms url=https://raw.githubusercontent.com/47ng/nuqs/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:25:13 GET https://raw.githubusercontent.com/47ng/nuqs/main/README
+readme 2025/08/17 23:25:13 RESP 404 text/plain; charset=utf-8 dur=205.312419ms url=https://raw.githubusercontent.com/47ng/nuqs/main/README body="404: Not Found"
+readme 2025/08/17 23:25:13 GET https://raw.githubusercontent.com/47ng/nuqs/master/README.md
+readme 2025/08/17 23:25:13 RESP 200 text/plain; charset=utf-8 bytes=28449 dur=205.297185ms
+readme 2025/08/17 23:25:13 using README from https://raw.githubusercontent.com/47ng/nuqs/master/README.md
+readme 2025/08/17 23:26:17 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:26:21 fetching README for facebook/react
+readme 2025/08/17 23:26:21 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:26:21 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=51.036175ms
+readme 2025/08/17 23:26:21 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:27:22 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:27:27 fetching README for facebook/react
+readme 2025/08/17 23:27:27 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:27:27 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=53.193808ms
+readme 2025/08/17 23:27:27 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:28:06 fetching README for remix-run/react-router
+readme 2025/08/17 23:28:06 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:28:06 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=239.408493ms
+readme 2025/08/17 23:28:06 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:28:11 fetching README for recharts/react-smooth
+readme 2025/08/17 23:28:11 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.md
+readme 2025/08/17 23:28:11 RESP 404 text/plain; charset=utf-8 dur=226.494111ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.md body="404: Not Found"
+readme 2025/08/17 23:28:11 GET https://raw.githubusercontent.com/recharts/react-smooth/main/Readme.md
+readme 2025/08/17 23:28:12 RESP 404 text/plain; charset=utf-8 dur=205.051327ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:28:12 GET https://raw.githubusercontent.com/recharts/react-smooth/main/readme.md
+readme 2025/08/17 23:28:12 RESP 404 text/plain; charset=utf-8 dur=204.24273ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:28:12 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.MD
+readme 2025/08/17 23:28:12 RESP 404 text/plain; charset=utf-8 dur=176.537952ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:28:12 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.markdown
+readme 2025/08/17 23:28:12 RESP 404 text/plain; charset=utf-8 dur=233.73892ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:28:12 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.rst
+readme 2025/08/17 23:28:12 RESP 404 text/plain; charset=utf-8 dur=205.162032ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:28:12 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.txt
+readme 2025/08/17 23:28:13 RESP 404 text/plain; charset=utf-8 dur=205.805829ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:28:13 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README
+readme 2025/08/17 23:28:13 RESP 404 text/plain; charset=utf-8 dur=160.117821ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README body="404: Not Found"
+readme 2025/08/17 23:28:13 GET https://raw.githubusercontent.com/recharts/react-smooth/master/README.md
+readme 2025/08/17 23:28:13 RESP 200 text/plain; charset=utf-8 bytes=5088 dur=14.660093ms
+readme 2025/08/17 23:28:13 using README from https://raw.githubusercontent.com/recharts/react-smooth/master/README.md
+readme 2025/08/17 23:28:36 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:28:42 fetching README for facebook/react
+readme 2025/08/17 23:28:42 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:28:42 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=168.7895ms
+readme 2025/08/17 23:28:42 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:29:01 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:29:04 fetching README for facebook/react
+readme 2025/08/17 23:29:04 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:29:04 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=48.495154ms
+readme 2025/08/17 23:29:04 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:29:16 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:29:20 fetching README for facebook/react
+readme 2025/08/17 23:29:20 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:29:20 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=51.380274ms
+readme 2025/08/17 23:29:20 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:29:41 fetching README for remix-run/react-router
+readme 2025/08/17 23:29:41 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:29:41 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=16.998227ms
+readme 2025/08/17 23:29:41 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:30:02 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:30:06 fetching README for facebook/react
+readme 2025/08/17 23:30:06 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:30:07 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=52.17573ms
+readme 2025/08/17 23:30:07 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:30:31 fetching README for remix-run/react-router
+readme 2025/08/17 23:30:31 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:30:31 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=16.664777ms
+readme 2025/08/17 23:30:31 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:32:00 fetching README for remix-run/react-router
+readme 2025/08/17 23:32:00 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:32:00 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=14.836888ms
+readme 2025/08/17 23:32:00 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:32:38 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:32:42 fetching README for facebook/react
+readme 2025/08/17 23:32:42 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:32:42 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=48.016253ms
+readme 2025/08/17 23:32:42 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:33:14 fetching README for remix-run/react-router
+readme 2025/08/17 23:33:14 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:33:14 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=144.795149ms
+readme 2025/08/17 23:33:14 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:35:09 fetching README for vadimdemedes/ink
+readme 2025/08/17 23:35:09 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.md
+readme 2025/08/17 23:35:09 RESP 404 text/plain; charset=utf-8 dur=247.889184ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.md body="404: Not Found"
+readme 2025/08/17 23:35:09 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/Readme.md
+readme 2025/08/17 23:35:10 RESP 404 text/plain; charset=utf-8 dur=169.094715ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:35:10 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/readme.md
+readme 2025/08/17 23:35:10 RESP 404 text/plain; charset=utf-8 dur=340.118768ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:35:10 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.MD
+readme 2025/08/17 23:35:10 RESP 404 text/plain; charset=utf-8 dur=218.907884ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:35:10 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.markdown
+readme 2025/08/17 23:35:10 RESP 404 text/plain; charset=utf-8 dur=206.825025ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:35:10 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.rst
+readme 2025/08/17 23:35:11 RESP 404 text/plain; charset=utf-8 dur=158.419562ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:35:11 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.txt
+readme 2025/08/17 23:35:11 RESP 404 text/plain; charset=utf-8 dur=216.480607ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:35:11 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README
+readme 2025/08/17 23:35:11 RESP 404 text/plain; charset=utf-8 dur=224.231648ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README body="404: Not Found"
+readme 2025/08/17 23:35:11 GET https://raw.githubusercontent.com/vadimdemedes/ink/master/README.md
+readme 2025/08/17 23:35:11 RESP 404 text/plain; charset=utf-8 dur=155.843478ms url=https://raw.githubusercontent.com/vadimdemedes/ink/master/README.md body="404: Not Found"
+readme 2025/08/17 23:35:11 GET https://raw.githubusercontent.com/vadimdemedes/ink/master/Readme.md
+readme 2025/08/17 23:35:11 RESP 404 text/plain; charset=utf-8 dur=266.649915ms url=https://raw.githubusercontent.com/vadimdemedes/ink/master/Readme.md body="404: Not Found"
+readme 2025/08/17 23:35:11 GET https://raw.githubusercontent.com/vadimdemedes/ink/master/readme.md
+readme 2025/08/17 23:35:12 RESP 200 text/plain; charset=utf-8 bytes=53955 dur=309.776775ms
+readme 2025/08/17 23:35:12 using README from https://raw.githubusercontent.com/vadimdemedes/ink/master/readme.md
+readme 2025/08/17 23:35:28 fetching README for vadimdemedes/ink-text-input
+readme 2025/08/17 23:35:28 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.md
+readme 2025/08/17 23:35:28 RESP 404 text/plain; charset=utf-8 dur=255.382166ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.md body="404: Not Found"
+readme 2025/08/17 23:35:28 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/Readme.md
+readme 2025/08/17 23:35:29 RESP 404 text/plain; charset=utf-8 dur=204.418856ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:35:29 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/readme.md
+readme 2025/08/17 23:35:29 RESP 404 text/plain; charset=utf-8 dur=204.810428ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:35:29 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.MD
+readme 2025/08/17 23:35:29 RESP 404 text/plain; charset=utf-8 dur=204.5056ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:35:29 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.markdown
+readme 2025/08/17 23:35:29 RESP 404 text/plain; charset=utf-8 dur=152.898188ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:35:29 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.rst
+readme 2025/08/17 23:35:29 RESP 404 text/plain; charset=utf-8 dur=146.376941ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:35:29 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.txt
+readme 2025/08/17 23:35:30 RESP 404 text/plain; charset=utf-8 dur=210.936474ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:35:30 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README
+readme 2025/08/17 23:35:30 RESP 404 text/plain; charset=utf-8 dur=156.727649ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/main/README body="404: Not Found"
+readme 2025/08/17 23:35:30 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/master/README.md
+readme 2025/08/17 23:35:30 RESP 404 text/plain; charset=utf-8 dur=142.034ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/master/README.md body="404: Not Found"
+readme 2025/08/17 23:35:30 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/master/Readme.md
+readme 2025/08/17 23:35:30 RESP 404 text/plain; charset=utf-8 dur=213.753793ms url=https://raw.githubusercontent.com/vadimdemedes/ink-text-input/master/Readme.md body="404: Not Found"
+readme 2025/08/17 23:35:30 GET https://raw.githubusercontent.com/vadimdemedes/ink-text-input/master/readme.md
+readme 2025/08/17 23:35:30 RESP 200 text/plain; charset=utf-8 bytes=2307 dur=203.778771ms
+readme 2025/08/17 23:35:30 using README from https://raw.githubusercontent.com/vadimdemedes/ink-text-input/master/readme.md
+readme 2025/08/17 23:36:33 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:36:39 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:36:39 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:36:39 RESP 404 text/plain; charset=utf-8 dur=181.294247ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:36:39 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:36:39 RESP 404 text/plain; charset=utf-8 dur=149.852287ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:36:39 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:36:39 RESP 404 text/plain; charset=utf-8 dur=144.024452ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:36:39 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:36:40 RESP 404 text/plain; charset=utf-8 dur=154.473051ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:36:40 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:36:40 RESP 404 text/plain; charset=utf-8 dur=151.738767ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:36:40 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:36:40 RESP 404 text/plain; charset=utf-8 dur=150.288525ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:36:40 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:36:40 RESP 404 text/plain; charset=utf-8 dur=145.998384ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:36:40 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:36:40 RESP 404 text/plain; charset=utf-8 dur=152.265688ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:36:40 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:36:40 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=136.146031ms
+readme 2025/08/17 23:36:40 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:36:49 fetching README for DefinitelyTyped/DefinitelyTyped
+readme 2025/08/17 23:36:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md
+readme 2025/08/17 23:36:49 RESP 404 text/plain; charset=utf-8 dur=157.87677ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md body="404: Not Found"
+readme 2025/08/17 23:36:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md
+readme 2025/08/17 23:36:49 RESP 404 text/plain; charset=utf-8 dur=243.372139ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:36:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md
+readme 2025/08/17 23:36:49 RESP 404 text/plain; charset=utf-8 dur=160.913537ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:36:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD
+readme 2025/08/17 23:36:50 RESP 404 text/plain; charset=utf-8 dur=149.720904ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:36:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown
+readme 2025/08/17 23:36:50 RESP 404 text/plain; charset=utf-8 dur=156.277774ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:36:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst
+readme 2025/08/17 23:36:50 RESP 404 text/plain; charset=utf-8 dur=146.477351ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:36:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt
+readme 2025/08/17 23:36:50 RESP 404 text/plain; charset=utf-8 dur=195.416863ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:36:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README
+readme 2025/08/17 23:36:50 RESP 404 text/plain; charset=utf-8 dur=167.341797ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README body="404: Not Found"
+readme 2025/08/17 23:36:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/17 23:36:51 RESP 200 text/plain; charset=utf-8 bytes=47085 dur=255.125477ms
+readme 2025/08/17 23:36:51 using README from https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/17 23:37:33 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:37:40 fetching README for facebook/react
+readme 2025/08/17 23:37:40 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:37:40 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=178.331786ms
+readme 2025/08/17 23:37:40 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:38:10 fetching README for remix-run/react-router
+readme 2025/08/17 23:38:10 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:38:10 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=14.02488ms
+readme 2025/08/17 23:38:10 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:39:31 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:39:36 fetching README for facebook/react
+readme 2025/08/17 23:39:36 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:39:36 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=60.091995ms
+readme 2025/08/17 23:39:36 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:45:43 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:45:47 fetching README for facebook/react
+readme 2025/08/17 23:45:47 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:45:47 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=171.20977ms
+readme 2025/08/17 23:45:47 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:46:33 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:46:33 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:46:33 RESP 404 text/plain; charset=utf-8 dur=212.048406ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:46:33 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:46:33 RESP 404 text/plain; charset=utf-8 dur=204.894775ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:46:33 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:46:33 RESP 404 text/plain; charset=utf-8 dur=152.640218ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:46:33 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:46:33 RESP 404 text/plain; charset=utf-8 dur=253.983519ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:46:33 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:46:34 RESP 404 text/plain; charset=utf-8 dur=204.879297ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:46:34 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:46:34 RESP 404 text/plain; charset=utf-8 dur=204.539923ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:46:34 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:46:34 RESP 404 text/plain; charset=utf-8 dur=203.624125ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:46:34 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:46:34 RESP 404 text/plain; charset=utf-8 dur=150.817053ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:46:34 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:46:34 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=152.446437ms
+readme 2025/08/17 23:46:34 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:47:28 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:47:31 fetching README for facebook/react
+readme 2025/08/17 23:47:31 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:47:32 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=65.887425ms
+readme 2025/08/17 23:47:32 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:48:27 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:48:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:48:27 RESP 404 text/plain; charset=utf-8 dur=143.225144ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:48:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:48:27 RESP 404 text/plain; charset=utf-8 dur=200.98687ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:48:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:48:27 RESP 404 text/plain; charset=utf-8 dur=203.864203ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:48:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:48:28 RESP 404 text/plain; charset=utf-8 dur=204.897959ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:48:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:48:28 RESP 404 text/plain; charset=utf-8 dur=204.9023ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:48:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:48:28 RESP 404 text/plain; charset=utf-8 dur=204.430466ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:48:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:48:28 RESP 404 text/plain; charset=utf-8 dur=204.677481ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:48:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:48:28 RESP 404 text/plain; charset=utf-8 dur=206.241048ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:48:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:48:28 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=15.506973ms
+readme 2025/08/17 23:48:28 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:48:51 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=14.411052ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=13.839597ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=13.816488ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=28.905056ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=13.475508ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=14.105345ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=13.222311ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:48:51 RESP 404 text/plain; charset=utf-8 dur=13.94864ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:48:51 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:48:51 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=17.375547ms
+readme 2025/08/17 23:48:51 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:49:16 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:49:20 fetching README for facebook/react
+readme 2025/08/17 23:49:20 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:49:20 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=50.648635ms
+readme 2025/08/17 23:49:20 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:49:55 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:49:59 fetching README for facebook/react
+readme 2025/08/17 23:49:59 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:49:59 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=49.076914ms
+readme 2025/08/17 23:49:59 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:50:28 fetching README for facebook/react
+readme 2025/08/17 23:50:28 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:50:28 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=13.487686ms
+readme 2025/08/17 23:50:28 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:50:33 fetching README for facebook/react
+readme 2025/08/17 23:50:33 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:50:33 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=15.604629ms
+readme 2025/08/17 23:50:33 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:50:41 fetching README for react-grid-layout/react-draggable
+readme 2025/08/17 23:50:41 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/17 23:50:41 RESP 404 text/plain; charset=utf-8 dur=253.793866ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/17 23:50:41 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/17 23:50:41 RESP 404 text/plain; charset=utf-8 dur=157.174781ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:50:41 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/17 23:50:41 RESP 404 text/plain; charset=utf-8 dur=162.100035ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:50:41 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/17 23:50:42 RESP 404 text/plain; charset=utf-8 dur=142.446492ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:50:42 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/17 23:50:42 RESP 404 text/plain; charset=utf-8 dur=193.399872ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:50:42 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/17 23:50:42 RESP 404 text/plain; charset=utf-8 dur=162.419296ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:50:42 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/17 23:50:42 RESP 404 text/plain; charset=utf-8 dur=164.026775ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:50:42 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/17 23:50:42 RESP 404 text/plain; charset=utf-8 dur=245.740061ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/17 23:50:42 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/17 23:50:43 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=206.017036ms
+readme 2025/08/17 23:50:43 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/17 23:52:11 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:52:20 fetching README for facebook/react
+readme 2025/08/17 23:52:20 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:52:21 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=184.514387ms
+readme 2025/08/17 23:52:21 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:52:58 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:53:06 fetching README for facebook/react
+readme 2025/08/17 23:53:06 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:53:06 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=50.74468ms
+readme 2025/08/17 23:53:06 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:53:21 fetching README for remix-run/react-router
+readme 2025/08/17 23:53:21 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:53:21 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=183.62672ms
+readme 2025/08/17 23:53:21 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:54:03 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/17 23:54:06 fetching README for facebook/react
+readme 2025/08/17 23:54:06 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:54:06 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=50.506398ms
+readme 2025/08/17 23:54:06 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:54:16 fetching README for facebook/react
+readme 2025/08/17 23:54:16 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:54:16 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=18.501589ms
+readme 2025/08/17 23:54:16 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/17 23:54:21 fetching README for remix-run/react-router
+readme 2025/08/17 23:54:21 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:54:21 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=14.986617ms
+readme 2025/08/17 23:54:21 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/17 23:54:27 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:54:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:54:27 RESP 404 text/plain; charset=utf-8 dur=141.884771ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:54:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:54:27 RESP 404 text/plain; charset=utf-8 dur=197.99386ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:54:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:54:27 RESP 404 text/plain; charset=utf-8 dur=161.891393ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:54:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:54:27 RESP 404 text/plain; charset=utf-8 dur=248.831041ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:54:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:54:27 RESP 404 text/plain; charset=utf-8 dur=153.754533ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:54:27 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:54:28 RESP 404 text/plain; charset=utf-8 dur=255.150472ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:54:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:54:28 RESP 404 text/plain; charset=utf-8 dur=203.901593ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:54:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:54:28 RESP 404 text/plain; charset=utf-8 dur=204.461772ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:54:28 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:54:28 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=205.528472ms
+readme 2025/08/17 23:54:28 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:54:32 fetching README for reduxjs/react-redux
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=41.413356ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=24.466185ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=39.067556ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=18.757568ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=29.246704ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=17.551096ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=16.401298ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/17 23:54:32 RESP 404 text/plain; charset=utf-8 dur=16.267216ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/17 23:54:32 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/17 23:54:32 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=16.746001ms
+readme 2025/08/17 23:54:32 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/18 00:02:18 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/18 00:02:29 fetching README for jsx-eslint/eslint-plugin-react
+readme 2025/08/18 00:02:29 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md
+readme 2025/08/18 00:02:30 RESP 404 text/plain; charset=utf-8 dur=241.648049ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md body="404: Not Found"
+readme 2025/08/18 00:02:30 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md
+readme 2025/08/18 00:02:30 RESP 404 text/plain; charset=utf-8 dur=204.743575ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:02:30 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md
+readme 2025/08/18 00:02:30 RESP 404 text/plain; charset=utf-8 dur=202.65523ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:02:30 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD
+readme 2025/08/18 00:02:30 RESP 404 text/plain; charset=utf-8 dur=206.276905ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:02:30 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown
+readme 2025/08/18 00:02:30 RESP 404 text/plain; charset=utf-8 dur=204.625845ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:02:30 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst
+readme 2025/08/18 00:02:31 RESP 404 text/plain; charset=utf-8 dur=408.641491ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:02:31 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt
+readme 2025/08/18 00:02:31 RESP 404 text/plain; charset=utf-8 dur=204.510699ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:02:31 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README
+readme 2025/08/18 00:02:31 RESP 404 text/plain; charset=utf-8 dur=181.028478ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README body="404: Not Found"
+readme 2025/08/18 00:02:31 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/18 00:02:31 RESP 200 text/plain; charset=utf-8 bytes=39448 dur=229.96466ms
+readme 2025/08/18 00:02:31 using README from https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/18 00:02:46 fetching README for reduxjs/react-redux
+readme 2025/08/18 00:02:46 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/18 00:02:46 RESP 404 text/plain; charset=utf-8 dur=234.956301ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/18 00:02:46 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/18 00:02:47 RESP 404 text/plain; charset=utf-8 dur=156.870828ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:02:47 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/18 00:02:47 RESP 404 text/plain; charset=utf-8 dur=251.870634ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:02:47 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/18 00:02:47 RESP 404 text/plain; charset=utf-8 dur=164.071529ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:02:47 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/18 00:02:47 RESP 404 text/plain; charset=utf-8 dur=245.478206ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:02:47 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/18 00:02:47 RESP 404 text/plain; charset=utf-8 dur=144.529926ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:02:47 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/18 00:02:48 RESP 404 text/plain; charset=utf-8 dur=162.931125ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:02:48 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/18 00:02:48 RESP 404 text/plain; charset=utf-8 dur=193.385003ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/18 00:02:48 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/18 00:02:48 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=215.26419ms
+readme 2025/08/18 00:02:48 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/18 00:03:01 fetching README for remix-run/react-router
+readme 2025/08/18 00:03:01 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:03:01 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=152.090165ms
+readme 2025/08/18 00:03:01 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:03:09 fetching README for remix-run/react-router
+readme 2025/08/18 00:03:09 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:03:09 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=17.068907ms
+readme 2025/08/18 00:03:09 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:03:13 fetching README for facebook/react
+readme 2025/08/18 00:03:13 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:03:13 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=198.887286ms
+readme 2025/08/18 00:03:13 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:03:48 fetching README for DefinitelyTyped/DefinitelyTyped
+readme 2025/08/18 00:03:48 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md
+readme 2025/08/18 00:03:49 RESP 404 text/plain; charset=utf-8 dur=171.662363ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md body="404: Not Found"
+readme 2025/08/18 00:03:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md
+readme 2025/08/18 00:03:49 RESP 404 text/plain; charset=utf-8 dur=203.81352ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:03:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md
+readme 2025/08/18 00:03:49 RESP 404 text/plain; charset=utf-8 dur=150.348586ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:03:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD
+readme 2025/08/18 00:03:49 RESP 404 text/plain; charset=utf-8 dur=258.86105ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:03:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown
+readme 2025/08/18 00:03:49 RESP 404 text/plain; charset=utf-8 dur=204.598179ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:03:49 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst
+readme 2025/08/18 00:03:50 RESP 404 text/plain; charset=utf-8 dur=204.645939ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:03:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt
+readme 2025/08/18 00:03:50 RESP 404 text/plain; charset=utf-8 dur=204.868871ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:03:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README
+readme 2025/08/18 00:03:50 RESP 404 text/plain; charset=utf-8 dur=204.49633ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README body="404: Not Found"
+readme 2025/08/18 00:03:50 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/18 00:03:50 RESP 200 text/plain; charset=utf-8 bytes=47085 dur=206.126122ms
+readme 2025/08/18 00:03:50 using README from https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/18 00:04:06 fetching README for react-grid-layout/react-draggable
+readme 2025/08/18 00:04:06 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/18 00:04:07 RESP 404 text/plain; charset=utf-8 dur=153.058742ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/18 00:04:07 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/18 00:04:07 RESP 404 text/plain; charset=utf-8 dur=269.614947ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:04:07 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/18 00:04:07 RESP 404 text/plain; charset=utf-8 dur=305.946549ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:04:07 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/18 00:04:07 RESP 404 text/plain; charset=utf-8 dur=235.071629ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:04:07 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/18 00:04:08 RESP 404 text/plain; charset=utf-8 dur=173.960505ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:04:08 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/18 00:04:08 RESP 404 text/plain; charset=utf-8 dur=206.120287ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:04:08 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/18 00:04:08 RESP 404 text/plain; charset=utf-8 dur=202.865027ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:04:08 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/18 00:04:08 RESP 404 text/plain; charset=utf-8 dur=155.107743ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/18 00:04:08 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:04:08 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=153.149734ms
+readme 2025/08/18 00:04:08 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:06:06 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/18 00:06:12 fetching README for remix-run/react-router
+readme 2025/08/18 00:06:12 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:06:12 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=51.282779ms
+readme 2025/08/18 00:06:12 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:06:22 fetching README for react-grid-layout/react-draggable
+readme 2025/08/18 00:06:22 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/18 00:06:22 RESP 404 text/plain; charset=utf-8 dur=200.533746ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/18 00:06:22 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/18 00:06:22 RESP 404 text/plain; charset=utf-8 dur=204.700445ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:06:22 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/18 00:06:23 RESP 404 text/plain; charset=utf-8 dur=204.29932ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:06:23 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/18 00:06:23 RESP 404 text/plain; charset=utf-8 dur=204.965469ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:06:23 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/18 00:06:23 RESP 404 text/plain; charset=utf-8 dur=204.513295ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:06:23 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/18 00:06:23 RESP 404 text/plain; charset=utf-8 dur=205.401727ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:06:23 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/18 00:06:23 RESP 404 text/plain; charset=utf-8 dur=157.335979ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:06:23 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/18 00:06:24 RESP 404 text/plain; charset=utf-8 dur=166.069212ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/18 00:06:24 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:06:24 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=16.185357ms
+readme 2025/08/18 00:06:24 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:06:39 fetching README for facebook/react
+readme 2025/08/18 00:06:39 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:06:39 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=16.511388ms
+readme 2025/08/18 00:06:39 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:06:58 fetching README for remix-run/react-router
+readme 2025/08/18 00:06:58 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:06:58 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=16.719954ms
+readme 2025/08/18 00:06:58 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:07:07 fetching README for remix-run/react-router
+readme 2025/08/18 00:07:07 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:07:07 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=13.274207ms
+readme 2025/08/18 00:07:07 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:07:25 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/18 00:07:31 fetching README for facebook/react
+readme 2025/08/18 00:07:31 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:07:31 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=52.000622ms
+readme 2025/08/18 00:07:31 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:08:02 fetching README for remix-run/react-router
+readme 2025/08/18 00:08:02 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:08:02 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=140.95434ms
+readme 2025/08/18 00:08:02 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:08:08 fetching README for reduxjs/react-redux
+readme 2025/08/18 00:08:08 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md
+readme 2025/08/18 00:08:08 RESP 404 text/plain; charset=utf-8 dur=234.085789ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.md body="404: Not Found"
+readme 2025/08/18 00:08:08 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md
+readme 2025/08/18 00:08:08 RESP 404 text/plain; charset=utf-8 dur=204.260297ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:08:08 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md
+readme 2025/08/18 00:08:09 RESP 404 text/plain; charset=utf-8 dur=147.452506ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:08:09 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD
+readme 2025/08/18 00:08:09 RESP 404 text/plain; charset=utf-8 dur=160.373685ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:08:09 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown
+readme 2025/08/18 00:08:09 RESP 404 text/plain; charset=utf-8 dur=151.836304ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:08:09 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst
+readme 2025/08/18 00:08:09 RESP 404 text/plain; charset=utf-8 dur=153.874792ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:08:09 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt
+readme 2025/08/18 00:08:09 RESP 404 text/plain; charset=utf-8 dur=204.665435ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:08:09 GET https://raw.githubusercontent.com/reduxjs/react-redux/main/README
+readme 2025/08/18 00:08:09 RESP 404 text/plain; charset=utf-8 dur=205.149034ms url=https://raw.githubusercontent.com/reduxjs/react-redux/main/README body="404: Not Found"
+readme 2025/08/18 00:08:09 GET https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/18 00:08:10 RESP 200 text/plain; charset=utf-8 bytes=3160 dur=206.022386ms
+readme 2025/08/18 00:08:10 using README from https://raw.githubusercontent.com/reduxjs/react-redux/master/README.md
+readme 2025/08/18 00:08:14 fetching README for react-grid-layout/react-draggable
+readme 2025/08/18 00:08:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/18 00:08:14 RESP 404 text/plain; charset=utf-8 dur=238.654054ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/18 00:08:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/18 00:08:14 RESP 404 text/plain; charset=utf-8 dur=193.432839ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:08:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/18 00:08:14 RESP 404 text/plain; charset=utf-8 dur=162.149097ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:08:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/18 00:08:14 RESP 404 text/plain; charset=utf-8 dur=158.044289ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:08:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/18 00:08:14 RESP 404 text/plain; charset=utf-8 dur=156.15435ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:08:14 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/18 00:08:15 RESP 404 text/plain; charset=utf-8 dur=150.659725ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:08:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/18 00:08:15 RESP 404 text/plain; charset=utf-8 dur=202.157213ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:08:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/18 00:08:15 RESP 404 text/plain; charset=utf-8 dur=205.2839ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/18 00:08:15 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:08:15 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=15.27312ms
+readme 2025/08/18 00:08:15 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:08:20 fetching README for DefinitelyTyped/DefinitelyTyped
+readme 2025/08/18 00:08:20 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md
+readme 2025/08/18 00:08:20 RESP 404 text/plain; charset=utf-8 dur=187.338712ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md body="404: Not Found"
+readme 2025/08/18 00:08:20 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md
+readme 2025/08/18 00:08:20 RESP 404 text/plain; charset=utf-8 dur=204.036731ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:08:20 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md
+readme 2025/08/18 00:08:20 RESP 404 text/plain; charset=utf-8 dur=202.938944ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:08:20 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD
+readme 2025/08/18 00:08:20 RESP 404 text/plain; charset=utf-8 dur=206.341798ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:08:20 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown
+readme 2025/08/18 00:08:21 RESP 404 text/plain; charset=utf-8 dur=204.297001ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:08:21 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst
+readme 2025/08/18 00:08:21 RESP 404 text/plain; charset=utf-8 dur=204.043729ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:08:21 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt
+readme 2025/08/18 00:08:21 RESP 404 text/plain; charset=utf-8 dur=204.446713ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:08:21 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README
+readme 2025/08/18 00:08:21 RESP 404 text/plain; charset=utf-8 dur=204.682921ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README body="404: Not Found"
+readme 2025/08/18 00:08:21 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/18 00:08:21 RESP 200 text/plain; charset=utf-8 bytes=47085 dur=23.766368ms
+readme 2025/08/18 00:08:21 using README from https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/18 00:08:26 fetching README for facebook/react
+readme 2025/08/18 00:08:26 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:08:26 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=255.508395ms
+readme 2025/08/18 00:08:26 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:08:33 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/18 00:08:41 fetching README for remix-run/react-router
+readme 2025/08/18 00:08:41 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:08:41 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=50.952993ms
+readme 2025/08/18 00:08:41 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:08:51 fetching README for DefinitelyTyped/DefinitelyTyped
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=17.842312ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.md body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=14.054699ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=13.979407ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=13.593871ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=14.113462ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=14.066528ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=13.951777ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README
+readme 2025/08/18 00:08:51 RESP 404 text/plain; charset=utf-8 dur=14.112145ms url=https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/main/README body="404: Not Found"
+readme 2025/08/18 00:08:51 GET https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/18 00:08:51 RESP 200 text/plain; charset=utf-8 bytes=47085 dur=138.978899ms
+readme 2025/08/18 00:08:51 using README from https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/README.md
+readme 2025/08/18 00:08:55 fetching README for facebook/react
+readme 2025/08/18 00:08:55 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:08:56 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=17.610153ms
+readme 2025/08/18 00:08:56 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:09:01 fetching README for react-grid-layout/react-draggable
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=17.137141ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.md body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=13.773086ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=13.653348ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=14.091267ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=13.714225ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=14.014136ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=14.11334ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README
+readme 2025/08/18 00:09:01 RESP 404 text/plain; charset=utf-8 dur=15.903232ms url=https://raw.githubusercontent.com/react-grid-layout/react-draggable/main/README body="404: Not Found"
+readme 2025/08/18 00:09:01 GET https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:09:01 RESP 200 text/plain; charset=utf-8 bytes=13481 dur=14.516527ms
+readme 2025/08/18 00:09:01 using README from https://raw.githubusercontent.com/react-grid-layout/react-draggable/master/README.md
+readme 2025/08/18 00:09:27 fetching README for vadimdemedes/ink
+readme 2025/08/18 00:09:27 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.md
+readme 2025/08/18 00:09:27 RESP 404 text/plain; charset=utf-8 dur=165.829125ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.md body="404: Not Found"
+readme 2025/08/18 00:09:27 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/Readme.md
+readme 2025/08/18 00:09:27 RESP 404 text/plain; charset=utf-8 dur=251.628872ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:09:27 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/readme.md
+readme 2025/08/18 00:09:27 RESP 404 text/plain; charset=utf-8 dur=203.938473ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:09:27 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.MD
+readme 2025/08/18 00:09:28 RESP 404 text/plain; charset=utf-8 dur=204.683738ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:09:28 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.markdown
+readme 2025/08/18 00:09:28 RESP 404 text/plain; charset=utf-8 dur=153.586218ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:09:28 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.rst
+readme 2025/08/18 00:09:28 RESP 404 text/plain; charset=utf-8 dur=256.309542ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:09:28 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README.txt
+readme 2025/08/18 00:09:28 RESP 404 text/plain; charset=utf-8 dur=151.820249ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:09:28 GET https://raw.githubusercontent.com/vadimdemedes/ink/main/README
+readme 2025/08/18 00:09:28 RESP 404 text/plain; charset=utf-8 dur=150.160107ms url=https://raw.githubusercontent.com/vadimdemedes/ink/main/README body="404: Not Found"
+readme 2025/08/18 00:09:28 GET https://raw.githubusercontent.com/vadimdemedes/ink/master/README.md
+readme 2025/08/18 00:09:29 RESP 404 text/plain; charset=utf-8 dur=209.072044ms url=https://raw.githubusercontent.com/vadimdemedes/ink/master/README.md body="404: Not Found"
+readme 2025/08/18 00:09:29 GET https://raw.githubusercontent.com/vadimdemedes/ink/master/Readme.md
+readme 2025/08/18 00:09:29 RESP 404 text/plain; charset=utf-8 dur=206.05321ms url=https://raw.githubusercontent.com/vadimdemedes/ink/master/Readme.md body="404: Not Found"
+readme 2025/08/18 00:09:29 GET https://raw.githubusercontent.com/vadimdemedes/ink/master/readme.md
+readme 2025/08/18 00:09:29 RESP 200 text/plain; charset=utf-8 bytes=53955 dur=205.295874ms
+readme 2025/08/18 00:09:29 using README from https://raw.githubusercontent.com/vadimdemedes/ink/master/readme.md
+readme 2025/08/18 00:10:57 fetching README for facebook/react
+readme 2025/08/18 00:10:57 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:10:57 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=13.647081ms
+readme 2025/08/18 00:10:57 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:11:00 fetching README for remix-run/react-router
+readme 2025/08/18 00:11:00 GET https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:11:00 RESP 200 text/plain; charset=utf-8 bytes=1400 dur=14.812186ms
+readme 2025/08/18 00:11:00 using README from https://raw.githubusercontent.com/remix-run/react-router/main/README.md
+readme 2025/08/18 00:11:05 fetching README for facebook/react
+readme 2025/08/18 00:11:05 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:11:05 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=16.750849ms
+readme 2025/08/18 00:11:05 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:11:07 fetching README for jsx-eslint/eslint-plugin-react
+readme 2025/08/18 00:11:07 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md
+readme 2025/08/18 00:11:07 RESP 404 text/plain; charset=utf-8 dur=198.20163ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.md body="404: Not Found"
+readme 2025/08/18 00:11:07 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md
+readme 2025/08/18 00:11:07 RESP 404 text/plain; charset=utf-8 dur=159.268761ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:11:07 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md
+readme 2025/08/18 00:11:07 RESP 404 text/plain; charset=utf-8 dur=205.822266ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:11:07 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD
+readme 2025/08/18 00:11:07 RESP 404 text/plain; charset=utf-8 dur=250.356478ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:11:07 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown
+readme 2025/08/18 00:11:08 RESP 404 text/plain; charset=utf-8 dur=204.149093ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:11:08 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst
+readme 2025/08/18 00:11:08 RESP 404 text/plain; charset=utf-8 dur=203.959451ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:11:08 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt
+readme 2025/08/18 00:11:08 RESP 404 text/plain; charset=utf-8 dur=204.162316ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:11:08 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README
+readme 2025/08/18 00:11:08 RESP 404 text/plain; charset=utf-8 dur=204.968266ms url=https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/main/README body="404: Not Found"
+readme 2025/08/18 00:11:08 GET https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/18 00:11:08 RESP 200 text/plain; charset=utf-8 bytes=39448 dur=207.407129ms
+readme 2025/08/18 00:11:08 using README from https://raw.githubusercontent.com/jsx-eslint/eslint-plugin-react/master/README.md
+readme 2025/08/18 00:11:59 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/18 00:13:04 fetching README for equinor/design-system
+readme 2025/08/18 00:13:04 GET https://raw.githubusercontent.com/equinor/design-system/main/README.md
+readme 2025/08/18 00:13:05 RESP 404 text/plain; charset=utf-8 dur=215.502432ms url=https://raw.githubusercontent.com/equinor/design-system/main/README.md body="404: Not Found"
+readme 2025/08/18 00:13:05 GET https://raw.githubusercontent.com/equinor/design-system/main/Readme.md
+readme 2025/08/18 00:13:05 RESP 404 text/plain; charset=utf-8 dur=205.584904ms url=https://raw.githubusercontent.com/equinor/design-system/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:13:05 GET https://raw.githubusercontent.com/equinor/design-system/main/readme.md
+readme 2025/08/18 00:13:05 RESP 404 text/plain; charset=utf-8 dur=203.459008ms url=https://raw.githubusercontent.com/equinor/design-system/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:13:05 GET https://raw.githubusercontent.com/equinor/design-system/main/README.MD
+readme 2025/08/18 00:13:05 RESP 404 text/plain; charset=utf-8 dur=204.923568ms url=https://raw.githubusercontent.com/equinor/design-system/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:13:05 GET https://raw.githubusercontent.com/equinor/design-system/main/README.markdown
+readme 2025/08/18 00:13:05 RESP 404 text/plain; charset=utf-8 dur=204.220579ms url=https://raw.githubusercontent.com/equinor/design-system/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:13:05 GET https://raw.githubusercontent.com/equinor/design-system/main/README.rst
+readme 2025/08/18 00:13:06 RESP 404 text/plain; charset=utf-8 dur=204.758743ms url=https://raw.githubusercontent.com/equinor/design-system/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:13:06 GET https://raw.githubusercontent.com/equinor/design-system/main/README.txt
+readme 2025/08/18 00:13:06 RESP 404 text/plain; charset=utf-8 dur=206.040415ms url=https://raw.githubusercontent.com/equinor/design-system/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:13:06 GET https://raw.githubusercontent.com/equinor/design-system/main/README
+readme 2025/08/18 00:13:06 RESP 404 text/plain; charset=utf-8 dur=149.741092ms url=https://raw.githubusercontent.com/equinor/design-system/main/README body="404: Not Found"
+readme 2025/08/18 00:13:06 GET https://raw.githubusercontent.com/equinor/design-system/master/README.md
+readme 2025/08/18 00:13:06 RESP 200 text/plain; charset=utf-8 bytes=9123 dur=260.120493ms
+readme 2025/08/18 00:13:06 using README from https://raw.githubusercontent.com/equinor/design-system/master/README.md
+readme 2025/08/18 00:14:17 debug logging enabled: /home/fredrik/npm-search/npm-search.log
+readme 2025/08/18 00:14:36 fetching README for facebook/react
+readme 2025/08/18 00:14:36 GET https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:14:37 RESP 200 text/plain; charset=utf-8 bytes=5317 dur=222.774454ms
+readme 2025/08/18 00:14:37 using README from https://raw.githubusercontent.com/facebook/react/main/README.md
+readme 2025/08/18 00:16:06 fetching README for recharts/react-smooth
+readme 2025/08/18 00:16:06 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.md
+readme 2025/08/18 00:16:06 RESP 404 text/plain; charset=utf-8 dur=150.981481ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.md body="404: Not Found"
+readme 2025/08/18 00:16:06 GET https://raw.githubusercontent.com/recharts/react-smooth/main/Readme.md
+readme 2025/08/18 00:16:06 RESP 404 text/plain; charset=utf-8 dur=154.254806ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/Readme.md body="404: Not Found"
+readme 2025/08/18 00:16:06 GET https://raw.githubusercontent.com/recharts/react-smooth/main/readme.md
+readme 2025/08/18 00:16:07 RESP 404 text/plain; charset=utf-8 dur=216.757696ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/readme.md body="404: Not Found"
+readme 2025/08/18 00:16:07 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.MD
+readme 2025/08/18 00:16:07 RESP 404 text/plain; charset=utf-8 dur=149.458947ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.MD body="404: Not Found"
+readme 2025/08/18 00:16:07 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.markdown
+readme 2025/08/18 00:16:07 RESP 404 text/plain; charset=utf-8 dur=158.457766ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.markdown body="404: Not Found"
+readme 2025/08/18 00:16:07 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.rst
+readme 2025/08/18 00:16:07 RESP 404 text/plain; charset=utf-8 dur=169.86937ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.rst body="404: Not Found"
+readme 2025/08/18 00:16:07 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README.txt
+readme 2025/08/18 00:16:07 RESP 404 text/plain; charset=utf-8 dur=151.882519ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README.txt body="404: Not Found"
+readme 2025/08/18 00:16:07 GET https://raw.githubusercontent.com/recharts/react-smooth/main/README
+readme 2025/08/18 00:16:07 RESP 404 text/plain; charset=utf-8 dur=144.11894ms url=https://raw.githubusercontent.com/recharts/react-smooth/main/README body="404: Not Found"
+readme 2025/08/18 00:16:07 GET https://raw.githubusercontent.com/recharts/react-smooth/master/README.md
+readme 2025/08/18 00:16:07 RESP 200 text/plain; charset=utf-8 bytes=5088 dur=146.278058ms
+readme 2025/08/18 00:16:07 using README from https://raw.githubusercontent.com/recharts/react-smooth/master/README.md

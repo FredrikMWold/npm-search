@@ -40,6 +40,8 @@ type Model struct {
 	focus       bool
 	placeholder string
 	del         *delegate
+	// when true, show the README hotkey in the help footer
+	showReadmeHotkey bool
 }
 
 func New() *Model {
@@ -76,6 +78,10 @@ func New() *Model {
 	l.AdditionalShortHelpKeys = func() []key.Binding {
 		keys := []key.Binding{
 			key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "details")),
+		}
+		// Show README toggle early in the list when enabled
+		if m.showReadmeHotkey {
+			keys = append(keys, key.NewBinding(key.WithKeys("r"), key.WithHelp("r", "README")))
 		}
 		if it, ok := m.list.SelectedItem().(item); ok {
 			name := it.Name()
@@ -207,6 +213,9 @@ func (m *Model) View() string {
 	body := lipgloss.Place(innerW, innerH, lipgloss.Left, lipgloss.Top, content)
 	return m.style.Width(innerW).Height(innerH).Render(body)
 }
+
+// SetShowReadmeHotkey toggles the presence of the README hotkey in the footer help.
+func (m *Model) SetShowReadmeHotkey(show bool) { m.showReadmeHotkey = show }
 
 // countLines returns the number of lines in s when rendered.
 func countLines(s string) int {

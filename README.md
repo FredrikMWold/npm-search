@@ -3,7 +3,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/fredrikmwold/npm-search.svg)](https://pkg.go.dev/github.com/fredrikmwold/npm-search)
 [![Release](https://img.shields.io/github/v/release/FredrikMWold/npm-search?sort=semver)](https://github.com/FredrikMWold/npm-search/releases)
 
-**A minimal, keyboard-first TUI for npm** built with [Bubble Tea](https://github.com/charmbracelet/bubbletea). Search, inspect, install, and manage/update your project's npm packages without leaving your terminal.
+**A minimal, keyboard-first TUI for npm** built with [Bubble Tea](https://github.com/charmbracelet/bubbletea). Search, inspect, install/update your project's npm packages, and view package READMEs — all without leaving your terminal.
 
 ![Demo](./demo.gif)
 
@@ -16,6 +16,7 @@
 | Input | `Enter` | Run search for current query |
 | Results | `↑`/`↓` | Move selection |
 | Results | `Enter` | Toggle details sidebar for selected package |
+| Results (sidebar open) | `r` | View README for selected package |
 | Results | `i` | Install selected package |
 | Results | `I` | Install as dev dependency |
 | Results | `u` | Update selected package to latest (if installed) |
@@ -36,6 +37,7 @@
 - ⌨️ One-key install (i), dev install (I), and update (u) when installed
 - 🧠 Auto-detects npm, pnpm, yarn, and bun via lockfiles
 - 🧩 Responsive layout with a toggleable sidebar
+- 📖 In-app README viewer for packages with a GitHub repo
 
 ## Install
 
