@@ -80,7 +80,7 @@ func (d *DetailsModel) View() string {
 	// Make the package name heading the same color as other headings
 	titleStyle := lipgloss.NewStyle().Foreground(theme.Subtext0).Bold(true)
 	labelStyle := lipgloss.NewStyle().Foreground(theme.Subtext0)
-	headingStyle := labelStyle.Copy().Bold(true)
+	headingStyle := labelStyle.Bold(true)
 	linkStyle := lipgloss.NewStyle().Foreground(theme.Blue)
 	mutedStyle := lipgloss.NewStyle().Foreground(theme.Surface2)
 	sep := mutedStyle.Render(strings.Repeat("─", maxInt(0, innerW)))
@@ -108,17 +108,21 @@ func (d *DetailsModel) View() string {
 		b.WriteString(wrap.Render(styledDesc))
 		b.WriteString("\n\n")
 	}
-	// Links section with truncation and aligned labels
+	// Links section with truncation and aligned icons only (no text labels)
 	linkCount := 0
-	labelW := 6 // width for labels like "repo:" "home:" "npm:"
+	labelW := 8 // space for [home] + space
 	linkW := maxInt(8, innerW-labelW)
-	row := func(label, url string) {
+	row := func(icon, url string) {
 		if url == "" {
 			return
 		}
 		linkCount++
-		lbl := labelStyle.Width(labelW).Render(label)
-		disp := shortenLink(url, linkW)
+		// icon + single trailing space (no left/half padding), clickable
+		widthStyle := lipgloss.NewStyle().Width(labelW)
+		cell := widthStyle.Render(icon + " ")
+		lbl := osc8(url, cell)
+		// display text without scheme while keeping actual URL intact
+		disp := shortenLinkDisplay(url, linkW)
 		val := osc8(url, linkStyle.Render(disp))
 		b.WriteString(lbl)
 		b.WriteString(val)
@@ -128,6 +132,12 @@ func (d *DetailsModel) View() string {
 	repoURL := ensureScheme(normalizeURL(d.repository))
 	homeURL := ensureScheme(d.homepage)
 	npmURL := ensureScheme(d.npmLink)
+	// Icons without backgrounds; try alternative glyphs that appear larger
+	// repo: GitHub logo (Font Awesome) in white
+	// Fancy ASCII word-icons
+	repoIcon := lipgloss.NewStyle().Foreground(lipgloss.Color("#ffffff")).Render("[repo]")
+	homeIcon := lipgloss.NewStyle().Foreground(theme.Blue).Render("[home]")
+	npmIcon := lipgloss.NewStyle().Foreground(theme.Red).Render("[npm]")
 	hasLinks := repoURL != "" || homeURL != "" || npmURL != ""
 	if hasLinks {
 		if b.Len() > 0 {
@@ -138,9 +148,9 @@ func (d *DetailsModel) View() string {
 		linksLabel := headingStyle.Render("Links")
 		b.WriteString(wrap.Render(linksLabel))
 		b.WriteString("\n\n")
-		row("repo:", repoURL)
-		row("home:", homeURL)
-		row("npm:", npmURL)
+	row(repoIcon, repoURL)
+	row(homeIcon, homeURL)
+	row(npmIcon, npmURL)
 	}
 
 	// Clamp by lines with ellipsis if overflow (avoid re-wrapping hyperlinks)
@@ -180,6 +190,42 @@ func styleDescription(s string) string {
 	return s
 }
 
+// shortenLinkDisplay returns a display-friendly URL that strips http(s) scheme
+// while middle-truncating to fit maxW. The underlying URL should still include
+// the scheme when used in osc8 for clickability.
+func shortenLinkDisplay(url string, maxW int) string {
+	if maxW <= 0 || url == "" {
+		return ""
+	}
+	// Remove scheme only for display
+	disp := strings.TrimPrefix(strings.TrimPrefix(url, "https://"), "http://")
+	// Trim trailing slash for neatness
+	disp = strings.TrimRight(disp, "/")
+	// If it already fits, return as-is
+	if len(disp) <= maxW {
+		return disp
+	}
+	// Middle truncate
+	if maxW <= 1 {
+		return "…"
+	}
+	left := maxW / 2
+	right := maxW - left - 1 // for ellipsis
+	if right < 1 {
+		right = 1
+		if left > 1 {
+			left--
+		}
+	}
+	if left+right+1 > len(disp) {
+		if len(disp) > maxW {
+			disp = disp[:maxW]
+		}
+		return disp
+	}
+	return disp[:left] + "…" + disp[len(disp)-right:]
+}
+
 // local max to avoid importing others
 func maxInt(a, b int) int {
 	if a > b {
@@ -189,63 +235,7 @@ func maxInt(a, b int) int {
 }
 
 // shortenLink normalizes and middle-truncates a link to fit maxW cells.
-func shortenLink(s string, maxW int) string {
-	if maxW <= 0 {
-		return ""
-	}
-	// ensure scheme for clickability and preserve it at the start
-	scheme := ""
-	if strings.HasPrefix(s, "https://") {
-		scheme = "https://"
-	} else if strings.HasPrefix(s, "http://") {
-		scheme = "http://"
-	}
-	rest := s
-	if scheme != "" {
-		rest = s[len(scheme):]
-	}
-	// trim trailing slash for cleanliness
-	rest = strings.TrimRight(rest, "/")
-
-	// If it already fits, return as-is (with scheme)
-	if len(scheme)+len(rest) <= maxW {
-		return scheme + rest
-	}
-	// If space is too small, try to at least return the scheme (or ellipsis)
-	if maxW <= len(scheme)+1 {
-		if maxW <= len(scheme) {
-			// Even scheme doesn't fit fully; return truncated scheme
-			return (scheme + rest)[:maxW]
-		}
-		// show scheme + ellipsis
-		return scheme + "…"
-	}
-	// Truncate the rest in the middle to fit remaining width
-	remain := maxW - len(scheme)
-	if remain <= 1 {
-		return scheme + "…"
-	}
-	// middle truncation for rest
-	left := remain / 2
-	right := remain - left - 1 // for ellipsis
-	if right < 1 {
-		right = 1
-		if left > 1 {
-			left--
-		}
-	}
-	if left < 1 {
-		left = 1
-	}
-	if left+right+1 > len(rest) {
-		// shouldn't happen often, but guard anyway
-		if len(rest) > remain {
-			rest = rest[:remain]
-		}
-		return scheme + rest
-	}
-	return scheme + rest[:left] + "…" + rest[len(rest)-right:]
-}
+// (shortenLink removed in favor of shortenLinkDisplay)
 
 // ensureScheme adds https:// to URLs that lack http(s) scheme
 func ensureScheme(s string) string {
