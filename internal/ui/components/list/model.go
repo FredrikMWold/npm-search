@@ -49,8 +49,15 @@ func New() *Model {
 	// Create custom delegate (wrap default styles)
 	d := newDelegate()
 	// Theme normal and selected item styles
-	d.DefaultDelegate.Styles.SelectedTitle = d.DefaultDelegate.Styles.SelectedTitle.Foreground(theme.Mauve).Bold(true)
-	d.DefaultDelegate.Styles.SelectedDesc = d.DefaultDelegate.Styles.SelectedDesc.Foreground(theme.Subtext0)
+	// SelectedTitle includes a left border which acts as the selection cursor;
+	// color it with our theme accent.
+	d.DefaultDelegate.Styles.SelectedTitle = d.DefaultDelegate.Styles.SelectedTitle.
+		Foreground(theme.Mauve).
+		BorderForeground(theme.Mauve).
+		Bold(true)
+	d.DefaultDelegate.Styles.SelectedDesc = d.DefaultDelegate.Styles.SelectedDesc.
+		Foreground(theme.Mauve).
+		BorderForeground(theme.Mauve)
 	d.DefaultDelegate.Styles.NormalTitle = d.DefaultDelegate.Styles.NormalTitle.Foreground(theme.Text)
 	d.DefaultDelegate.Styles.NormalDesc = d.DefaultDelegate.Styles.NormalDesc.Foreground(theme.Surface2)
 
@@ -58,7 +65,8 @@ func New() *Model {
 	l.Title = "Results"
 	l.SetShowStatusBar(false)
 	l.SetShowHelp(true)
-	l.SetFilteringEnabled(true)
+	// Disable built-in list filtering; searching is handled by the top input
+	l.SetFilteringEnabled(false)
 	l.Styles.Title = lipgloss.NewStyle().Foreground(theme.Subtext0)
 	l.Styles.PaginationStyle = lipgloss.NewStyle().Foreground(theme.Surface2)
 	l.Styles.HelpStyle = lipgloss.NewStyle().Foreground(theme.Surface2)
@@ -66,14 +74,16 @@ func New() *Model {
 	// Add custom help keybindings for install actions
 	l.AdditionalShortHelpKeys = func() []key.Binding {
 		return []key.Binding{
-			key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "npm install")),
-			key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "npm install -D")),
+			key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "details")),
+			key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
+			key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
 		}
 	}
 	l.AdditionalFullHelpKeys = func() []key.Binding {
 		return []key.Binding{
-			key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "npm install")),
-			key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "npm install -D")),
+			key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "details")),
+			key.NewBinding(key.WithKeys("i"), key.WithHelp("i", "install")),
+			key.NewBinding(key.WithKeys("I"), key.WithHelp("I", "install dev")),
 		}
 	}
 

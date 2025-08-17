@@ -121,6 +121,17 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 				return m, tea.Batch(commands.SearchNPM(q))
 			} else if m.focus == focusResults {
+				// Toggle the sidebar when pressing Enter on results
+				if m.sideOpen {
+					m.sideOpen = false
+					// Recompute sizes for closed state
+					inputHeight := m.input.Height()
+					remaining := int(math.Max(0, float64(m.height-inputHeight)))
+					listW, sideW := computeSplit(m.width, m.sideOpen)
+					m.list.SetSize(listW, remaining)
+					m.side.SetSize(sideW, remaining)
+					return m, nil
+				}
 				// Open the sidebar with details for the selected item
 				m.sideOpen = true
 				if det, ok := m.list.SelectedDetails(); ok {
