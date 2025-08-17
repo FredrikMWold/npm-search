@@ -16,6 +16,11 @@ import (
 type item struct {
 	title       string
 	description string
+	// extra metadata for sidebar
+	fullDesc string
+	homepage string
+	repo     string
+	npmLink  string
 }
 
 func (i item) Title() string       { return i.title }
@@ -187,11 +192,65 @@ func (m *Model) SelectedName() (string, bool) {
 	return "", false
 }
 
+// Details holds the metadata needed by the sidebar for the selected item.
+type Details struct {
+	Name        string
+	Description string
+	StatsLine   string
+	Homepage    string
+	Repository  string
+	NPMLink     string
+}
+
+// SelectedDetails returns sidebar-ready metadata for the currently selected item.
+func (m *Model) SelectedDetails() (Details, bool) {
+	if it, ok := m.list.SelectedItem().(item); ok {
+		return Details{
+			Name:        it.title,
+			Description: it.fullDesc,
+			StatsLine:   it.description,
+			Homepage:    it.homepage,
+			Repository:  it.repo,
+			NPMLink:     it.npmLink,
+		}, true
+	}
+	return Details{}, false
+}
+
 // SetItems replaces the list items and optionally sets a title.
 func (m *Model) SetItems(title string, items []struct{ Title, Description string }) {
 	itms := make([]bblist.Item, 0, len(items))
 	for _, it := range items {
 		itms = append(itms, item{title: it.Title, description: it.Description})
+	}
+	m.list.SetItems(itms)
+	if title != "" {
+		m.list.Title = title
+	}
+}
+
+// ItemWithMeta is the input struct for SetItemsWithMeta with sidebar data.
+type ItemWithMeta struct {
+	Title      string
+	LineDesc   string
+	FullDesc   string
+	Homepage   string
+	Repository string
+	NPMLink    string
+}
+
+// SetItemsWithMeta replaces items and attaches metadata for the sidebar.
+func (m *Model) SetItemsWithMeta(title string, items []ItemWithMeta) {
+	itms := make([]bblist.Item, 0, len(items))
+	for _, it := range items {
+		itms = append(itms, item{
+			title:       it.Title,
+			description: it.LineDesc,
+			fullDesc:    it.FullDesc,
+			homepage:    it.Homepage,
+			repo:        it.Repository,
+			npmLink:     it.NPMLink,
+		})
 	}
 	m.list.SetItems(itms)
 	if title != "" {
@@ -213,6 +272,14 @@ func (m *Model) SetRowSpinner(frame string) {
 	}
 }
 
+// SetInstalled marks which package names were installed successfully to show
+// a green checkmark prefix.
+func (m *Model) SetInstalled(installed map[string]bool) {
+	if m.del != nil {
+		m.del.installed = installed
+	}
+}
+
 // max helper (local copy)
 func max(a, b int) int {
 	if a > b {
@@ -225,6 +292,7 @@ func max(a, b int) int {
 type delegate struct {
 	bblist.DefaultDelegate
 	installing map[string]bool
+	installed  map[string]bool
 	frame      string
 }
 
@@ -243,6 +311,10 @@ func (d *delegate) Render(w io.Writer, m bblist.Model, index int, listItem bblis
 	prefix := ""
 	if d.installing != nil && d.installing[it.Name()] {
 		prefix = d.frame + " "
+	} else if d.installed != nil && d.installed[it.Name()] {
+		// green checkmark for successful install
+		check := lipgloss.NewStyle().Foreground(theme.Green).Render("✔")
+		prefix = check + " "
 	}
 	// Wrap the item to override Title() with spinner prefix while preserving
 	// default height/formatting.
