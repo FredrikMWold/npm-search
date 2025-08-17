@@ -16,6 +16,14 @@ before:
     - go generate ./...
 
 builds:
+  - main: ./cmd/npm-search
+    ldflags:
+      - -X github.com/fredrikmwold/npm-search/internal/version.Version={{.Version}}
+      - -X github.com/fredrikmwold/npm-search/internal/version.Commit={{.Commit}}
+      - -X github.com/fredrikmwold/npm-search/internal/version.Date={{.Date}}
+    env:
+      - GOOS=linux
+      - GOARCH=amd64
   - env:
       - CGO_ENABLED=0
     goos:
