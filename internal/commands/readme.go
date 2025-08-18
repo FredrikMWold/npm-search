@@ -112,7 +112,7 @@ func tryRawFallbackCtx(ctx context.Context, owner, repo string) string {
 		for _, nm := range names {
 			u := "https://raw.githubusercontent.com/" + url.PathEscape(owner) + "/" + url.PathEscape(repo) + "/" + url.PathEscape(br) + "/" + nm
 			req, _ := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
-			req.Header.Set("User-Agent", "npm-search (https://github.com/fredrikmwold/npm-search)")
+			req.Header.Set("User-Agent", "npm-tui (https://github.com/fredrikmwold/npm-tui)")
 			start := time.Now()
 			if r, err := client.Do(req); err == nil && r != nil {
 				if r.StatusCode == http.StatusOK {

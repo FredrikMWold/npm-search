@@ -7,10 +7,10 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/fredrikmwold/npm-search/internal/commands"
-	"github.com/fredrikmwold/npm-search/internal/ui/components"
-	clist "github.com/fredrikmwold/npm-search/internal/ui/components/list"
-	"github.com/fredrikmwold/npm-search/internal/ui/theme"
+	"github.com/fredrikmwold/npm-tui/internal/commands"
+	"github.com/fredrikmwold/npm-tui/internal/ui/components"
+	clist "github.com/fredrikmwold/npm-tui/internal/ui/components/list"
+	"github.com/fredrikmwold/npm-tui/internal/ui/theme"
 )
 
 // Model is the root UI model.
@@ -370,7 +370,7 @@ func (m *Model) View() string {
 		return "" // wait for initial size
 	}
 	// Render input and results. The input renders its own inline label.
-	m.input.SetLabel("npm search:", lipgloss.NewStyle().Foreground(theme.Subtext0))
+	m.input.SetLabel("npm-search:", lipgloss.NewStyle().Foreground(theme.Subtext0))
 	inputView := m.input.View()
 	// When README is open, use the full area below the input
 	var body string

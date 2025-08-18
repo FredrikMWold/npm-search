@@ -16,12 +16,12 @@ before:
     - go generate ./...
 
 builds:
-  - id: npm-search
-    main: ./cmd/npm-search
+  - id: npm-tui
+    main: ./cmd/npm-tui
     ldflags:
-      - -X github.com/fredrikmwold/npm-search/internal/version.Version={{.Version}}
-      - -X github.com/fredrikmwold/npm-search/internal/version.Commit={{.Commit}}
-      - -X github.com/fredrikmwold/npm-search/internal/version.Date={{.Date}}
+      - -X github.com/fredrikmwold/npm-tui/internal/version.Version={{.Version}}
+      - -X github.com/fredrikmwold/npm-tui/internal/version.Commit={{.Commit}}
+      - -X github.com/fredrikmwold/npm-tui/internal/version.Date={{.Date}}
     env:
       - CGO_ENABLED=0
     goos:

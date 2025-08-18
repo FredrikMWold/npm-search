@@ -1,4 +1,4 @@
-module github.com/fredrikmwold/npm-search
+module github.com/fredrikmwold/npm-tui
 
 go 1.24.6
 

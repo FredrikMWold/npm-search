@@ -1,7 +1,7 @@
-# npm-search
+# npm-tui
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/fredrikmwold/npm-search.svg)](https://pkg.go.dev/github.com/fredrikmwold/npm-search)
-[![Release](https://img.shields.io/github/v/release/FredrikMWold/npm-search?sort=semver)](https://github.com/FredrikMWold/npm-search/releases)
+[![Go Reference](https://pkg.go.dev/badge/github.com/fredrikmwold/npm-tui.svg)](https://pkg.go.dev/github.com/fredrikmwold/npm-tui)
+[![Release](https://img.shields.io/github/v/release/FredrikMWold/npm-tui?sort=semver)](https://github.com/FredrikMWold/npm-tui/releases)
 
 **A minimal, keyboard-first TUI for npm** built with [Bubble Tea](https://github.com/charmbracelet/bubbletea). Search, inspect, install/update your project's npm packages, and view package READMEs — all without leaving your terminal.
 
@@ -44,9 +44,9 @@
 Install with Go:
 
 ```sh
-go install github.com/fredrikmwold/npm-search/cmd/npm-search@latest
+go install github.com/fredrikmwold/npm-tui/cmd/npm-tui@latest
 ```
 
 Or download a prebuilt binary from the Releases page and place it on your PATH:
 
-- https://github.com/FredrikMWold/npm-search/releases
+- https://github.com/FredrikMWold/npm-tui/releases

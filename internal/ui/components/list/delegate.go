@@ -7,7 +7,7 @@ import (
 	bblist "github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/fredrikmwold/npm-search/internal/ui/theme"
+	"github.com/fredrikmwold/npm-tui/internal/ui/theme"
 )
 
 // delegate customizes row rendering to show a spinner for installing items.

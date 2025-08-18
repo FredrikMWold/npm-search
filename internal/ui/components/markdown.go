@@ -8,7 +8,7 @@ import (
 	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/fredrikmwold/npm-search/internal/ui/theme"
+	"github.com/fredrikmwold/npm-tui/internal/ui/theme"
 )
 
 // MarkdownViewer renders markdown in a scrollable viewport filling the given size.

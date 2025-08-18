@@ -14,12 +14,12 @@ Set Shell zsh
 
 # Build the app and prep a friendly alias without showing the noise
 Hide
-Type "go build -o npm-search ./cmd/npm-search && alias npm-search='./npm-search' && clear"
+Type "go build -o npm-tui ./cmd/npm-tui && alias npm-tui='./npm-tui' && clear"
 Enter
 Show
 
 # Launch the TUI
-Type "npm-search"
+Type "npm-tui"
 Sleep 1200ms
 Enter
 Sleep 2500ms
@@ -58,6 +58,17 @@ Sleep 500ms
 # Open details (sidebar highlights metadata)
 Enter
 Sleep 1500ms
+
+Type 'r'
+Sleep 5s
+Down
+Down
+Down
+Down
+Down
+Sleep 700ms
+Escape
+Sleep 500ms
 
 # Install the selected package
 Type "i"
