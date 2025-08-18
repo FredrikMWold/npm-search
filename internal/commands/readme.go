@@ -53,6 +53,10 @@ func parseGitHubRepo(s string) (owner, repo string, err error) {
 	}
 	// strip git+ prefix
 	s = strings.TrimPrefix(s, "git+")
+	// normalize git protocol scheme to https for easier parsing
+	if strings.HasPrefix(s, "git://") {
+		s = "https://" + strings.TrimPrefix(s, "git://")
+	}
 	// handle npm shorthand like github:owner/repo
 	if strings.HasPrefix(s, "github:") {
 		rest := strings.TrimPrefix(s, "github:")
@@ -74,12 +78,15 @@ func parseGitHubRepo(s string) (owner, repo string, err error) {
 		return "", "", errors.New("invalid github ssh repo path")
 	}
 	// Try URL parsing
-	if !strings.HasPrefix(s, "http://") && !strings.HasPrefix(s, "https://") {
-		s = "https://" + s
-	}
+	// First, attempt to parse as-is (supports https, http, ssh, etc.)
 	u, e := url.Parse(s)
-	if e != nil {
-		return "", "", e
+	if e != nil || u.Host == "" {
+		// If parsing failed or there's no host (e.g., "github.com/owner/repo"),
+		// try again with https:// prefix.
+		u, e = url.Parse("https://" + s)
+		if e != nil {
+			return "", "", e
+		}
 	}
 	host := strings.ToLower(u.Host)
 	if host != "github.com" && !strings.HasSuffix(host, ".github.com") && !strings.HasSuffix(host, "githubusercontent.com") {

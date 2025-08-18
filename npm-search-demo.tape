@@ -60,7 +60,7 @@ Enter
 Sleep 1500ms
 
 Type 'r'
-Sleep 5s
+Sleep 8s
 Down
 Down
 Down
