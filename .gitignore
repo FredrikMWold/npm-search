@@ -30,3 +30,11 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Project binaries
+# If you build the CLI from repo root (e.g., `go build ./cmd/npm-tui`),
+# the output may be `./npm-tui` in the root or `./cmd/npm-tui/npm-tui` inside the cmd dir.
+# Ignore both potential locations without affecting the tracked folder named `npm-tui`.
+/npm-tui
+/cmd/npm-tui/npm-tui
+/cmd/npm-tui/npm-tui.exe

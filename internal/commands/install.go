@@ -29,25 +29,36 @@ const (
 
 //
 
+// installMutex is a simple semaphore (buffered channel) to serialize
+// install/update operations. Running multiple package manager commands
+// concurrently in the same project often causes lock/contention issues
+// and leads to hangs or inconsistent state. Limiting to 1 ensures
+// predictable behavior when users trigger several actions quickly.
+var installMutex = make(chan struct{}, 1)
+
 func InstallNPM(pkg string, dev bool) tea.Cmd {
 	return func() tea.Msg {
 		if pkg == "" {
 			return NpmInstallMsg{Package: pkg, Dev: dev, Err: nil}
 		}
+		// Serialize install/update operations
+		installMutex <- struct{}{}
+		defer func() { <-installMutex }()
+
 		// Decide which package manager to use based on project files
 		wd, _ := os.Getwd()
 		pm := detectPackageManager(wd)
 
+		// Re-check installed state within the critical section to avoid
+		// stale decisions when multiple actions are queued.
+		installed := isPkgInstalled(wd, pkg)
+
 		var cmdName string
 		var args []string
-		// Determine if already installed once per exec
-		installed := isPkgInstalled(wd, pkg)
 		switch pm {
 		case PMPNPM:
 			cmdName = "pnpm"
-			// If package already exists, prefer update; pnpm up <pkg>
 			if installed {
-				// bump manifest to latest
 				args = []string{"up"}
 			} else {
 				args = []string{"add"}
@@ -58,45 +69,40 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 			args = append(args, pkg)
 		case PMYarn:
 			cmdName = "yarn"
-			// yarn upgrade <pkg> if installed, else add
 			if installed {
-				args = []string{"upgrade", "--latest"}
+				args = []string{"upgrade", "--latest", pkg}
 			} else {
 				args = []string{"add"}
 				if dev {
 					args = append(args, "-D")
 				}
+				args = append(args, pkg)
 			}
-			args = append(args, pkg)
 		case PMBun:
 			cmdName = "bun"
-			// bun upgrade <pkg> if installed, else add
 			if installed {
-				args = []string{"upgrade"}
+				args = []string{"upgrade", pkg}
 			} else {
 				args = []string{"add"}
 				if dev {
 					args = append(args, "-d")
 				}
+				args = append(args, pkg)
 			}
-			args = append(args, pkg)
 		default: // npm
 			cmdName = "npm"
-			// npm update <pkg> if installed, else install
-			if installed {
-				// npm install <pkg>@latest updates package.json to latest
-				args = []string{"install"}
-			} else {
-				args = []string{"install"}
-				if dev {
-					args = append(args, "--save-dev")
-				}
+			// Use install <pkg>@latest for both installed and new; add --save-dev for dev.
+			args = []string{"install"}
+			if dev && !installed { // keep dev flag only for fresh installs
+				args = append(args, "--save-dev")
 			}
-			// Pin to @latest to ensure manifest bump when updating
 			args = append(args, pkg+"@latest")
 		}
-		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
+
+		// Timeout per actual execution; starts after we acquired the mutex.
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 		defer cancel()
+
 		// If a specific PM was detected but binary is missing, return an error instead
 		if _, err := exec.LookPath(cmdName); err != nil {
 			if pm != PMNPM { // only auto-use npm when npm was selected by detection
@@ -106,6 +112,10 @@ func InstallNPM(pkg string, dev bool) tea.Cmd {
 			// pm is npm; proceed
 		}
 		cmd := exec.CommandContext(ctx, cmdName, args...)
+		// Ensure we run in the detected working directory
+		if wd != "" {
+			cmd.Dir = wd
+		}
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			return NpmInstallMsg{Package: pkg, Dev: dev, Output: string(out), Err: err}

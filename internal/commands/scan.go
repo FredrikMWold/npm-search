@@ -25,6 +25,8 @@ func ScanInstalledDeps() tea.Cmd {
 		if pkgPath == "" {
 			return ScanDepsMsg{Installed: map[string]bool{}, Wanted: map[string]string{}}
 		}
+		// Base directory of the project (where package.json lives)
+		baseDir := filepath.Dir(pkgPath)
 		b, err := os.ReadFile(pkgPath)
 		if err != nil {
 			return ScanDepsMsg{Installed: map[string]bool{}, Wanted: map[string]string{}, Path: pkgPath, Err: err}
@@ -41,15 +43,16 @@ func ScanInstalledDeps() tea.Cmd {
 		set := map[string]bool{}
 		wanted := map[string]string{}
 		for k, v := range data.Dependencies {
-			set[k] = true
+			// mark installed only if present in node_modules
+			set[k] = isPkgInstalled(baseDir, k)
 			wanted[k] = v
 		}
 		for k, v := range data.DevDependencies {
-			set[k] = true
+			set[k] = isPkgInstalled(baseDir, k)
 			wanted[k] = v
 		}
 		for k, v := range data.OptionalDependencies {
-			set[k] = true
+			set[k] = isPkgInstalled(baseDir, k)
 			wanted[k] = v
 		}
 		return ScanDepsMsg{Installed: set, Wanted: wanted, Path: pkgPath}
