@@ -2,9 +2,12 @@ package commands
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 	"time"
+
+	"strconv"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -112,5 +115,79 @@ func SearchNPM(query string) tea.Cmd {
 		}
 
 		return NpmSearchMsg{Query: query, Result: parsed}
+	}
+}
+
+// FetchDownloadsRange fetches downloads per day for a given package over the last N days
+// using the npm downloads range API and returns an NpmDownloadsRangeMsg.
+// days must be >= 1. Values are ordered oldest..newest.
+func FetchDownloadsRange(pkg string, days int) tea.Cmd {
+	return func() tea.Msg {
+		if pkg == "" || days < 1 {
+			return NpmDownloadsRangeMsg{Package: pkg, Values: nil}
+		}
+		// Check cache first
+		key := pkg + "|" + strconv.Itoa(days)
+		if vals, ok := cacheGetDLRange(key); ok {
+			return NpmDownloadsRangeMsg{Package: pkg, Values: vals}
+		}
+		// Compute date window: inclusive start:end, YYYY-MM-DD
+		end := time.Now().AddDate(0, 0, -1) // yesterday to avoid partial current day
+		start := end.AddDate(0, 0, -(days - 1))
+		startStr := start.Format("2006-01-02")
+		endStr := end.Format("2006-01-02")
+
+		u := "https://api.npmjs.org/downloads/range/" + startStr + ":" + endStr + "/" + url.PathEscape(pkg)
+		client := &http.Client{Timeout: 8 * time.Second}
+		resp, err := client.Get(u)
+		if err != nil {
+			return NpmDownloadsRangeMsg{Package: pkg, Err: err}
+		}
+		defer resp.Body.Close()
+		var parsed rangeDownloadsResponse
+		if err := json.NewDecoder(resp.Body).Decode(&parsed); err != nil {
+			return NpmDownloadsRangeMsg{Package: pkg, Err: err}
+		}
+		// Aggregate to weekly (ISO week) averages to reduce columns while showing trend
+		vals := make([]float64, 0, 64)
+		pts := make([]DownloadPoint, 0, 64)
+		var curWeek string
+		var sum int
+		var count int
+		var weekStart time.Time
+		flush := func() {
+			if count > 0 {
+				avg := float64(sum) / float64(count)
+				vals = append(vals, avg)
+				// place the point at mid-week for better spacing
+				mid := weekStart.AddDate(0, 0, 3)
+				pts = append(pts, DownloadPoint{Time: mid, Value: avg})
+			}
+			sum = 0
+			count = 0
+		}
+		for _, d := range parsed.Downloads {
+			t, err := time.Parse("2006-01-02", d.Day)
+			if err != nil {
+				// skip invalid date entries
+				continue
+			}
+			y, w := t.ISOWeek()
+			wk := fmt.Sprintf("%04d-%02d", y, w)
+			if curWeek == "" {
+				curWeek = wk
+				weekStart = t
+			}
+			if wk != curWeek {
+				flush()
+				curWeek = wk
+				weekStart = t
+			}
+			sum += d.Downloads
+			count++
+		}
+		flush()
+		cacheSetDLRange(key, vals)
+		return NpmDownloadsRangeMsg{Package: pkg, Values: vals, Points: pts}
 	}
 }

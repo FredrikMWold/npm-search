@@ -1,9 +1,14 @@
 package components
 
 import (
+	"fmt"
+	"math"
 	"regexp"
 	"strings"
+	"time"
 
+	"github.com/NimbleMarkets/ntcharts/linechart/timeserieslinechart"
+	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
@@ -15,6 +20,8 @@ type DetailsModel struct {
 	width  int
 	height int
 	style  lipgloss.Style
+	// scrollable content area
+	vp viewport.Model
 
 	// content
 	title       string
@@ -23,6 +30,18 @@ type DetailsModel struct {
 	homepage    string
 	repository  string
 	npmLink     string
+
+	// downloads over time series
+	dlValues []float64
+	dlTimes  []time.Time
+	// cached rendered chart string for current width
+	dlRendered string
+	// cached content string and dirty flag
+	content string
+	dirty   bool
+	// track when we need to reset scroll to top (e.g., on selection change)
+	resetTop  bool
+	lastTitle string
 }
 
 func NewDetails() *DetailsModel {
@@ -30,7 +49,10 @@ func NewDetails() *DetailsModel {
 		Border(lipgloss.RoundedBorder()).
 		BorderForeground(theme.BorderUnfocused).
 		Foreground(theme.Text)
-	return &DetailsModel{style: st}
+	vp := viewport.New(0, 0)
+	vp.MouseWheelEnabled = true
+	// viewport is unstyled; outer style draws the border
+	return &DetailsModel{style: st, vp: vp, dirty: true}
 }
 
 func (d *DetailsModel) Init() tea.Cmd { return nil }
@@ -42,7 +64,17 @@ func (d *DetailsModel) SetSize(w, h int) {
 	if h < 0 {
 		h = 0
 	}
+	// Invalidate cached sparkline rendering on any size change
+	if w != d.width || h != d.height {
+		d.dlRendered = ""
+	}
 	d.width, d.height = w, h
+	// viewport fills the inner area within the border
+	innerW := intMax(0, d.width-2)
+	innerH := intMax(0, d.height-2)
+	d.vp.Width = innerW
+	d.vp.Height = innerH
+	d.dirty = true
 }
 
 func (d *DetailsModel) SetFocused(f bool) {
@@ -55,17 +87,70 @@ func (d *DetailsModel) SetFocused(f bool) {
 
 // SetContent updates the sidebar content.
 func (d *DetailsModel) SetContent(title, desc, homepage, repo, npmLink string) {
-	d.title = title
+	if title != d.title {
+		d.lastTitle = d.title
+		d.title = title
+		// selection changed -> reset scroll to top next render
+		d.resetTop = true
+	} else {
+		d.title = title
+	}
 	d.description = desc
 	d.homepage = homepage
 	d.repository = repo
 	d.npmLink = npmLink
+	d.dirty = true
 }
 
 // SetStats sets the one-line stats string (version/downloads/license/author)
-func (d *DetailsModel) SetStats(s string) { d.stats = s }
+func (d *DetailsModel) SetStats(s string) { d.stats = s; d.dirty = true }
 
-func (d *DetailsModel) Update(msg tea.Msg) tea.Cmd { return nil }
+// SetDownloadsValues sets the downloads-over-time values to be displayed as a sparkline.
+func (d *DetailsModel) SetDownloadsValues(vals []float64) {
+	d.dlValues = vals
+	d.dlRendered = "" // invalidate cache
+	d.dirty = true
+}
+
+// SetDownloadsPoints sets the time axis for the downloads chart.
+func (d *DetailsModel) SetDownloadsPoints(times []time.Time) {
+	d.dlTimes = times
+	d.dlRendered = ""
+	d.dirty = true
+}
+
+func (d *DetailsModel) Update(msg tea.Msg) tea.Cmd {
+	switch t := msg.(type) {
+	case tea.MouseMsg:
+		// Only process wheel scroll; ignore other mouse events to avoid conflicts
+		mm := t
+		if mm.Type == tea.MouseWheelUp || mm.Type == tea.MouseWheelDown {
+			// Smooth, small-step scrolling to reduce flicker/jumps
+			step := 2
+			if mm.Type == tea.MouseWheelUp {
+				d.vp.SetYOffset(max(0, d.vp.YOffset-step))
+			} else {
+				d.vp.SetYOffset(min(d.vp.YOffset+step, max(0, d.vp.TotalLineCount()-d.vp.Height)))
+			}
+			return nil
+		}
+		return nil
+	case tea.KeyMsg:
+		switch t.Type {
+		case tea.KeyPgUp, tea.KeyPgDown, tea.KeyHome, tea.KeyEnd:
+			var cmd tea.Cmd
+			d.vp, cmd = d.vp.Update(msg)
+			return cmd
+		default:
+			// ignore other keys to avoid conflicting with list navigation
+			return nil
+		}
+	default:
+		var cmd tea.Cmd
+		d.vp, cmd = d.vp.Update(msg)
+		return cmd
+	}
+}
 
 func (d *DetailsModel) View() string {
 	innerW := intMax(0, d.width-2)
@@ -75,12 +160,11 @@ func (d *DetailsModel) View() string {
 		return d.style.Width(intMax(0, d.width-2)).Height(intMax(0, d.height-2)).Render("")
 	}
 
-	// Build content lines
+	// Build content lines when dirty or width changed relative to cache
 	var b strings.Builder
 	// Make the package name heading the same color as other headings
-	titleStyle := lipgloss.NewStyle().Foreground(theme.Subtext0).Bold(true)
-	labelStyle := lipgloss.NewStyle().Foreground(theme.Subtext0)
-	headingStyle := labelStyle.Bold(true)
+	titleStyle := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1)
+	headingStyle := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1)
 	linkStyle := lipgloss.NewStyle().Foreground(theme.Blue)
 	mutedStyle := lipgloss.NewStyle().Foreground(theme.Surface2)
 	sep := mutedStyle.Render(strings.Repeat("─", intMax(0, innerW)))
@@ -93,7 +177,115 @@ func (d *DetailsModel) View() string {
 	}
 	if d.stats != "" {
 		b.WriteString(wrap.Render(d.stats))
-		b.WriteString("\n")
+		// If we have downloads series, render chart with extra spacing below the info
+		if len(d.dlValues) > 1 {
+			// Add an extra blank line between stats and the chart
+			b.WriteString("\n")
+			// Time series chart width fits innerW, height 6 for readability within sidebar
+			if d.dlRendered == "" {
+				width := innerW
+				if width < 8 {
+					width = intMax(1, innerW)
+				}
+				h := 6
+				// Use a compact Y label formatter (e.g., 1.2k, 3.4M)
+				yFmt := func(i int, v float64) string {
+					av := math.Abs(v)
+					switch {
+					case av >= 1_000_000_000:
+						return fmt.Sprintf("%.1fB", v/1_000_000_000)
+					case av >= 1_000_000:
+						return fmt.Sprintf("%.1fM", v/1_000_000)
+					case av >= 1_000:
+						return fmt.Sprintf("%.0fk", v/1_000)
+					default:
+						return fmt.Sprintf("%.0f", v)
+					}
+				}
+				var lastYear string
+				xFmt := func(i int, v float64) string {
+					// Reset yearly state at the start of a draw pass
+					if i == 0 {
+						lastYear = ""
+					}
+					t := time.Unix(int64(v), 0).UTC()
+					y := t.Format("'06")
+					md := t.Format("02/01") // DD/MM
+					if y != lastYear {
+						lastYear = y
+						return y + " " + md
+					}
+					return md
+				}
+				axisStyle := lipgloss.NewStyle().Foreground(theme.Surface2)
+				labelStyle := lipgloss.NewStyle().Foreground(theme.Subtext0)
+				graphStyle := lipgloss.NewStyle().Foreground(theme.Blue)
+				lc := timeserieslinechart.New(
+					width, h,
+					timeserieslinechart.WithYLabelFormatter(yFmt),
+					timeserieslinechart.WithXLabelFormatter(xFmt),
+					timeserieslinechart.WithAxesStyles(axisStyle, labelStyle),
+					timeserieslinechart.WithStyle(graphStyle),
+				)
+				// If we have timestamps, use them; else, synthesize evenly spaced days
+				if len(d.dlTimes) == len(d.dlValues) && len(d.dlTimes) > 0 {
+					for i := range d.dlValues {
+						lc.Push(timeserieslinechart.TimePoint{Time: d.dlTimes[i], Value: d.dlValues[i]})
+					}
+				} else {
+					// fallback: create pseudo-dates one week apart ending today
+					end := time.Now()
+					start := end.AddDate(0, 0, -7*(len(d.dlValues)-1))
+					for i, v := range d.dlValues {
+						t := start.AddDate(0, 0, 7*i)
+						lc.Push(timeserieslinechart.TimePoint{Time: t, Value: v})
+					}
+				}
+				// Plot-area background: shade only the graphing columns across the time range
+				// Use a higher-contrast surface for better visibility.
+				bgStyle := lipgloss.NewStyle().Background(theme.Surface0)
+				var minT, maxT time.Time
+				if len(d.dlTimes) == len(d.dlValues) && len(d.dlTimes) > 0 {
+					minT, maxT = d.dlTimes[0], d.dlTimes[0]
+					for _, tt := range d.dlTimes {
+						if tt.Before(minT) {
+							minT = tt
+						}
+						if tt.After(maxT) {
+							maxT = tt
+						}
+					}
+				} else if len(d.dlValues) > 0 {
+					maxT = time.Now()
+					minT = maxT.AddDate(0, 0, -7*(len(d.dlValues)-1))
+				}
+				if !minT.IsZero() && !maxT.IsZero() {
+					// Align to UTC midnight boundaries for consistent column mapping
+					toMidnight := func(t time.Time) time.Time {
+						u := t.UTC()
+						y, m, d := u.Date()
+						return time.Date(y, m, d, 0, 0, 0, 0, time.UTC)
+					}
+					minMid := toMidnight(minT)
+					// include the last day fully by extending one more day beyond the max midnight
+					maxMid := toMidnight(maxT).AddDate(0, 0, 1)
+					// Ensure the chart uses the same visible window we are shading
+					lc.SetTimeRange(minMid, maxMid)
+					lc.SetViewTimeRange(minMid, maxMid)
+					for t := minMid; t.Before(maxMid); t = t.AddDate(0, 0, 1) {
+						lc.SetColumnBackgroundStyle(t, bgStyle)
+					}
+				}
+
+				// Use braille for smoother lines in tight areas
+				lc.DrawBraille()
+				d.dlRendered = lc.View()
+			}
+			b.WriteString("\n")
+			b.WriteString(d.dlRendered)
+		}
+		// One extra blank line under the graph for padding
+		b.WriteString("\n\n")
 		b.WriteString(sep)
 		b.WriteString("\n")
 	}
@@ -150,19 +342,20 @@ func (d *DetailsModel) View() string {
 		row(homeIcon, homeURL)
 		row(npmIcon, npmURL)
 	}
-
-	// Clamp by lines with ellipsis if overflow (avoid re-wrapping hyperlinks)
-	lines := strings.Split(b.String(), "\n")
-	if innerH > 0 && len(lines) > innerH {
-		lines = lines[:innerH]
-		// Add overflow indicator to the last visible line if there was overflow
-		if innerH-1 >= 0 {
-			lines[innerH-1] = strings.TrimRight(lines[innerH-1], " ") + " …"
+	// Update viewport content only when changed to preserve scroll offset
+	newContent := b.String()
+	if d.dirty || newContent != d.content {
+		d.content = newContent
+		d.vp.SetContent(d.content)
+		d.dirty = false
+		if d.resetTop {
+			d.vp.GotoTop()
+			d.resetTop = false
 		}
 	}
-	clamped := strings.Join(lines, "\n")
-	content := lipgloss.Place(innerW, innerH, lipgloss.Left, lipgloss.Top, clamped)
-	return d.style.Width(innerW).Height(innerH).Render(content)
+	// Render the viewport inside the bordered container
+	body := lipgloss.Place(innerW, innerH, lipgloss.Left, lipgloss.Top, d.vp.View())
+	return d.style.Width(innerW).Height(innerH).Render(body)
 }
 
 // styleDescription applies lightweight inline styling to description text:

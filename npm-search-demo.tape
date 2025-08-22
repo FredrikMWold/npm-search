@@ -57,7 +57,7 @@ Sleep 500ms
 
 # Open details (sidebar highlights metadata)
 Enter
-Sleep 1500ms
+Sleep 2500ms
 
 Type 'r'
 Sleep 8s

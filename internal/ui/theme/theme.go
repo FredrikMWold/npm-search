@@ -15,11 +15,12 @@ var (
 	Surface2 = lipgloss.Color("#585b70")
 
 	// Accents
-	Mauve = lipgloss.Color("#cba6f7")
-	Blue  = lipgloss.Color("#89b4fa")
-	Green = lipgloss.Color("#a6e3a1")
-	Peach = lipgloss.Color("#fab387")
-	Red   = lipgloss.Color("#f38ba8")
+	Mauve    = lipgloss.Color("#cba6f7")
+	Lavender = lipgloss.Color("#b4befe")
+	Blue     = lipgloss.Color("#89b4fa")
+	Green    = lipgloss.Color("#a6e3a1")
+	Peach    = lipgloss.Color("#fab387")
+	Red      = lipgloss.Color("#f38ba8")
 	// Additional accents to reduce clashes
 	Sky    = lipgloss.Color("#89dceb")
 	Yellow = lipgloss.Color("#f9e2af")

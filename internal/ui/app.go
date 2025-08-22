@@ -2,6 +2,8 @@ package ui
 
 import (
 	"fmt"
+	"strings"
+	"time"
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
@@ -37,6 +39,8 @@ type Model struct {
 	installing map[string]bool
 	// per-row install success state
 	installed map[string]bool
+	// timestamp of last mouse wheel event to disambiguate from Up/Down key events
+	lastWheel time.Time
 }
 
 type focusTarget int
@@ -44,6 +48,7 @@ type focusTarget int
 const (
 	focusInput focusTarget = iota
 	focusResults
+	focusSide
 )
 
 func New() *Model {
@@ -80,7 +85,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		var cmd tea.Cmd
 		m.spinner, cmd = m.spinner.Update(msg)
 		if m.loading {
-			m.list.SetTitle(fmt.Sprintf("Searching npm %s", m.spinner.View()))
+			// Keep default title background for the text, but render spinner outside it
+			m.list.SetTitle(m.list.RenderPrefixedTitle("Searching npm", m.spinner.View()))
 			m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 		}
 		// Also update row spinner frame for installing packages
@@ -118,11 +124,22 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.recomputeLayout()
 			return m, commands.LoadProjectPackages()
 		case tea.KeyTab:
-			// toggle focus between input and results
-			if m.focus == focusInput {
-				m.focus = focusResults
+			// cycle focus; when sidebar is open, include it in the cycle
+			if m.sideOpen {
+				switch m.focus {
+				case focusInput:
+					m.focus = focusResults
+				case focusResults:
+					m.focus = focusSide
+				default:
+					m.focus = focusInput
+				}
 			} else {
-				m.focus = focusInput
+				if m.focus == focusInput {
+					m.focus = focusResults
+				} else {
+					m.focus = focusInput
+				}
 			}
 			m.applyFocus()
 			return m, nil
@@ -130,12 +147,16 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			// handled below
 		case tea.KeyEnter:
 			if m.focus == focusInput {
-				// Trigger search and move focus to results
+				// Move focus to results; only trigger search if query is non-empty
 				q := m.input.Value()
 				m.focus = focusResults
 				m.applyFocus()
+				if strings.TrimSpace(q) == "" {
+					// Keep current items (e.g., project packages) and do not enter loading state
+					return m, nil
+				}
 				m.loading = true
-				m.list.SetTitle(fmt.Sprintf("Searching npm %s", m.spinner.View()))
+				m.list.SetTitle(m.list.RenderPrefixedTitle("Searching npm", m.spinner.View()))
 				m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 				return m, tea.Batch(commands.SearchNPM(q))
 			} else if m.focus == focusResults {
@@ -144,12 +165,18 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.sideOpen = false
 					m.readmeOpen = false
 					m.list.SetShowReadmeHotkey(false)
+					// return focus to results when closing
+					m.focus = focusResults
+					m.applyFocus()
 					// Recompute sizes for closed state
 					m.recomputeLayout()
 					return m, nil
 				}
 				// Open the sidebar with details for the selected item
 				m.sideOpen = true
+				// keep focus on results so arrows and wheel continue to work
+				m.focus = focusResults
+				m.applyFocus()
 				m.list.SetShowReadmeHotkey(true)
 				if det, ok := m.list.SelectedDetails(); ok {
 					m.side.SetContent(det.Name, det.Description, det.Homepage, det.Repository, det.NPMLink)
@@ -157,6 +184,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				// Recompute sizes for open state
 				m.recomputeLayout()
+				// Kick off downloads range fetch for sparkline (last 365 days)
+				if name, ok := m.list.SelectedName(); ok {
+					return m, commands.FetchDownloadsRange(name, 365)
+				}
 				return m, nil
 			}
 		}
@@ -205,6 +236,18 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				if m.readmeOpen {
 					m.readmeOpen = false
+					// When closing README, keep sidebar/results focus cycle intact
+					if m.sideOpen {
+						if m.focus == focusSide {
+							// keep focus on sidebar after README closes
+							m.focus = focusSide
+						} else {
+							m.focus = focusResults
+						}
+					} else {
+						m.focus = focusResults
+					}
+					m.applyFocus()
 					m.recomputeLayout()
 					return m, nil
 				}
@@ -270,6 +313,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.list.SetShowReadmeHotkey(false)
 		m.side.SetContent("", "", "", "", "")
 		m.side.SetStats("")
+		m.side.SetDownloadsValues(nil)
 		// ensure sizing is recomputed on new data
 		m.recomputeLayout()
 		// initialize sidebar with first selection, if any
@@ -344,6 +388,64 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	// Let the focused component handle the message.
 	var cmds []tea.Cmd
+	// Input routing to ensure correct scrolling behavior
+	if !m.readmeOpen {
+		switch t := msg.(type) {
+		case tea.MouseMsg:
+			if m.sideOpen {
+				// Mouse wheel should scroll the sidebar only; ignore other mouse events here
+				mm := t
+				if mm.Type == tea.MouseWheelUp || mm.Type == tea.MouseWheelDown {
+					m.lastWheel = time.Now()
+					if cmd := m.side.Update(msg); cmd != nil {
+						cmds = append(cmds, cmd)
+					}
+				}
+				return m, tea.Batch(cmds...)
+			}
+			// Sidebar closed: route only wheel events to the list (ignore motion/click noise)
+			mm := t
+			if mm.Type == tea.MouseWheelUp || mm.Type == tea.MouseWheelDown {
+				if cmd := m.list.Update(msg); cmd != nil {
+					cmds = append(cmds, cmd)
+				}
+			}
+			// Update sidebar content if selection moved
+			if det, ok := m.list.SelectedDetails(); ok {
+				m.side.SetContent(det.Name, det.Description, det.Homepage, det.Repository, det.NPMLink)
+				m.side.SetStats(det.StatsLine)
+				if m.sideOpen {
+					if name, ok2 := m.list.SelectedName(); ok2 {
+						cmds = append(cmds, commands.FetchDownloadsRange(name, 365))
+					}
+				}
+			}
+			return m, tea.Batch(cmds...)
+		case tea.KeyMsg:
+			switch t.Type {
+			case tea.KeyUp, tea.KeyDown:
+				// If a wheel event just occurred, ignore synthetic Up/Down to prevent flicker
+				if m.sideOpen && time.Since(m.lastWheel) < 200*time.Millisecond {
+					return m, nil
+				}
+				// Arrow keys scroll the list
+				if cmd := m.list.Update(msg); cmd != nil {
+					cmds = append(cmds, cmd)
+				}
+				// Update sidebar content as selection changes
+				if det, ok := m.list.SelectedDetails(); ok {
+					m.side.SetContent(det.Name, det.Description, det.Homepage, det.Repository, det.NPMLink)
+					m.side.SetStats(det.StatsLine)
+					if m.sideOpen {
+						if name, ok2 := m.list.SelectedName(); ok2 {
+							cmds = append(cmds, commands.FetchDownloadsRange(name, 365))
+						}
+					}
+				}
+				return m, tea.Batch(cmds...)
+			}
+		}
+	}
 	if m.readmeOpen {
 		if cmd := m.readme.Update(msg); cmd != nil {
 			cmds = append(cmds, cmd)
@@ -352,14 +454,42 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if cmd := m.input.Update(msg); cmd != nil {
 			cmds = append(cmds, cmd)
 		}
-	} else {
+	} else if m.focus == focusResults {
+		// If arrow keys were handled earlier, they already updated the list and sidebar
+		// This branch handles other messages destined for the list (non-arrow keys/misc)
 		if cmd := m.list.Update(msg); cmd != nil {
 			cmds = append(cmds, cmd)
 		}
-		// Update sidebar live on selection change
 		if det, ok := m.list.SelectedDetails(); ok {
 			m.side.SetContent(det.Name, det.Description, det.Homepage, det.Repository, det.NPMLink)
 			m.side.SetStats(det.StatsLine)
+			if m.sideOpen {
+				if name, ok2 := m.list.SelectedName(); ok2 {
+					cmds = append(cmds, commands.FetchDownloadsRange(name, 365))
+				}
+			}
+		}
+	} else if m.focus == focusSide {
+		if m.sideOpen {
+			if cmd := m.side.Update(msg); cmd != nil {
+				cmds = append(cmds, cmd)
+			}
+		}
+	}
+	// Handle async downloads-range results outside the large switch for clarity
+	switch msg := msg.(type) {
+	case commands.NpmDownloadsRangeMsg:
+		if msg.Err == nil && msg.Package != "" {
+			m.side.SetDownloadsValues(msg.Values)
+			if len(msg.Points) > 0 {
+				ts := make([]time.Time, 0, len(msg.Points))
+				for _, p := range msg.Points {
+					ts = append(ts, p.Time)
+				}
+				m.side.SetDownloadsPoints(ts)
+			} else {
+				m.side.SetDownloadsPoints(nil)
+			}
 		}
 	}
 	return m, tea.Batch(cmds...)
@@ -389,7 +519,7 @@ var _ tea.Model = (*Model)(nil)
 func (m *Model) applyFocus() {
 	m.input.SetFocused(m.focus == focusInput)
 	m.list.SetFocused(m.focus == focusResults)
-	m.side.SetFocused(m.focus == focusResults)
+	m.side.SetFocused(m.focus == focusSide)
 }
 
 //

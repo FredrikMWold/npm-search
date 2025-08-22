@@ -25,6 +25,7 @@ type MarkdownViewer struct {
 
 func NewMarkdownViewer() *MarkdownViewer {
 	vp := viewport.New(0, 0)
+	vp.MouseWheelEnabled = true
 	// Styled similarly to other panes for consistency
 	vp.Style = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(theme.BorderFocused).Foreground(theme.Text)
 	mv := &MarkdownViewer{vp: vp}

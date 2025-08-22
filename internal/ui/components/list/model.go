@@ -42,6 +42,9 @@ type Model struct {
 	del         *delegate
 	// when true, show the README hotkey in the help footer
 	showReadmeHotkey bool
+	// cached title styles
+	titleStyleDefault lipgloss.Style
+	titleStylePlain   lipgloss.Style
 }
 
 func New() *Model {
@@ -70,7 +73,10 @@ func New() *Model {
 	l.SetShowHelp(true)
 	// Disable built-in list filtering; searching is handled by the top input
 	l.SetFilteringEnabled(false)
-	l.Styles.Title = lipgloss.NewStyle().Foreground(theme.Subtext0)
+	// Title styles: default with background, and plain without background
+	titleDefault := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1)
+	titlePlain := lipgloss.NewStyle().Foreground(theme.Crust).Bold(true).Padding(0, 0)
+	l.Styles.Title = titleDefault
 	l.Styles.PaginationStyle = lipgloss.NewStyle().Foreground(theme.Surface2)
 	l.Styles.HelpStyle = lipgloss.NewStyle().Foreground(theme.Surface2)
 
@@ -124,6 +130,8 @@ func New() *Model {
 	m.style = style
 	m.list = l
 	m.del = d
+	m.titleStyleDefault = titleDefault
+	m.titleStylePlain = titlePlain
 	return m
 }
 
@@ -212,6 +220,28 @@ func (m *Model) View() string {
 	// Ensure the border wraps exactly the inner area and content fills it
 	body := lipgloss.Place(innerW, innerH, lipgloss.Left, lipgloss.Top, content)
 	return m.style.Width(innerW).Height(innerH).Render(body)
+}
+
+// UsePlainTitleStyle switches the list title to a style without background.
+func (m *Model) UsePlainTitleStyle() { m.list.Styles.Title = m.titleStylePlain }
+
+// UseDefaultTitleStyle restores the default title style with background.
+func (m *Model) UseDefaultTitleStyle() { m.list.Styles.Title = m.titleStyleDefault }
+
+// RenderPrefixedTitle returns a title where the prefix is rendered with the
+// default background style while the suffix remains unstyled (e.g., spinner).
+func (m *Model) RenderPrefixedTitle(prefix, suffix string) string {
+	if prefix == "" {
+		return suffix
+	}
+	if suffix == "" {
+		// Render with right padding only (no left padding)
+		s := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1, 0, 0)
+		return s.Render(prefix)
+	}
+	// Use right padding only and do not add an extra plain space
+	s := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1, 0, 0)
+	return s.Render(prefix) + " " + suffix
 }
 
 // SetShowReadmeHotkey toggles the presence of the README hotkey in the footer help.

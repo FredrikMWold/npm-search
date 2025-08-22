@@ -1,5 +1,7 @@
 package commands
 
+import "time"
+
 // NpmSearchMsg is emitted when an npm search completes
 type NpmSearchMsg struct {
 	Query  string
@@ -61,4 +63,30 @@ type downloadsPointResponse struct {
 	Start     string `json:"start"`
 	End       string `json:"end"`
 	Package   string `json:"package"`
+}
+
+// NpmDownloadsRangeMsg carries downloads-over-time values for a package.
+// Values are ordered from oldest to newest.
+type NpmDownloadsRangeMsg struct {
+	Package string
+	Values  []float64
+	Points  []DownloadPoint
+	Err     error
+}
+
+// rangeDownloadsResponse models the /downloads/range API response
+type rangeDownloadsResponse struct {
+	Start     string `json:"start"`
+	End       string `json:"end"`
+	Package   string `json:"package"`
+	Downloads []struct {
+		Day       string `json:"day"`
+		Downloads int    `json:"downloads"`
+	} `json:"downloads"`
+}
+
+// DownloadPoint is a typed time/value pair if needed by callers.
+type DownloadPoint struct {
+	Time  time.Time
+	Value float64
 }
