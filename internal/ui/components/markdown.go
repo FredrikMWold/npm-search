@@ -29,6 +29,16 @@ func NewMarkdownViewer() *MarkdownViewer {
 	// Styled similarly to other panes for consistency
 	vp.Style = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(theme.BorderFocused).Foreground(theme.Text)
 	mv := &MarkdownViewer{vp: vp}
+
+	// Pre-warm a renderer to avoid a noticeable pause on the first render.
+	// Use a sensible default wrap width; render() will recreate if needed.
+	if r, err := glamour.NewTermRenderer(glamour.WithAutoStyle(), glamour.WithWordWrap(80)); err == nil {
+		mv.renderer = r
+		mv.rwidth = 80
+	// Do a tiny render to warm internal caches so the first real render
+	// later doesn't block the UI for a noticeable amount of time.
+	_, _ = r.Render("# warmup")
+	}
 	return mv
 }
 
@@ -80,6 +90,33 @@ func (m *MarkdownViewer) SetPlain(s string) {
 	m.vp.GotoTop()
 }
 
+// SetLoading sets a centered loading message with a spinner.
+func (m *MarkdownViewer) SetLoading(label, spin string) {
+	// Compute inner area (viewport content area)
+	w := m.vp.Width
+	h := m.vp.Height
+	if w <= 0 {
+		w = intMax(0, m.width-2)
+	}
+	if h <= 0 {
+		h = intMax(0, m.height-2)
+	}
+	if w < 1 {
+		w = 1
+	}
+	if h < 1 {
+		h = 1
+	}
+	msg := label
+	if spin != "" {
+		msg = msg + " " + spin
+	}
+	// Subtle color for loading text
+	content := lipgloss.NewStyle().Foreground(theme.Subtext0).Render(msg)
+	centered := lipgloss.Place(w, h, lipgloss.Center, lipgloss.Center, content)
+	m.vp.SetContent(centered)
+}
+
 func (m *MarkdownViewer) render() {
 	// viewport width already accounts for borders
 	w := m.vp.Width
@@ -89,9 +126,10 @@ func (m *MarkdownViewer) render() {
 	if w <= 0 {
 		w = 80
 	}
-	// Ensure cached renderer for current width
+	// Ensure cached renderer exists. Prefer reusing the pre-warmed renderer
+	// even if the wrap width differs to avoid the expensive first-time cost.
 	var err error
-	if m.renderer == nil || m.rwidth != w {
+	if m.renderer == nil {
 		m.renderer, err = glamour.NewTermRenderer(
 			glamour.WithAutoStyle(),
 			glamour.WithWordWrap(w),
@@ -129,7 +167,9 @@ func (m *MarkdownViewer) RenderAsync(md string, seq int) tea.Cmd {
 	}
 	// Snapshot a renderer to avoid recreating per render when width is unchanged
 	var r *glamour.TermRenderer
-	if m.renderer != nil && m.rwidth == w {
+	// Reuse cached renderer if available regardless of width to avoid
+	// recreating it on the first render (it's expensive).
+	if m.renderer != nil {
 		r = m.renderer
 	}
 	return func() tea.Msg {

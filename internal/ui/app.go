@@ -26,6 +26,8 @@ type Model struct {
 	readme *components.MarkdownViewer
 	// sequence for README requests to ignore stale responses
 	readmeReq int
+	// whether the README is currently loading
+	readmeLoading bool
 	// whether the sidebar is currently open
 	sideOpen bool
 	// whether the fullscreen README viewer is open
@@ -89,6 +91,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.list.SetTitle(m.list.RenderPrefixedTitle("Searching npm", m.spinner.View()))
 			m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 		}
+		// If README is loading, update its spinner label as well
+		if m.readmeOpen && m.readmeLoading {
+			m.readme.SetLoading("Loading readme", m.spinner.View())
+		}
 		// Also update row spinner frame for installing packages
 		m.list.SetRowSpinner(m.spinner.View())
 		return m, cmd
@@ -97,6 +103,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.recomputeLayout()
 		// Update focus styles on resize as well.
 		m.applyFocus()
+		// Recenter loading state if README is loading
+		if m.readmeOpen && m.readmeLoading {
+			m.readme.SetLoading("Loading readme", m.spinner.View())
+		}
 		return m, nil
 
 	case tea.KeyMsg:
@@ -107,6 +117,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			// If README is open, close it quickly without resetting state
 			if m.readmeOpen {
 				m.readmeOpen = false
+				m.readmeLoading = false
 				m.recomputeLayout()
 				return m, nil
 			}
@@ -115,6 +126,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.focus = focusInput
 			m.sideOpen = false
 			m.readmeOpen = false
+			m.readmeLoading = false
 			m.applyFocus()
 			// Trigger reload of project packages
 			m.loading = true
@@ -164,6 +176,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				if m.sideOpen {
 					m.sideOpen = false
 					m.readmeOpen = false
+					m.readmeLoading = false
 					m.list.SetShowReadmeHotkey(false)
 					// return focus to results when closing
 					m.focus = focusResults
@@ -236,6 +249,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				if m.readmeOpen {
 					m.readmeOpen = false
+					m.readmeLoading = false
 					// When closing README, keep sidebar/results focus cycle intact
 					if m.sideOpen {
 						if m.focus == focusSide {
@@ -258,8 +272,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						m.readme.SetPlain("No GitHub repository URL found for this package.")
 						return m, nil
 					}
-					// Avoid placeholder text sticking; start with an empty view
-					m.readme.SetPlain("")
+					// Show spinner while loading the README
+					m.readmeLoading = true
+					m.readme.SetLoading("Loading readme", m.spinner.View())
 					m.readmeReq++
 					return m, commands.FetchGitHubReadmeWithReq(det.Repository, m.readmeReq)
 				}
@@ -310,6 +325,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// close sidebar and README by default after a new search
 		m.sideOpen = false
 		m.readmeOpen = false
+		m.readmeLoading = false
 		m.list.SetShowReadmeHotkey(false)
 		m.side.SetContent("", "", "", "", "")
 		m.side.SetStats("")
@@ -362,7 +378,14 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case commands.GitHubReadmeMsg:
 		// Render markdown asynchronously for responsiveness
 		if msg.Err != nil {
-			m.readme.SetPlain("Could not load README:\n\n" + msg.Err.Error())
+			m.readmeLoading = false
+			if m.readmeOpen {
+				m.readme.SetPlain("Could not load README:\n\n" + msg.Err.Error())
+				// Ensure viewport processes the new content immediately
+				if cmd := m.readme.Update(nil); cmd != nil {
+					return m, cmd
+				}
+			}
 			return m, nil
 		}
 		// Ignore stale responses
@@ -371,7 +394,12 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		// Render synchronously so the formatted output shows immediately
 		if m.readmeOpen {
+			m.readmeLoading = false
 			m.readme.SetMarkdown(msg.Content)
+			// Ensure viewport processes the new content immediately
+			if cmd := m.readme.Update(nil); cmd != nil {
+				return m, cmd
+			}
 		}
 		return m, nil
 	case components.MarkdownRenderedMsg:
