@@ -20,7 +20,7 @@
 | Results | `i` | Install selected package |
 | Results | `I` | Install as dev dependency |
 | Results | `u` | Update selected package to latest (if installed) |
-| Anywhere | `Tab` | Toggle focus between input and results |
+| Anywhere | `Tab` | Toggle focus between sections |
 | Anywhere | `Esc` | Clear input and show your project packages |
 | Anywhere | `Ctrl+C` | Quit |
 

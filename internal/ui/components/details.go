@@ -137,7 +137,10 @@ func (d *DetailsModel) Update(msg tea.Msg) tea.Cmd {
 		return nil
 	case tea.KeyMsg:
 		switch t.Type {
-		case tea.KeyPgUp, tea.KeyPgDown, tea.KeyHome, tea.KeyEnd:
+		// Allow common paging and arrow keys to control the sidebar viewport so
+		// terminals that synthesize Up/Down from the mouse wheel will scroll the
+		// sidebar as expected.
+		case tea.KeyPgUp, tea.KeyPgDown, tea.KeyHome, tea.KeyEnd, tea.KeyUp, tea.KeyDown:
 			var cmd tea.Cmd
 			d.vp, cmd = d.vp.Update(msg)
 			return cmd

@@ -140,13 +140,16 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyTab:
 			// cycle focus; when sidebar is open, include it in the cycle
 			if m.sideOpen {
+				// Cycle among: results -> input -> sidebar -> results
 				switch m.focus {
-				case focusInput:
-					m.focus = focusResults
 				case focusResults:
-					m.focus = focusSide
-				default:
 					m.focus = focusInput
+				case focusInput:
+					m.focus = focusSide
+				case focusSide:
+					m.focus = focusResults
+				default:
+					m.focus = focusResults
 				}
 			} else {
 				if m.focus == focusInput {
@@ -158,7 +161,31 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.applyFocus()
 			return m, nil
 		case tea.KeyRunes:
-			// handled below
+			// Some terminals send Tab as a rune '\t' instead of KeyTab. Treat
+			// that case as KeyTab so focus cycling works consistently.
+			if len(msg.Runes) == 1 && msg.Runes[0] == '\t' {
+				// reuse the KeyTab handling by constructing a new KeyMsg
+				m.focus = func() focusTarget {
+					if m.sideOpen {
+						switch m.focus {
+						case focusResults:
+							return focusInput
+						case focusInput:
+							return focusSide
+						case focusSide:
+							return focusResults
+						default:
+							return focusResults
+						}
+					}
+					if m.focus == focusInput {
+						return focusResults
+					}
+					return focusInput
+				}()
+				m.applyFocus()
+				return m, nil
+			}
 		case tea.KeyEnter:
 			if m.focus == focusInput {
 				// Move focus to results; only trigger search if query is non-empty
@@ -190,8 +217,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				// Open the sidebar with details for the selected item
 				m.sideOpen = true
-				// keep focus on results so arrows and wheel continue to work
-				m.focus = focusResults
+				// give keyboard focus to the sidebar when it is opened so its
+				// border shows active color and the list loses the active border
+				m.focus = focusSide
 				m.applyFocus()
 				m.list.SetShowReadmeHotkey(true)
 				if det, ok := m.list.SelectedDetails(); ok {
@@ -205,13 +233,24 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					return m, commands.FetchDownloadsRange(name, 365)
 				}
 				return m, nil
+			} else if m.focus == focusSide {
+				if m.sideOpen {
+					m.sideOpen = false
+					m.readmeOpen = false
+					m.readmeLoading = false
+					m.list.SetShowReadmeHotkey(false)
+					m.focus = focusResults
+					m.applyFocus()
+					m.recomputeLayout()
+					return m, nil
+				}
 			}
 		}
 		// Rune key handling
 		if r := msg.Runes; len(r) == 1 {
 			switch r[0] {
 			case 'i':
-				if m.focus == focusResults {
+				if m.focus == focusResults || m.focus == focusSide {
 					if name, ok := m.list.SelectedName(); ok {
 						// mark installing and kick off command
 						if m.installing == nil {
@@ -223,7 +262,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 				}
 			case 'I':
-				if m.focus == focusResults {
+				if m.focus == focusResults || m.focus == focusSide {
 					if name, ok := m.list.SelectedName(); ok {
 						if m.installing == nil {
 							m.installing = map[string]bool{}
@@ -234,7 +273,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 				}
 			case 'u':
-				if m.focus == focusResults {
+				if m.focus == focusResults || m.focus == focusSide {
 					if name, ok := m.list.SelectedName(); ok {
 						if m.installing == nil {
 							m.installing = map[string]bool{}
@@ -246,8 +285,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 				}
 			case 'r', 'R':
-				// Only handle README toggle when results are focused and sidebar is open
-				if m.focus != focusResults || !m.sideOpen {
+				// Only handle README toggle when results or sidebar are focused and sidebar is open
+				if (m.focus != focusResults && m.focus != focusSide) || !m.sideOpen {
 					break
 				}
 				if m.readmeOpen {
@@ -456,12 +495,18 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Batch(cmds...)
 		case tea.KeyMsg:
 			switch t.Type {
-			case tea.KeyUp, tea.KeyDown:
-				// If a wheel event just occurred, ignore synthetic Up/Down to prevent flicker
-				if m.sideOpen && time.Since(m.lastWheel) < 200*time.Millisecond {
-					return m, nil
+			case tea.KeyUp, tea.KeyDown, tea.KeyPgUp, tea.KeyPgDown, tea.KeyHome, tea.KeyEnd:
+				// When the sidebar is open we should prefer scrolling it only when it
+				// has keyboard focus, or when a recent mouse wheel event suggests the
+				// terminal synthesized keys from wheel input. Otherwise route arrow
+				// keys to the package list so Tab can switch focus back to it.
+				if m.sideOpen && (m.focus == focusSide || time.Since(m.lastWheel) < 300*time.Millisecond) {
+					if cmd := m.side.Update(msg); cmd != nil {
+						cmds = append(cmds, cmd)
+					}
+					return m, tea.Batch(cmds...)
 				}
-				// Arrow keys scroll the list
+				// Otherwise arrow keys scroll the list
 				if cmd := m.list.Update(msg); cmd != nil {
 					cmds = append(cmds, cmd)
 				}
@@ -503,8 +548,42 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 		}
 	} else if m.focus == focusSide {
-		if m.sideOpen {
-			if cmd := m.side.Update(msg); cmd != nil {
+		// When the sidebar has keyboard focus, only allow navigation events
+		// (arrows, page, home/end) and mouse wheel to be handled by the
+		// sidebar. Other key presses (enter, r, i, etc.) should still be
+		// handled by the results list so actions apply to the selected item.
+		switch t := msg.(type) {
+		case tea.KeyMsg:
+			switch t.Type {
+			case tea.KeyUp, tea.KeyDown, tea.KeyPgUp, tea.KeyPgDown, tea.KeyHome, tea.KeyEnd:
+				if m.sideOpen {
+					if cmd := m.side.Update(msg); cmd != nil {
+						cmds = append(cmds, cmd)
+					}
+				}
+			default:
+				// Route other keys to the list so actions operate on results
+				if cmd := m.list.Update(msg); cmd != nil {
+					cmds = append(cmds, cmd)
+				}
+			}
+		case tea.MouseMsg:
+			mm := t
+			if mm.Type == tea.MouseWheelUp || mm.Type == tea.MouseWheelDown {
+				if m.sideOpen {
+					if cmd := m.side.Update(msg); cmd != nil {
+						cmds = append(cmds, cmd)
+					}
+				}
+			} else {
+				// Non-wheel mouse events should go to the list (clicks/selection)
+				if cmd := m.list.Update(msg); cmd != nil {
+					cmds = append(cmds, cmd)
+				}
+			}
+		default:
+			// Fallback: route to list
+			if cmd := m.list.Update(msg); cmd != nil {
 				cmds = append(cmds, cmd)
 			}
 		}
@@ -550,8 +629,18 @@ func (m *Model) View() string {
 var _ tea.Model = (*Model)(nil)
 
 func (m *Model) applyFocus() {
+	// Input gets focus only when focus==focusInput
 	m.input.SetFocused(m.focus == focusInput)
-	m.list.SetFocused(m.focus == focusResults)
+
+	// When the sidebar has keyboard focus, the package list must not show
+	// the active border color.
+	if m.focus == focusSide {
+		m.list.SetFocused(false)
+	} else {
+		m.list.SetFocused(m.focus == focusResults)
+	}
+
+	// Sidebar shows active border only when it has keyboard focus.
 	m.side.SetFocused(m.focus == focusSide)
 }
 
