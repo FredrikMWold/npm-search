@@ -16,6 +16,8 @@ Set Shell zsh
 Hide
 Type "go build -o npm-tui ./cmd/npm-tui && alias npm-tui='./npm-tui' && clear"
 Enter
+Type "clear"
+Enter
 Show
 
 # Launch the TUI
@@ -60,7 +62,11 @@ Enter
 Sleep 2500ms
 
 Type 'r'
-Sleep 8s
+Sleep 5s
+Down
+Down
+Down
+Down
 Down
 Down
 Down

@@ -87,8 +87,10 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		var cmd tea.Cmd
 		m.spinner, cmd = m.spinner.Update(msg)
 		if m.loading {
-			// Keep default title background for the text, but render spinner outside it
+			// Render the prefix with lavender background and padding, but use a
+			// plain outer title style so the spinner remains unstyled.
 			m.list.SetTitle(m.list.RenderPrefixedTitle("Searching npm", m.spinner.View()))
+			m.list.UsePlainTitleStyle()
 			m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 		}
 		// If README is loading, update its spinner label as well
@@ -169,6 +171,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				m.loading = true
 				m.list.SetTitle(m.list.RenderPrefixedTitle("Searching npm", m.spinner.View()))
+				m.list.UsePlainTitleStyle()
 				m.list.SetPlaceholder(fmt.Sprintf("Searching npm %s", m.spinner.View()))
 				return m, tea.Batch(commands.SearchNPM(q))
 			} else if m.focus == focusResults {
@@ -306,6 +309,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			items = append(items, clist.ItemWithMeta{Title: title, LineDesc: line, FullDesc: full, Homepage: home, Repository: repo, NPMLink: npm, Latest: o.Package.Version})
 		}
 		m.loading = false
+		// restore default title style (with lavender background) for regular titles
+		m.list.UseDefaultTitleStyle()
 		// send items with metadata for sidebar
 		// convert to the specialized setter to preserve extra fields
 		if msg.Query == "" {

@@ -235,13 +235,30 @@ func (m *Model) RenderPrefixedTitle(prefix, suffix string) string {
 		return suffix
 	}
 	if suffix == "" {
-		// Render with right padding only (no left padding)
-		s := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1, 0, 0)
-		return s.Render(prefix)
+		// Render using the cached default title style which includes
+		// horizontal padding so the prefix aligns with other titles.
+		return m.titleStyleDefault.Render(prefix)
 	}
-	// Use right padding only and do not add an extra plain space
-	s := lipgloss.NewStyle().Foreground(theme.Crust).Background(theme.Lavender).Bold(true).Padding(0, 1, 0, 0)
-	return s.Render(prefix) + " " + suffix
+	// Render the prefix with the cached default style (one horizontal
+	// padding cell) and append a single plain space before the suffix so
+	// there is exactly one gap cell between the padded prefix and spinner.
+	return m.titleStyleDefault.Render(prefix) + " " + suffix
+}
+
+// RenderPrefixedTitlePlain returns a title where the prefix is rendered without
+// the lavender background (plain title style) while keeping bold and a single
+// trailing padding cell so it lines up with other titles.
+func (m *Model) RenderPrefixedTitlePlain(prefix, suffix string) string {
+	if prefix == "" {
+		return suffix
+	}
+	// Render prefix using the cached plain title style (no background,
+	// no extra padding) so the spinner suffix sits directly after the
+	// text without a stray block. Do not insert additional spaces.
+	if suffix == "" {
+		return m.titleStylePlain.Render(prefix)
+	}
+	return m.titleStylePlain.Render(prefix) + suffix
 }
 
 // SetShowReadmeHotkey toggles the presence of the README hotkey in the footer help.

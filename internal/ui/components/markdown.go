@@ -35,9 +35,9 @@ func NewMarkdownViewer() *MarkdownViewer {
 	if r, err := glamour.NewTermRenderer(glamour.WithAutoStyle(), glamour.WithWordWrap(80)); err == nil {
 		mv.renderer = r
 		mv.rwidth = 80
-	// Do a tiny render to warm internal caches so the first real render
-	// later doesn't block the UI for a noticeable amount of time.
-	_, _ = r.Render("# warmup")
+		// Do a tiny render to warm internal caches so the first real render
+		// later doesn't block the UI for a noticeable amount of time.
+		_, _ = r.Render("# warmup")
 	}
 	return mv
 }
