@@ -148,7 +148,8 @@ func FetchDownloadsRange(pkg string, days int) tea.Cmd {
 		if err := json.NewDecoder(resp.Body).Decode(&parsed); err != nil {
 			return NpmDownloadsRangeMsg{Package: pkg, Err: err}
 		}
-		// Aggregate to weekly (ISO week) averages to reduce columns while showing trend
+		// Aggregate to weekly (ISO week) sums to match the "Weekly Downloads" metric
+		// (previously averaged per-day which made the Y-axis appear too low).
 		vals := make([]float64, 0, 64)
 		pts := make([]DownloadPoint, 0, 64)
 		var curWeek string
@@ -156,12 +157,16 @@ func FetchDownloadsRange(pkg string, days int) tea.Cmd {
 		var count int
 		var weekStart time.Time
 		flush := func() {
-			if count > 0 {
-				avg := float64(sum) / float64(count)
-				vals = append(vals, avg)
+			// Only include full ISO weeks (7 days). This avoids skew from
+			// partial first/last weeks when the requested range doesn't align
+			// to week boundaries.
+			if count == 7 {
+				// Use total weekly downloads (sum) to match the "Weekly Downloads" metric.
+				total := float64(sum)
+				vals = append(vals, total)
 				// place the point at mid-week for better spacing
 				mid := weekStart.AddDate(0, 0, 3)
-				pts = append(pts, DownloadPoint{Time: mid, Value: avg})
+				pts = append(pts, DownloadPoint{Time: mid, Value: total})
 			}
 			sum = 0
 			count = 0
